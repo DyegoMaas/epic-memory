@@ -2,12 +2,12 @@ using System;
 
 namespace SSaME.Core
 {
-    public class Sequenciador   
+    public class GeradorAtaques   
     {
         private readonly IArena arena;
         private readonly IRandom random;
 
-        public Sequenciador(IArena arena, IRandom random)
+        public GeradorAtaques(IArena arena, IRandom random)
         {
             this.arena = arena;
             this.random = random;
@@ -15,8 +15,8 @@ namespace SSaME.Core
 
         public Ataque GerarAtaque()
         {
-            int indiceTimeA = random.NextInt(0, arena.TimeA.Count);
-            int indiceTimeB = random.NextInt(0, arena.TimeB.Count);
+            int indiceTimeA = random.Range(0, arena.TimeA.Count);
+            int indiceTimeB = random.Range(0, arena.TimeB.Count);
 
             int idAtacante, idAlvo;
             var timeAtacante = EscolherTimeAtacante();

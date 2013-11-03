@@ -346,7 +346,7 @@ namespace Messaging
                     if (attributes[0].FsmVariableName == fsmVarName)
                     {
                         return (T)property.GetValue(message, new object[] { });
-                    }
+                    } 
                 }
             }
 

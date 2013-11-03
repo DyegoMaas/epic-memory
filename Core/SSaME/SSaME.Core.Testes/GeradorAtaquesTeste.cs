@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace SSaME.Core.Testes
 {
     [TestFixture]
-    public class SequenciadorTeste
+    public class GeradorAtaquesTeste
     {
         private const int IdJogadorATimeA = 1;
         private const int IdJogadorBTimeA = 2;
@@ -41,14 +41,14 @@ namespace SSaME.Core.Testes
             var random = Substitute.For<IRandom>();
 
             random.Bool().Returns(true);
-            random.NextInt(0, 1).Returns(0);
+            random.Range(0, 1).Returns(0);
 
             return random;
         }
 
-        private Sequenciador DadoUmSequenciador(IArena arena, IRandom random)
+        private GeradorAtaques DadoUmSequenciador(IArena arena, IRandom random)
         {
-            return new Sequenciador(arena, random);
+            return new GeradorAtaques(arena, random);
         }
 
         private void AlvoEAtacanteDevemEstarEntreOsJogadoresDaArena(Ataque ataque)

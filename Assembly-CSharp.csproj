@@ -44,6 +44,14 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Sequenciador\Arena.cs" />
+     <Compile Include="Assets\Scripts\Sequenciador\Ataque.cs" />
+     <Compile Include="Assets\Scripts\Sequenciador\GeradorAtaques.cs" />
+     <Compile Include="Assets\Scripts\Sequenciador\IArena.cs" />
+     <Compile Include="Assets\Scripts\Sequenciador\IRandom.cs" />
+     <Compile Include="Assets\Scripts\Sequenciador\Sequenciador.cs" />
+     <Compile Include="Assets\Scripts\Sequenciador\TimeAtacante.cs" />
+     <Compile Include="Assets\Scripts\Sequenciador\UnityRandomizer.cs" />
      <Compile Include="Assets\Scripts\Utils\Messaging\MessageType.cs" />
      <Compile Include="Assets\Scripts\Utils\Messaging\Messages.cs" />
      <Compile Include="Assets\Scripts\Utils\Messaging\Messenger.cs" />
