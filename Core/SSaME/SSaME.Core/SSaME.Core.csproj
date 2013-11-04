@@ -46,6 +46,7 @@
     <Compile Include="IRandom.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GeradorAtaques.cs" />
+    <Compile Include="Sequencia.cs" />
     <Compile Include="TimeAtacante.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
