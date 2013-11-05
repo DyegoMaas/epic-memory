@@ -21,7 +21,8 @@ public class Sequenciador : MonoBehaviour
     private Stack<Personagem> personagensSelecionados;
     private ValidadorAtaques validadorAtaques;
     private Sequencia sequenciaAtaques;
-    private readonly List<int> touchesProcessed = new List<int>(); 
+    private readonly List<int> touchesProcessed = new List<int>();
+    private bool jogadorPodeInteragir;
 
     // Use this for initialization
     void Start()
@@ -57,6 +58,11 @@ public class Sequenciador : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!jogadorPodeInteragir)
+        {
+            return;
+        }
+
         Vector3 clickPosition;
         if (Click(out clickPosition))
         {
@@ -159,8 +165,10 @@ public class Sequenciador : MonoBehaviour
 
     private IEnumerator ManipularErroAtaque()
     {
+        jogadorPodeInteragir = false;
         ataquesGerados.Clear();
         sequenciaAtaques = new Sequencia();
+
         yield return new WaitForSeconds(TempoEsperaAntesDeRecomecarReproducao);
 
         StartCoroutine(ComecarProximaRodada());
@@ -184,11 +192,13 @@ public class Sequenciador : MonoBehaviour
 
     private IEnumerator ReproduzirSequenciaAtaques()
     {
+        jogadorPodeInteragir = false;
         foreach (var ataque in ataquesGerados.ToList())
         {
             StartCoroutine(ReproduzirAtaque(ataque));
             yield return new WaitForSeconds(DuracaoAtaque);
         }
+        jogadorPodeInteragir = true;
     }
 
     private IEnumerator ReproduzirAtaque(Ataque ataque)
