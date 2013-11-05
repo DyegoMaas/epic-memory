@@ -62,6 +62,19 @@ namespace SSaME.Core.Testes
             ASequenciaDeveEstarInvalida(listaAtaquesGravados, sequencia);
         }
 
+        [Test]
+        public void eh_possivel_validar_uma_reproducao_parcial()
+        {
+            var sequencia = DadoUmaSequenciaVazia();
+            var ataqueGravado1 = DadoUmAtaqueDoTimeA();
+            var ataqueGravado2 = DadoUmSegundoAtaqueDoTimeA();
+            var listaAtaquesGravados = DadaUmaListaDeAtaquesComEstesAtaques(ataqueGravado1, ataqueGravado2);
+
+            QuandoOUsuarioReproduzirOsAtaques(sequencia, ataqueGravado1);
+
+            ASequenciaDeveEstarValida(listaAtaquesGravados, sequencia);
+        }
+
         private static Sequencia DadoUmaSequenciaVazia()
         {
             return new Sequencia();
@@ -69,17 +82,17 @@ namespace SSaME.Core.Testes
 
         private static Ataque DadoUmAtaqueDoTimeA()
         {
-            return new Ataque(IdJogadorATimeA, IdJogadorATimeB, TimeAtacante.TimeA);
+            return new Ataque(IdJogadorATimeA, IdJogadorATimeB, Times.TimeA);
         }
 
         private static Ataque DadoUmSegundoAtaqueDoTimeA()
         {
-            return new Ataque(IdJogadorBTimeA, IdJogadorATimeB, TimeAtacante.TimeA);
+            return new Ataque(IdJogadorBTimeA, IdJogadorATimeB, Times.TimeA);
         }
 
         private static Ataque DadoUmAtaqueDoTimeB()
         {
-            return new Ataque(IdJogadorATimeB, IdJogadorATimeA, TimeAtacante.TimeB);
+            return new Ataque(IdJogadorATimeB, IdJogadorATimeA, Times.TimeB);
         }
 
         private static List<Ataque> DadaUmaListaDeAtaquesComEstesAtaques(params Ataque[] ataques)
@@ -91,7 +104,7 @@ namespace SSaME.Core.Testes
         {
             foreach (var ataque in ataques)
             {
-                sequencia.GerarAtaque(ataque);
+                sequencia.ArmazenarAtaque(ataque);
             }
         }
 

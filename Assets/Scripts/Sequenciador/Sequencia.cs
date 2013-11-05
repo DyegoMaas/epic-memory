@@ -4,17 +4,17 @@ public class Sequencia
 {
     private readonly List<Ataque> ataquesReproducao = new List<Ataque>();
 
-    public void GerarAtaque(Ataque ataque)
+    public void ArmazenarAtaque(Ataque ataque)
     {
         ataquesReproducao.Add(ataque);
     }
 
     public bool Validar(List<Ataque> ataquesGravacao)
     {
-        if (ataquesGravacao.Count != ataquesReproducao.Count)
+        if (ataquesReproducao.Count > ataquesGravacao.Count)
             return false;
 
-        for (int i = 0; i < ataquesGravacao.Count; i++)
+        for (int i = 0; i < ataquesReproducao.Count; i++)
         {
             var ataqueGravado = ataquesGravacao[i];
             var ataqueReproducao = ataquesReproducao[i];
@@ -30,5 +30,10 @@ public class Sequencia
         }
 
         return true;
+    }
+
+    public bool EstaCompleta(List<Ataque> ataquesGravacao)
+    {
+        return ataquesGravacao.Count == ataquesReproducao.Count;
     }
 }

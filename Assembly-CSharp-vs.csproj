@@ -52,8 +52,9 @@
      <Compile Include="Assets\Scripts\Sequenciador\IRandom.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\Sequencia.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\Sequenciador.cs" />
-     <Compile Include="Assets\Scripts\Sequenciador\TimeAtacante.cs" />
+     <Compile Include="Assets\Scripts\Sequenciador\Times.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\UnityRandomizer.cs" />
+     <Compile Include="Assets\Scripts\Sequenciador\ValidadorAtaques.cs" />
      <Compile Include="Assets\Scripts\Utils\Messaging\MessageType.cs" />
      <Compile Include="Assets\Scripts\Utils\Messaging\Messages.cs" />
      <Compile Include="Assets\Scripts\Utils\Messaging\Messenger.cs" />

@@ -4,9 +4,9 @@ namespace SSaME.Core
     {
         public int Atacante;
         public int Alvo;
-        public TimeAtacante TimeAtacante;
+        public Times TimeAtacante;
 
-        public Ataque(int idAtacante, int idAlvo, TimeAtacante timeAtacante)
+        public Ataque(int idAtacante, int idAlvo, Times timeAtacante)
         {
             Atacante = idAtacante;
             Alvo = idAlvo;

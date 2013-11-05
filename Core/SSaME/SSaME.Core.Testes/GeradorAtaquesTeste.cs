@@ -60,7 +60,7 @@ namespace SSaME.Core.Testes
 
         private void AlvoEAtavanteNaoDevemEstarNoMesmoTime(IArena arena, Ataque ataque)
         {
-            if (ataque.TimeAtacante == TimeAtacante.TimeA)
+            if (ataque.TimeAtacante == Times.TimeA)
                 arena.TimeA.Should().NotContain(ataque.Alvo);
             else
                 arena.TimeA.Should().NotContain(ataque.Atacante);

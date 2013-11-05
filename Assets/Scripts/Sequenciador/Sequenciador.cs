@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,9 +11,18 @@ public class Sequenciador : MonoBehaviour
     public Personagem[] TimeA;
     public Personagem[] TimeB;
     public int DuracaoAtaque = 1;
+    public int TempoEsperaAntesDeRecomecarReproducao = 1;
 
+    // máquina
+    private Arena arena;
     private GeradorAtaques geradorAtaques;
-    private readonly List<Ataque> ataques = new List<Ataque>();
+    private readonly List<Ataque> ataquesGerados = new List<Ataque>();
+    private List<Personagem> todosOsPersonagens; 
+
+    // jogador
+    private Stack<Personagem> personagensSelecionados;
+    private ValidadorAtaques validadorAtaques;
+    private Sequencia sequenciaAtaques;
 
     void Awake()
     {
@@ -20,39 +30,35 @@ public class Sequenciador : MonoBehaviour
     }
 
     // Use this for initialization
-	void Start ()
-	{
-	    var arena = new Arena();
+    void Start()
+    {
+        arena = new Arena();
+        geradorAtaques = new GeradorAtaques(arena, new UnityRandomizer());
+        validadorAtaques = new ValidadorAtaques(arena);
+        sequenciaAtaques = new Sequencia();
+        personagensSelecionados = new Stack<Personagem>(2);
+        todosOsPersonagens = TimeA.Union(TimeB).ToList();
 
-	    foreach (var personagem in TimeA)
-	    {
-            int idPersonagem = arena.AdicionarParticipanteAoTimeA();    
-            personagem.DefinirId(idPersonagem);
-	    }
+        // inicialização personagens do Time A
+        foreach (var personagem in TimeA)
+        {
+            int idPersonagem = arena.AdicionarParticipanteAoTimeA();
+            personagem.Inicializar(idPersonagem, Times.TimeA);
+        }
 
+        // inicialização personagens do Time B
         foreach (var personagem in TimeB)
         {
             int idPersonagem = arena.AdicionarParticipanteAoTimeB();
-            personagem.DefinirId(idPersonagem);
+            personagem.Inicializar(idPersonagem, Times.TimeB);
         }
 
-	    ImprimirTime('A', arena.TimeA);
-	    ImprimirTime('B', arena.TimeB);
-
-	    geradorAtaques = new GeradorAtaques(arena, new UnityRandomizer());
-	}
-    
-    private void ImprimirTime(char sigla, IEnumerable<int> time)
-    {
-        Debug.Log(string.Format("Time {0}:", sigla));
-        foreach (var id in time)
-        {
-            Debug.Log(id);
-        }
+        StartCoroutine(ComecarProximaRodada());
     }
 
     // Update is called once per frame
-	void Update () {
+    void Update()
+    {
         if (Input.GetButtonDown("Fire1"))
         {
             Ray ray = Camera.ScreenPointToRay(Input.mousePosition);
@@ -64,6 +70,8 @@ public class Sequenciador : MonoBehaviour
                 {
                     if (PersonagemFoiSelecionado(hit, personagem))
                     {
+                        personagensSelecionados.Push(personagem);
+                        personagem.Selecionar();
                         Debug.Log(string.Format("{0} selecionado", personagem.gameObject.name));
                         continue;
                     }
@@ -73,46 +81,98 @@ public class Sequenciador : MonoBehaviour
                 {
                     if (PersonagemFoiSelecionado(hit, personagem))
                     {
+                        personagensSelecionados.Push(personagem);
+                        personagem.Selecionar();
                         Debug.Log(string.Format("{0} selecionado", personagem.gameObject.name));
                     }
                 }
             }
         }
-	}
 
-    private static bool PersonagemFoiSelecionado(RaycastHit hit, Personagem personagem)
+        if (personagensSelecionados.Count == 2)
+        {
+            ValidarAtaque();
+        }
+    }
+
+    private void ValidarAtaque()
+    {
+        var alvo = personagensSelecionados.Pop();
+        var atacante = personagensSelecionados.Pop();
+        var ataque = new Ataque(atacante.Id, alvo.Id, atacante.Time);
+
+        if (validadorAtaques.AtaqueValido(ataque))
+        {
+            sequenciaAtaques.ArmazenarAtaque(ataque);
+            if (sequenciaAtaques.Validar(ataquesGerados))
+            {
+                if (sequenciaAtaques.EstaCompleta(ataquesGerados))
+                {
+                    StartCoroutine(ComecarProximaRodada());
+                }
+            }
+            else
+            {
+                StartCoroutine(ManipularErroAtaque());
+            }
+        }
+        else
+        {
+            StartCoroutine(ManipularErroAtaque());
+        }
+    }
+
+    private IEnumerator ManipularErroAtaque()
+    {
+        Debug.Log("VOCÊ ERROU!!!");
+
+        ataquesGerados.Clear();
+        sequenciaAtaques = new Sequencia();
+        yield return new WaitForSeconds(TempoEsperaAntesDeRecomecarReproducao);
+
+        StartCoroutine(ComecarProximaRodada());
+    }
+
+    private IEnumerator ComecarProximaRodada()
+    {
+        sequenciaAtaques = new Sequencia();
+        yield return new WaitForSeconds(TempoEsperaAntesDeRecomecarReproducao);
+
+        GerarAtaque();
+        StartCoroutine(ReproduzirSequenciaAtaques());
+    }
+
+    private void GerarAtaque()
+    {
+        var ataque = geradorAtaques.GerarAtaque();
+        ataquesGerados.Add(ataque);
+        Debug.Log(ataque);
+    }
+
+    private bool PersonagemFoiSelecionado(RaycastHit hit, Personagem personagem)
     {
         return personagem.collider.transform == hit.transform;
     }
 
-    void OnGUI()
-    {
-        if (GUI.Button(new Rect(0, 0, 100, 50), "Gerar ataque"))
-        {
-            var ataque = geradorAtaques.GerarAtaque();
-            ataques.Add(ataque);
-            Debug.Log(ataque);
-        }
-
-        if (GUI.Button(new Rect(0, 100, 100, 50), "Reproduzir Sequência"))
-        {
-            StartCoroutine(ReproduzirSequenciaAtaques());
-        }
-    }
-
     private IEnumerator ReproduzirSequenciaAtaques()
     {
-        Debug.Log("-----");
-        Debug.Log("Sequência de ataques:");
-        foreach (var ataque in ataques)
+        Debug.Log("*Sequência de ataques:");
+        foreach (var ataque in ataquesGerados.ToList())
         {
-            ReproduzirAtaque(ataque);
+            StartCoroutine(ReproduzirAtaque(ataque));
             yield return new WaitForSeconds(DuracaoAtaque);
         }
     }
 
-    private void ReproduzirAtaque(Ataque ataque)
+    private IEnumerator ReproduzirAtaque(Ataque ataque)
     {
         Debug.Log(ataque);
+
+        var atacante = todosOsPersonagens.Find(p => p.Id == ataque.Atacante);
+        var alvo = todosOsPersonagens.Find(p => p.Id == ataque.Alvo);
+
+        atacante.Selecionar();
+        yield return new WaitForSeconds(.5f);
+        alvo.Selecionar();
     }
 }
