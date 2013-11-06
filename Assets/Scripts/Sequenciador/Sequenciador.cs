@@ -142,6 +142,8 @@ public class Sequenciador : MonoBehaviour
         var atacante = personagensSelecionados.Pop();
         var ataque = new Ataque(atacante.Id, alvo.Id, atacante.Time);
 
+        atacante.Atacar();
+
         if (validadorAtaques.AtaqueValido(ataque))
         {
             sequenciaAtaques.ArmazenarAtaque(ataque);
@@ -209,5 +211,6 @@ public class Sequenciador : MonoBehaviour
         atacante.Selecionar();
         yield return new WaitForSeconds(.5f);
         alvo.Selecionar();
+        atacante.Atacar();
     }
 }
