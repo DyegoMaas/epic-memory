@@ -15,7 +15,7 @@ namespace SSaME.Core
             TimeA = new List<IPersonagem>();
         }
 
-        public void AdicionarParticipante(IPersonagem personagem)
+        public void AdicionarPersonagem(IPersonagem personagem)
         {
             personagem.Inicializar(ProximoId());
 

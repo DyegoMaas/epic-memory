@@ -14,7 +14,7 @@ namespace SSaME.Core.Testes
                 .Construir();
             var arena = DadoUmaArenaVazia();
 
-            arena.AdicionarParticipante(personagem);
+            arena.AdicionarPersonagem(personagem);
 
             arena.TimeA.Should().NotBeNull();
             arena.TimeA.Count.Should().Be(1);
@@ -29,7 +29,7 @@ namespace SSaME.Core.Testes
                 .Construir();
             var arena = DadoUmaArenaVazia();
 
-            arena.AdicionarParticipante(personagem);
+            arena.AdicionarPersonagem(personagem);
 
             arena.TimeB.Should().NotBeNull();
             arena.TimeB.Count.Should().Be(1);
@@ -54,10 +54,10 @@ namespace SSaME.Core.Testes
 
             var arena = DadoUmaArenaVazia();
 
-            arena.AdicionarParticipante(participanteA);
-            arena.AdicionarParticipante(participanteB);
-            arena.AdicionarParticipante(participanteC);
-            arena.AdicionarParticipante(participanteD);
+            arena.AdicionarPersonagem(participanteA);
+            arena.AdicionarPersonagem(participanteB);
+            arena.AdicionarPersonagem(participanteC);
+            arena.AdicionarPersonagem(participanteD);
 
             participanteD.Id.Should().BeGreaterThan(participanteC.Id);
             participanteC.Id.Should().BeGreaterThan(participanteB.Id);

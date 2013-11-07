@@ -70,6 +70,14 @@ public class Sequenciador : MonoBehaviour
                 {
                     if (PersonagemFoiSelecionado(hit, personagem))
                     {
+                        if (personagensSelecionados.Count == 1)
+                        {
+                            if (OJogadorEscolheuUmPersonagemDoMesmoTime(personagem))
+                            {
+                                continue;
+                            }
+                        }
+
                         SelecionarPersonagem(personagem);
                         continue;
                     }
@@ -82,7 +90,7 @@ public class Sequenciador : MonoBehaviour
             ValidarAtaque();
         }
     }
-    
+
     private bool Click(out Vector3 clickPosition)
     {
         clickPosition = Vector3.zero;
@@ -109,6 +117,15 @@ public class Sequenciador : MonoBehaviour
     private bool PersonagemFoiSelecionado(RaycastHit hit, Personagem personagem)
     {
         return personagem.collider.transform == hit.transform;
+    }
+
+    private bool OJogadorEscolheuUmPersonagemDoMesmoTime(IPersonagem personagem)
+    {
+        var personagemJaSelecionado = personagensSelecionados.Pop();
+        bool mesmoTime = personagem.Time == personagemJaSelecionado.Time;
+        personagensSelecionados.Push(personagemJaSelecionado);
+
+        return mesmoTime;
     }
 
     private void SelecionarPersonagem(Personagem personagem)

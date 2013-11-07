@@ -9,6 +9,8 @@ public class Personagem : MonoBehaviour, IPersonagem {
     public int Nivel { get; private set; }
 
     public Times TimePersonagem = Times.TimeA;
+    public AudioClip SomSelecao;
+    public AudioClip SomAtaque;
 
     private tk2dSpriteAnimator spriteAnimator;
 
@@ -36,13 +38,15 @@ public class Personagem : MonoBehaviour, IPersonagem {
 
     public void Selecionar()
     {
-        Debug.Log("selecionado " + gameObject.name);
+        if (SomSelecao)
+        {
+            AudioSource.PlayClipAtPoint(SomSelecao, transform.position);
+        }
         StartCoroutine(AnimarSelecao());
     }
 
     private IEnumerator AnimarSelecao()
     {
-
         iTween.ScaleTo(gameObject, new Vector3(1.5f, 1.5f, 1), .2f);
         yield return new WaitForSeconds(.1f);
         iTween.ScaleTo(gameObject, new Vector3(1, 1, 1), .2f);
@@ -50,6 +54,10 @@ public class Personagem : MonoBehaviour, IPersonagem {
 
     public void Atacar()
     {
+        if (SomAtaque)
+        {
+            AudioSource.PlayClipAtPoint(SomAtaque, transform.position);
+        }
         spriteAnimator.Play("Ataque");
     }
 
