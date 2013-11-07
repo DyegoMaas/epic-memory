@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\Sequenciador\IArena.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\IPersonagem.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\IRandom.cs" />
+     <Compile Include="Assets\Scripts\Sequenciador\InputManager.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\Sequencia.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\Sequenciador.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\Times.cs" />

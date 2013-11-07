@@ -19,19 +19,18 @@ public class Sequenciador : MonoBehaviour
     private Stack<IPersonagem> personagensSelecionados;
     private ValidadorAtaques validadorAtaques;
     private Sequencia sequenciaAtaques = new Sequencia();
-    private readonly List<int> touchesProcessed = new List<int>();
     private bool jogadorPodeInteragir;
+    private InputManager inputManager;
 
     // Use this for initialization
     void Start()
     {
         personagensSelecionados = new Stack<IPersonagem>(2);
         repositorioPersonagens = new RepositorioPersonagens();
+        inputManager = new InputManager(repositorioPersonagens);
 
         geradorAtaques = new GeradorAtaques(repositorioPersonagens, new UnityRandomizer());
         validadorAtaques = new ValidadorAtaques();
-        
-        
 
         var personagens = FindObjectsOfType(typeof(Personagem)) as Personagem[];
         if (personagens != null)
@@ -53,31 +52,10 @@ public class Sequenciador : MonoBehaviour
             return;
         }
 
-        Vector3 clickPosition;
-        if (Click(out clickPosition))
+        IPersonagem personagem;
+        if (inputManager.Click(out personagem))
         {
-            Ray ray = Camera.ScreenPointToRay(clickPosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit))
-            {
-                foreach (var personagem in repositorioPersonagens.BuscarTodos())
-                {
-                    if (PersonagemFoiSelecionado(hit, personagem))
-                    {
-                        if (personagensSelecionados.Count == 1)
-                        {
-                            if (OJogadorEscolheuUmPersonagemDoMesmoTime(personagem))
-                            {
-                                continue;
-                            }
-                        }
-
-                        SelecionarPersonagem(personagem);
-                        continue;
-                    }
-                }
-            }
+            SelecionarPersonagem(personagem);
         }
 
         if (JogadorCompletouUmAtaque())
@@ -85,35 +63,7 @@ public class Sequenciador : MonoBehaviour
             ValidarAtaque();
         }
     }
-
-    private bool Click(out Vector3 clickPosition)
-    {
-        clickPosition = Vector3.zero;
-
-        if (Input.GetButtonDown("Fire1"))
-        {
-            clickPosition = Input.mousePosition;
-            return true;
-        }
-
-        if(Input.touchCount > 0)
-        {
-            var touch = Input.GetTouch(0);
-            if (!touchesProcessed.Contains(touch.fingerId))
-            {
-                clickPosition = touch.position;
-                touchesProcessed.Add(touch.fingerId);
-            }
-        }
-
-        return false;
-    }
-
-    private bool PersonagemFoiSelecionado(RaycastHit hit, IPersonagem personagem)
-    {
-        return personagem.GetCollider().transform == hit.transform;
-    }
-
+    
     private bool OJogadorEscolheuUmPersonagemDoMesmoTime(IPersonagem personagem)
     {
         var personagemJaSelecionado = personagensSelecionados.Pop();
@@ -125,6 +75,14 @@ public class Sequenciador : MonoBehaviour
 
     private void SelecionarPersonagem(IPersonagem personagem)
     {
+        if (personagensSelecionados.Count == 1)
+        {
+            if (OJogadorEscolheuUmPersonagemDoMesmoTime(personagem))
+            {
+                return;
+            }
+        }
+
         personagensSelecionados.Push(personagem);
         personagem.Selecionar();
     }
