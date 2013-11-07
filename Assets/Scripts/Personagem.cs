@@ -65,4 +65,9 @@ public class Personagem : MonoBehaviour, IPersonagem {
     {
         throw new System.NotImplementedException();
     }
+
+    public Collider GetCollider()
+    {
+        return collider;
+    }
 }

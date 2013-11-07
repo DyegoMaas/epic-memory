@@ -3,47 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using SSaME.Core;
 
-public class RepositorioPersonagens
+public class RepositorioPersonagens : IArena
 {
-    private static readonly Dictionary<int, Personagem> Personagens = new Dictionary<int, Personagem>();
-    private static readonly Dictionary<int, Personagem> TimeA = new Dictionary<int, Personagem>();
-    private static readonly Dictionary<int, Personagem> TimeB = new Dictionary<int, Personagem>();
+    private readonly Dictionary<int, IPersonagem> Personagens = new Dictionary<int, IPersonagem>();
+    public List<IPersonagem> TimeA { get; private set; }
+    public List<IPersonagem> TimeB { get; private set; }
+    
+    private static int idAtual;
 
-    public void Adicionar(Personagem personagem)
+    public RepositorioPersonagens()
     {
+        TimeA = new List<IPersonagem>();
+        TimeB = new List<IPersonagem>();
+    }
+
+    public void Adicionar(IPersonagem personagem)
+    {
+        personagem.Inicializar(ProximoId());
         Personagens.Add(personagem.Id, personagem);
 
         var time = (personagem.Time == Times.TimeA) ? TimeA : TimeB;
-        time.Add(personagem.Id, personagem);
+        time.Add(personagem);
     }
 
-    public IList<Personagem> BuscarTodos()
+    public IList<IPersonagem> BuscarTodos()
     {
         return Personagens.Values.ToList();
     }
 
-    public IPersonagem Buscar(int idPersonagem)
+    private static int ProximoId()
     {
-        return BuscarPersonagem(idPersonagem, Personagens);
-    }
-
-    public IPersonagem BuscarNoTimeA(int idPersonagem)
-    {
-        return BuscarPersonagem(idPersonagem, TimeA);
-    }
-
-    public IPersonagem BuscarNoTimeB(int idPersonagem)
-    {
-        return BuscarPersonagem(idPersonagem, TimeB);
-    }
-
-    private IPersonagem BuscarPersonagem(int idPersonagem, Dictionary<int, Personagem> repositorio)
-    {
-        if(!repositorio.ContainsKey(idPersonagem))
-        {
-            throw new Exception("Personagem não encontrado: " + idPersonagem);
-        }
-
-        return repositorio[idPersonagem];
+        return ++idAtual;
     }
 }

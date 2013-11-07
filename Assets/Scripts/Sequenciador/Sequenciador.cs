@@ -25,29 +25,24 @@ public class Sequenciador : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        var arena = new Arena();
-        geradorAtaques = new GeradorAtaques(arena, new UnityRandomizer());
-        validadorAtaques = new ValidadorAtaques();
-        
         personagensSelecionados = new Stack<IPersonagem>(2);
         repositorioPersonagens = new RepositorioPersonagens();
+
+        geradorAtaques = new GeradorAtaques(repositorioPersonagens, new UnityRandomizer());
+        validadorAtaques = new ValidadorAtaques();
+        
+        
 
         var personagens = FindObjectsOfType(typeof(Personagem)) as Personagem[];
         if (personagens != null)
         {
             foreach (var personagem in personagens)
             {
-                ConsolidarPersonagem(personagem, arena);
                 repositorioPersonagens.Adicionar(personagem);
             }
         }
 
         StartCoroutine(ComecarProximaRodada());
-    }
-
-    private void ConsolidarPersonagem(Personagem personagem, Arena arena)
-    {
-        arena.AdicionarPersonagem(personagem);
     }
 
     // Update is called once per frame
@@ -114,9 +109,9 @@ public class Sequenciador : MonoBehaviour
         return false;
     }
 
-    private bool PersonagemFoiSelecionado(RaycastHit hit, Personagem personagem)
+    private bool PersonagemFoiSelecionado(RaycastHit hit, IPersonagem personagem)
     {
-        return personagem.collider.transform == hit.transform;
+        return personagem.GetCollider().transform == hit.transform;
     }
 
     private bool OJogadorEscolheuUmPersonagemDoMesmoTime(IPersonagem personagem)
@@ -128,7 +123,7 @@ public class Sequenciador : MonoBehaviour
         return mesmoTime;
     }
 
-    private void SelecionarPersonagem(Personagem personagem)
+    private void SelecionarPersonagem(IPersonagem personagem)
     {
         personagensSelecionados.Push(personagem);
         personagem.Selecionar();
@@ -192,7 +187,6 @@ public class Sequenciador : MonoBehaviour
     {
         var ataque = geradorAtaques.GerarAtaque();
         ataquesGerados.Add(ataque);
-        Debug.Log(ataque);
     }
 
     private IEnumerator ReproduzirSequenciaAtaques()
