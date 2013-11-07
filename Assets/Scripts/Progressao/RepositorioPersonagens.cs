@@ -5,11 +5,11 @@ using SSaME.Core;
 
 public class RepositorioPersonagens
 {
-    private static readonly Dictionary<int, IPersonagem> Personagens = new Dictionary<int, IPersonagem>();
-    private static readonly Dictionary<int, IPersonagem> TimeA = new Dictionary<int, IPersonagem>();
-    private static readonly Dictionary<int, IPersonagem> TimeB = new Dictionary<int, IPersonagem>();
+    private static readonly Dictionary<int, Personagem> Personagens = new Dictionary<int, Personagem>();
+    private static readonly Dictionary<int, Personagem> TimeA = new Dictionary<int, Personagem>();
+    private static readonly Dictionary<int, Personagem> TimeB = new Dictionary<int, Personagem>();
 
-    public void AdicionarPersonagem(IPersonagem personagem)
+    public void Adicionar(Personagem personagem)
     {
         Personagens.Add(personagem.Id, personagem);
 
@@ -17,7 +17,7 @@ public class RepositorioPersonagens
         time.Add(personagem.Id, personagem);
     }
 
-    public IList<IPersonagem> BuscarTodos()
+    public IList<Personagem> BuscarTodos()
     {
         return Personagens.Values.ToList();
     }
@@ -37,7 +37,7 @@ public class RepositorioPersonagens
         return BuscarPersonagem(idPersonagem, TimeB);
     }
 
-    private IPersonagem BuscarPersonagem(int idPersonagem, Dictionary<int, IPersonagem> repositorio)
+    private IPersonagem BuscarPersonagem(int idPersonagem, Dictionary<int, Personagem> repositorio)
     {
         if(!repositorio.ContainsKey(idPersonagem))
         {

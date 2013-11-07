@@ -2,11 +2,13 @@ using SSaME.Core;
 
 public class ProgressaoLinear : IProgressaoJogo
 {
+    private readonly RepositorioPersonagens repositorioPersonagens;
     private readonly int numeroAtaquesParaSubirNivel;
     private int numeroAtaques;
 
-    public ProgressaoLinear(int numeroAtaquesParaSubirNivel)
+    public ProgressaoLinear(RepositorioPersonagens repositorioPersonagens, int numeroAtaquesParaSubirNivel)
     {
+        this.repositorioPersonagens = repositorioPersonagens;
         this.numeroAtaquesParaSubirNivel = numeroAtaquesParaSubirNivel;
     }
 
@@ -20,9 +22,9 @@ public class ProgressaoLinear : IProgressaoJogo
         }
     }
 
-    private static void AtualizarNivelPersonagens()
+    private void AtualizarNivelPersonagens()
     {
-        var personagens = new RepositorioPersonagens().BuscarTodos();
+        var personagens = repositorioPersonagens.BuscarTodos();
         foreach (var personagem in personagens)
         {
             personagem.SubirNivel();

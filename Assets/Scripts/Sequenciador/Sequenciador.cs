@@ -11,38 +11,43 @@ public class Sequenciador : MonoBehaviour
     public int TempoEsperaAntesDeRecomecarReproducao = 1;
 
     // máquina
-    private Arena arena;
     private GeradorAtaques geradorAtaques;
     private readonly List<Ataque> ataquesGerados = new List<Ataque>();
-    private readonly IList<Personagem> todosPersonagens = new List<Personagem>();
+    private RepositorioPersonagens repositorioPersonagens;
 
     // jogador
     private Stack<IPersonagem> personagensSelecionados;
     private ValidadorAtaques validadorAtaques;
-    private Sequencia sequenciaAtaques;
+    private Sequencia sequenciaAtaques = new Sequencia();
     private readonly List<int> touchesProcessed = new List<int>();
     private bool jogadorPodeInteragir;
 
     // Use this for initialization
     void Start()
     {
-        arena = new Arena();
+        var arena = new Arena();
         geradorAtaques = new GeradorAtaques(arena, new UnityRandomizer());
         validadorAtaques = new ValidadorAtaques();
-        sequenciaAtaques = new Sequencia();
+        
         personagensSelecionados = new Stack<IPersonagem>(2);
+        repositorioPersonagens = new RepositorioPersonagens();
 
         var personagens = FindObjectsOfType(typeof(Personagem)) as Personagem[];
         if (personagens != null)
         {
             foreach (var personagem in personagens)
             {
-                todosPersonagens.Add(personagem);
-                arena.AdicionarParticipante(personagem);
+                ConsolidarPersonagem(personagem, arena);
+                repositorioPersonagens.Adicionar(personagem);
             }
         }
 
         StartCoroutine(ComecarProximaRodada());
+    }
+
+    private void ConsolidarPersonagem(Personagem personagem, Arena arena)
+    {
+        arena.AdicionarPersonagem(personagem);
     }
 
     // Update is called once per frame
@@ -61,7 +66,7 @@ public class Sequenciador : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
-                foreach (var personagem in todosPersonagens)
+                foreach (var personagem in repositorioPersonagens.BuscarTodos())
                 {
                     if (PersonagemFoiSelecionado(hit, personagem))
                     {

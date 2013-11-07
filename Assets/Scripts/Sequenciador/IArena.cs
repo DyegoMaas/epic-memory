@@ -7,6 +7,6 @@ namespace SSaME.Core
         List<IPersonagem> TimeA { get; }
         List<IPersonagem> TimeB { get; }
 
-        void AdicionarParticipante(IPersonagem personagem);
+        void AdicionarPersonagem(IPersonagem personagem);
     }
 }
