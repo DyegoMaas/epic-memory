@@ -1,19 +1,14 @@
-public struct Ataque
+namespace SSaME.Core
 {
-    public int Atacante;
-    public int Alvo;
-    public Times TimeAtacante;
-
-    public Ataque(int idAtacante, int idAlvo, Times timeAtacante)
+    public struct Ataque
     {
-        Atacante = idAtacante;
-        Alvo = idAlvo;
-        TimeAtacante = timeAtacante;
-    }
+        public IPersonagem Atacante;
+        public IPersonagem Alvo;
 
-    public override string ToString()
-    {
-        return string.Format("{0}({1}) ataca {2}({3})", Atacante, TimeAtacante.ToString(), Alvo, (TimeAtacante == Times.TimeA ? Times.TimeB : Times.TimeA).ToString());
+        public Ataque(IPersonagem atacante, IPersonagem alvo)
+        {
+            Atacante = atacante;
+            Alvo = alvo;
+        }
     }
-    
 }

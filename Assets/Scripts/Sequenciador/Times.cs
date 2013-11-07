@@ -1,5 +1,8 @@
-public enum Times
+namespace SSaME.Core
 {
-    TimeA = 1,
-    TimeB = 2
+    public enum Times
+    {
+        TimeA = 1,
+        TimeB = 2
+    }
 }

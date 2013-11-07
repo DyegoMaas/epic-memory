@@ -1,12 +1,21 @@
+using SSaME.Core;
 using UnityEngine;
 using System.Collections;
 
-public class Personagem : MonoBehaviour {
+public class Personagem : MonoBehaviour, IPersonagem {
 
-    public Times Time;
+    public Times Time { get; private set; }
     public int Id { get; private set; }
-    
+    public int Nivel { get; private set; }
+
+    public Times TimePersonagem = Times.TimeA;
+
     private tk2dSpriteAnimator spriteAnimator;
+
+    void Awake()
+    {
+        Time = TimePersonagem;
+    }
     
     // Use this for initialization
 	void Start ()
@@ -19,12 +28,10 @@ public class Personagem : MonoBehaviour {
 	
 	}
 
-    public void Inicializar(int id, Times time)
+    public void Inicializar(int id)
     {
         Id = id;
         gameObject.name += "_" + id.ToString().PadLeft(2, '0');
-
-        Time = time;
     }
 
     public void Selecionar()
@@ -44,5 +51,10 @@ public class Personagem : MonoBehaviour {
     public void Atacar()
     {
         spriteAnimator.Play("Ataque");
+    }
+
+    public void SubirNivel()
+    {
+        throw new System.NotImplementedException();
     }
 }

@@ -4,30 +4,25 @@ namespace SSaME.Core
 {
     public class Arena : IArena
     {
-        public List<int> TimeA { get; private set; }
-        public List<int> TimeB { get; private set; }
-        
+        public List<IPersonagem> TimeA { get; private set; }
+        public List<IPersonagem> TimeB { get; private set; }
+
         private int idAtual;
 
         public Arena()
         {
-            TimeB = new List<int>();
-            TimeA = new List<int>();
+            TimeB = new List<IPersonagem>();
+            TimeA = new List<IPersonagem>();
         }
 
-        public int AdicionarParticipanteAoTimeA()
+        public void AdicionarParticipante(IPersonagem personagem)
         {
-            int id = ProximoId();
-            TimeA.Add(id);
+            personagem.Inicializar(ProximoId());
 
-            return id;
-        }
-
-        public int AdicionarParticipanteAoTimeB()
-        {
-            int id = ProximoId();
-            TimeB.Add(id);
-            return id;
+            if (personagem.Time == Times.TimeA)
+                TimeA.Add(personagem);
+            else
+                TimeB.Add(personagem);
         }
 
         private int ProximoId()

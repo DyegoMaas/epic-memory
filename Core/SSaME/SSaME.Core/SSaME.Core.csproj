@@ -43,6 +43,7 @@
     <Compile Include="Arena.cs" />
     <Compile Include="Ataque.cs" />
     <Compile Include="IArena.cs" />
+    <Compile Include="IPersonagem.cs" />
     <Compile Include="IRandom.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GeradorAtaques.cs" />

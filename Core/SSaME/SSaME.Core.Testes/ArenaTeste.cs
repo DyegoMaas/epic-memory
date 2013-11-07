@@ -9,40 +9,59 @@ namespace SSaME.Core.Testes
         [Test]
         public void eh_possivel_adicionar_participantes_no_time_a()
         {
+            var personagem = new PersonagemTesteBuilder()
+                .DoTime(Times.TimeA)
+                .Construir();
             var arena = DadoUmaArenaVazia();
 
-            var idParticipante = arena.AdicionarParticipanteAoTimeA();
+            arena.AdicionarParticipante(personagem);
 
             arena.TimeA.Should().NotBeNull();
             arena.TimeA.Count.Should().Be(1);
-            arena.TimeA[0].Should().Be(idParticipante);
+            arena.TimeA[0].Id.Should().Be(1);
         }
 
         [Test]
         public void eh_possivel_adicionar_participantes_no_time_b()
         {
+            var personagem = new PersonagemTesteBuilder()
+                .DoTime(Times.TimeB)
+                .Construir();
             var arena = DadoUmaArenaVazia();
 
-            var idParticipante = arena.AdicionarParticipanteAoTimeB();
+            arena.AdicionarParticipante(personagem);
 
             arena.TimeB.Should().NotBeNull();
             arena.TimeB.Count.Should().Be(1);
-            arena.TimeB[0].Should().Be(idParticipante);
+            arena.TimeB[0].Id.Should().Be(1);
         }
 
         [Test]
         public void os_ids_sao_sequenciais()
         {
+            var participanteA = new PersonagemTesteBuilder()
+                .DoTime(Times.TimeA)
+                .Construir();
+            var participanteB = new PersonagemTesteBuilder()
+                .DoTime(Times.TimeA)
+                .Construir();
+            var participanteC = new PersonagemTesteBuilder()
+                .DoTime(Times.TimeB)
+                .Construir();
+            var participanteD = new PersonagemTesteBuilder()
+                .DoTime(Times.TimeB)
+                .Construir();
+
             var arena = DadoUmaArenaVazia();
 
-            var idParticipanteA = arena.AdicionarParticipanteAoTimeA();
-            var idParticipanteB = arena.AdicionarParticipanteAoTimeA();
-            var idParticipanteC = arena.AdicionarParticipanteAoTimeB();
-            var idParticipanteD = arena.AdicionarParticipanteAoTimeB();
+            arena.AdicionarParticipante(participanteA);
+            arena.AdicionarParticipante(participanteB);
+            arena.AdicionarParticipante(participanteC);
+            arena.AdicionarParticipante(participanteD);
 
-            idParticipanteD.Should().BeGreaterThan(idParticipanteC);
-            idParticipanteC.Should().BeGreaterThan(idParticipanteB);
-            idParticipanteB.Should().BeGreaterThan(idParticipanteA);
+            participanteD.Id.Should().BeGreaterThan(participanteC.Id);
+            participanteC.Id.Should().BeGreaterThan(participanteB.Id);
+            participanteB.Id.Should().BeGreaterThan(participanteA.Id);
         }
 
         private Arena DadoUmaArenaVazia()

@@ -1,39 +1,42 @@
 using System;
 
-public class GeradorAtaques
+namespace SSaME.Core
 {
-    private readonly IArena arena;
-    private readonly IRandom random;
-
-    public GeradorAtaques(IArena arena, IRandom random)
+    public class GeradorAtaques   
     {
-        this.arena = arena;
-        this.random = random;
-    }
+        private readonly IArena arena;
+        private readonly IRandom random;
 
-    public Ataque GerarAtaque()
-    {
-        int indiceTimeA = random.Range(0, arena.TimeA.Count);
-        int indiceTimeB = random.Range(0, arena.TimeB.Count);
-
-        int idAtacante, idAlvo;
-        var timeAtacante = EscolherTimeAtacante();
-        if (timeAtacante == Times.TimeA)
+        public GeradorAtaques(IArena arena, IRandom random)
         {
-            idAtacante = arena.TimeA[indiceTimeA];
-            idAlvo = arena.TimeB[indiceTimeB];
-        }
-        else
-        {
-            idAtacante = arena.TimeB[indiceTimeB];
-            idAlvo = arena.TimeA[indiceTimeA];
+            this.arena = arena;
+            this.random = random;
         }
 
-        return new Ataque(idAtacante, idAlvo, timeAtacante);
-    }
+        public Ataque GerarAtaque()
+        {
+            int indiceTimeA = random.Range(0, arena.TimeA.Count);
+            int indiceTimeB = random.Range(0, arena.TimeB.Count);
 
-    private Times EscolherTimeAtacante()
-    {
-        return random.Bool() ? Times.TimeA : Times.TimeB;
+            IPersonagem idAtacante;
+            IPersonagem idAlvo;
+            if (EscolherTimeAtacante() == Times.TimeA)
+            {
+                idAtacante = arena.TimeA[indiceTimeA];
+                idAlvo = arena.TimeB[indiceTimeB];
+            }
+            else
+            {
+                idAtacante = arena.TimeB[indiceTimeB];
+                idAlvo = arena.TimeA[indiceTimeA];
+            }
+
+            return new Ataque(idAtacante, idAlvo);
+        }
+
+        private Times EscolherTimeAtacante()
+        {
+            return random.Bool() ? Times.TimeA : Times.TimeB;
+        }
     }
 }

@@ -1,5 +1,8 @@
-public interface IRandom
+namespace SSaME.Core
 {
-    bool Bool();
-    int Range(int valorMinimo, int valorMaximo);
+    public interface IRandom  
+    {
+        bool Bool();
+        int Range(int valorMinimo, int valorMaximo);
+    }
 }

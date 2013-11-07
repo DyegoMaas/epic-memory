@@ -1,13 +1,12 @@
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using SSaME.Core;
 using UnityEngine;
 
 public class Sequenciador : MonoBehaviour
 {
     public Camera Camera;
-    public Personagem[] TimeA;
-    public Personagem[] TimeB;
     public int DuracaoAtaque = 1;
     public int TempoEsperaAntesDeRecomecarReproducao = 1;
 
@@ -15,10 +14,10 @@ public class Sequenciador : MonoBehaviour
     private Arena arena;
     private GeradorAtaques geradorAtaques;
     private readonly List<Ataque> ataquesGerados = new List<Ataque>();
-    private Dictionary<int, Personagem> personagens;
+    private readonly IList<Personagem> todosPersonagens = new List<Personagem>();
 
     // jogador
-    private Stack<Personagem> personagensSelecionados;
+    private Stack<IPersonagem> personagensSelecionados;
     private ValidadorAtaques validadorAtaques;
     private Sequencia sequenciaAtaques;
     private readonly List<int> touchesProcessed = new List<int>();
@@ -29,27 +28,18 @@ public class Sequenciador : MonoBehaviour
     {
         arena = new Arena();
         geradorAtaques = new GeradorAtaques(arena, new UnityRandomizer());
-        validadorAtaques = new ValidadorAtaques(arena);
+        validadorAtaques = new ValidadorAtaques();
         sequenciaAtaques = new Sequencia();
-        personagensSelecionados = new Stack<Personagem>(2);
-        personagens = new Dictionary<int, Personagem>(TimeA.Length + TimeB.Length);
+        personagensSelecionados = new Stack<IPersonagem>(2);
 
-        // inicialização personagens do Time A
-        foreach (var personagem in TimeA)
+        var personagens = FindObjectsOfType(typeof(Personagem)) as Personagem[];
+        if (personagens != null)
         {
-            int idPersonagem = arena.AdicionarParticipanteAoTimeA();
-            personagem.Inicializar(idPersonagem, Times.TimeA);
-
-            personagens.Add(idPersonagem, personagem);
-        }
-
-        // inicialização personagens do Time B
-        foreach (var personagem in TimeB)
-        {
-            int idPersonagem = arena.AdicionarParticipanteAoTimeB();
-            personagem.Inicializar(idPersonagem, Times.TimeB);
-
-            personagens.Add(idPersonagem, personagem);
+            foreach (var personagem in personagens)
+            {
+                todosPersonagens.Add(personagem);
+                arena.AdicionarParticipante(personagem);
+            }
         }
 
         StartCoroutine(ComecarProximaRodada());
@@ -71,16 +61,7 @@ public class Sequenciador : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
-                foreach (var personagem in TimeA)
-                {
-                    if (PersonagemFoiSelecionado(hit, personagem))
-                    {
-                        SelecionarPersonagem(personagem);
-                        continue;
-                    }
-                }
-
-                foreach (var personagem in TimeB)
+                foreach (var personagem in todosPersonagens)
                 {
                     if (PersonagemFoiSelecionado(hit, personagem))
                     {
@@ -140,7 +121,7 @@ public class Sequenciador : MonoBehaviour
     {
         var alvo = personagensSelecionados.Pop();
         var atacante = personagensSelecionados.Pop();
-        var ataque = new Ataque(atacante.Id, alvo.Id, atacante.Time);
+        var ataque = new Ataque(atacante, alvo);
 
         atacante.Atacar();
 
@@ -205,12 +186,9 @@ public class Sequenciador : MonoBehaviour
 
     private IEnumerator ReproduzirAtaque(Ataque ataque)
     {
-        var atacante = personagens[ataque.Atacante];
-        var alvo = personagens[ataque.Alvo];
-
-        atacante.Selecionar();
+        ataque.Atacante.Selecionar();
         yield return new WaitForSeconds(.5f);
-        alvo.Selecionar();
-        atacante.Atacar();
+        ataque.Alvo.Selecionar();
+        ataque.Atacante.Atacar();
     }
 }

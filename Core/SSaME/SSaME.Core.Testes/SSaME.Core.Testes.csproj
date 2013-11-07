@@ -51,6 +51,8 @@
   <ItemGroup>
     <Compile Include="ArenaTeste.cs" />
     <Compile Include="GeradorAtaquesTeste.cs" />
+    <Compile Include="PersonagemFake.cs" />
+    <Compile Include="PersonagemTesteBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SequenciaTeste.cs" />
     <Compile Include="ValidadorAtaquesTeste.cs" />

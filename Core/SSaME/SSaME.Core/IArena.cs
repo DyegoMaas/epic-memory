@@ -4,10 +4,9 @@ namespace SSaME.Core
 {
     public interface IArena
     {
-        List<int> TimeA { get; }
-        List<int> TimeB { get; }
+        List<IPersonagem> TimeA { get; }
+        List<IPersonagem> TimeB { get; }
 
-        int AdicionarParticipanteAoTimeA();
-        int AdicionarParticipanteAoTimeB();
+        void AdicionarParticipante(IPersonagem personagem);
     }
 }

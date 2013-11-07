@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 
-public interface IArena
+namespace SSaME.Core
 {
-    List<int> TimeA { get; }
-    List<int> TimeB { get; }
+    public interface IArena
+    {
+        List<IPersonagem> TimeA { get; }
+        List<IPersonagem> TimeB { get; }
 
-    int AdicionarParticipanteAoTimeA();
-    int AdicionarParticipanteAoTimeB();
+        void AdicionarParticipante(IPersonagem personagem);
+    }
 }

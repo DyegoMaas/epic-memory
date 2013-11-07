@@ -7,9 +7,9 @@ namespace SSaME.Core.Testes
     [TestFixture]
     public class SequenciaTeste
     {
-        private const int IdJogadorATimeA = 1;
-        private const int IdJogadorBTimeA = 2;
-        private const int IdJogadorATimeB = 3;
+        private readonly IPersonagem jogadorATimeA = new PersonagemFake(1, Times.TimeA);
+        private readonly IPersonagem jogadorBTimeA = new PersonagemFake(2, Times.TimeA);
+        private readonly IPersonagem jogadorATimeB = new PersonagemFake(3, Times.TimeA);
 
         [Test]
         public void o_usuario_reproduz_um_ataque_corretamente()
@@ -80,19 +80,19 @@ namespace SSaME.Core.Testes
             return new Sequencia();
         }
 
-        private static Ataque DadoUmAtaqueDoTimeA()
+        private Ataque DadoUmAtaqueDoTimeA()
         {
-            return new Ataque(IdJogadorATimeA, IdJogadorATimeB, Times.TimeA);
+            return new Ataque(jogadorATimeA, jogadorATimeB);
         }
 
-        private static Ataque DadoUmSegundoAtaqueDoTimeA()
+        private Ataque DadoUmSegundoAtaqueDoTimeA()
         {
-            return new Ataque(IdJogadorBTimeA, IdJogadorATimeB, Times.TimeA);
+            return new Ataque(jogadorBTimeA, jogadorATimeB);
         }
 
-        private static Ataque DadoUmAtaqueDoTimeB()
+        private Ataque DadoUmAtaqueDoTimeB()
         {
-            return new Ataque(IdJogadorATimeB, IdJogadorATimeA, Times.TimeB);
+            return new Ataque(jogadorATimeB, jogadorATimeA);
         }
 
         private static List<Ataque> DadaUmaListaDeAtaquesComEstesAtaques(params Ataque[] ataques)

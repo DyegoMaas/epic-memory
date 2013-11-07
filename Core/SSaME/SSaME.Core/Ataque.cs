@@ -2,15 +2,13 @@ namespace SSaME.Core
 {
     public struct Ataque
     {
-        public int Atacante;
-        public int Alvo;
-        public Times TimeAtacante;
+        public IPersonagem Atacante;
+        public IPersonagem Alvo;
 
-        public Ataque(int idAtacante, int idAlvo, Times timeAtacante)
+        public Ataque(IPersonagem atacante, IPersonagem alvo)
         {
-            Atacante = idAtacante;
-            Alvo = idAlvo;
-            TimeAtacante = timeAtacante;
+            Atacante = atacante;
+            Alvo = alvo;
         }
     }
 }

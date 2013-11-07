@@ -8,10 +8,10 @@ namespace SSaME.Core.Testes
     [TestFixture]
     public class GeradorAtaquesTeste
     {
-        private const int IdJogadorATimeA = 1;
-        private const int IdJogadorBTimeA = 2;
-        private const int IdJogadorATimeB = 3;
-        private const int IdJogadorBTimeB = 4;
+        private readonly IPersonagem jogadorATimeA = new PersonagemFake(1, Times.TimeA);
+        private readonly IPersonagem jogadorBTimeA = new PersonagemFake(2, Times.TimeA);
+        private readonly IPersonagem jogadorATimeB = new PersonagemFake(3, Times.TimeB);
+        private readonly IPersonagem jogadorBTimeB = new PersonagemFake(4, Times.TimeB);
 
         [Test]
         public void sequenciador_gera_um_ataque()
@@ -30,8 +30,8 @@ namespace SSaME.Core.Testes
         {
             var arena = Substitute.For<IArena>();
 
-            arena.TimeA.Returns(new List<int> {IdJogadorATimeA, IdJogadorBTimeA});
-            arena.TimeB.Returns(new List<int> {IdJogadorATimeB, IdJogadorBTimeB});
+            arena.TimeA.Returns(new List<IPersonagem> {jogadorATimeA, jogadorBTimeA});
+            arena.TimeB.Returns(new List<IPersonagem> { jogadorATimeB, jogadorBTimeB });
 
             return arena;
         }
@@ -53,14 +53,14 @@ namespace SSaME.Core.Testes
 
         private void AlvoEAtacanteDevemEstarEntreOsJogadoresDaArena(Ataque ataque)
         {
-            var listaJogadores = new List<int> {IdJogadorATimeA, IdJogadorATimeB, IdJogadorBTimeA, IdJogadorBTimeB};
+            var listaJogadores = new List<IPersonagem> {jogadorATimeA, jogadorATimeB, jogadorBTimeA, jogadorBTimeB};
             listaJogadores.Should().Contain(ataque.Atacante);
             listaJogadores.Should().Contain(ataque.Alvo);
         }
 
         private void AlvoEAtavanteNaoDevemEstarNoMesmoTime(IArena arena, Ataque ataque)
         {
-            if (ataque.TimeAtacante == Times.TimeA)
+            if (ataque.Atacante.Time == Times.TimeA)
                 arena.TimeA.Should().NotContain(ataque.Alvo);
             else
                 arena.TimeA.Should().NotContain(ataque.Atacante);

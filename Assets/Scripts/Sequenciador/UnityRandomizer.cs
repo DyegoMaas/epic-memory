@@ -1,3 +1,4 @@
+using SSaME.Core;
 using UnityEngine;
 
 public class UnityRandomizer : IRandom {

@@ -18,9 +18,9 @@ namespace SSaME.Core
             int indiceTimeA = random.Range(0, arena.TimeA.Count);
             int indiceTimeB = random.Range(0, arena.TimeB.Count);
 
-            int idAtacante, idAlvo;
-            var timeAtacante = EscolherTimeAtacante();
-            if (timeAtacante == Times.TimeA)
+            IPersonagem idAtacante;
+            IPersonagem idAlvo;
+            if (EscolherTimeAtacante() == Times.TimeA)
             {
                 idAtacante = arena.TimeA[indiceTimeA];
                 idAlvo = arena.TimeB[indiceTimeB];
@@ -31,7 +31,7 @@ namespace SSaME.Core
                 idAlvo = arena.TimeA[indiceTimeA];
             }
 
-            return new Ataque(idAtacante, idAlvo, timeAtacante);
+            return new Ataque(idAtacante, idAlvo);
         }
 
         private Times EscolherTimeAtacante()

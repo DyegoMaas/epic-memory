@@ -5,7 +5,7 @@ namespace SSaME.Core
     public class Sequencia  
     {
         private readonly List<Ataque> ataquesReproducao = new List<Ataque>(); 
-        
+
         public void ArmazenarAtaque(Ataque ataque)
         {
             ataquesReproducao.Add(ataque);
@@ -21,7 +21,7 @@ namespace SSaME.Core
                 var ataqueGravado = ataquesGravacao[i];
                 var ataqueReproducao = ataquesReproducao[i];
 
-                if (ataqueGravado.TimeAtacante != ataqueReproducao.TimeAtacante)
+                if (ataqueGravado.Atacante.Time != ataqueReproducao.Atacante.Time)
                     return false;
 
                 if (ataqueGravado.Atacante != ataqueReproducao.Atacante)
