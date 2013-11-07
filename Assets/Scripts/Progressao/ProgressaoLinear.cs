@@ -1,6 +1,6 @@
 using SSaME.Core;
 
-public class ProgressaoLinear : IProgressaoJogo
+public class ProgressaoLinear : IProgressaoPartida
 {
     private readonly RepositorioPersonagens repositorioPersonagens;
     private readonly int numeroAtaquesParaSubirNivel;
@@ -18,11 +18,11 @@ public class ProgressaoLinear : IProgressaoJogo
 
         if (numeroAtaques % numeroAtaquesParaSubirNivel == 0)
         {
-            AtualizarNivelPersonagens();
+            SubirNivelTodosPersonagens();
         }
     }
 
-    private void AtualizarNivelPersonagens()
+    private void SubirNivelTodosPersonagens()
     {
         var personagens = repositorioPersonagens.BuscarTodos();
         foreach (var personagem in personagens)

@@ -10,7 +10,7 @@ namespace SSaME.Core.Testes
         public void eh_possivel_adicionar_participantes_no_time_a()
         {
             var personagem = new PersonagemTesteBuilder()
-                .DoTime(Times.TimeA)
+                .DoTime(Time.A)
                 .Construir();
             var arena = DadoUmaArenaVazia();
 
@@ -25,7 +25,7 @@ namespace SSaME.Core.Testes
         public void eh_possivel_adicionar_participantes_no_time_b()
         {
             var personagem = new PersonagemTesteBuilder()
-                .DoTime(Times.TimeB)
+                .DoTime(Time.B)
                 .Construir();
             var arena = DadoUmaArenaVazia();
 
@@ -40,16 +40,16 @@ namespace SSaME.Core.Testes
         public void os_ids_sao_sequenciais()
         {
             var participanteA = new PersonagemTesteBuilder()
-                .DoTime(Times.TimeA)
+                .DoTime(Time.A)
                 .Construir();
             var participanteB = new PersonagemTesteBuilder()
-                .DoTime(Times.TimeA)
+                .DoTime(Time.A)
                 .Construir();
             var participanteC = new PersonagemTesteBuilder()
-                .DoTime(Times.TimeB)
+                .DoTime(Time.B)
                 .Construir();
             var participanteD = new PersonagemTesteBuilder()
-                .DoTime(Times.TimeB)
+                .DoTime(Time.B)
                 .Construir();
 
             var arena = DadoUmaArenaVazia();

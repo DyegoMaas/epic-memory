@@ -2,7 +2,7 @@ using SSaME.Core;
 using UnityEngine;
 using System.Collections;
 
-public interface IProgressaoJogo
+public interface IProgressaoPartida
 {
     void AtualizarProgressao(Ataque ataque);
 }

@@ -22,11 +22,11 @@ public class RepositorioPersonagens : IArena
         personagem.Inicializar(ProximoId());
         Personagens.Add(personagem.Id, personagem);
 
-        var time = (personagem.Time == Times.TimeA) ? TimeA : TimeB;
+        var time = (personagem.Time == Time.A) ? TimeA : TimeB;
         time.Add(personagem);
     }
 
-    public IList<IPersonagem> BuscarTodos()
+    public List<IPersonagem> BuscarTodos()
     {
         return Personagens.Values.ToList();
     }

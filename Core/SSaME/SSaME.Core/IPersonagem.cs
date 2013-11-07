@@ -2,7 +2,7 @@
 {
     public interface IPersonagem
     {
-        Times Time { get; }
+        Time Time { get; }
         int Id { get; }
         int Nivel { get; }
 

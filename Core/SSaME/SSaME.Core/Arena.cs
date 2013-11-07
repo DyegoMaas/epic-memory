@@ -19,7 +19,7 @@ namespace SSaME.Core
         {
             personagem.Inicializar(ProximoId());
 
-            if (personagem.Time == Times.TimeA)
+            if (personagem.Time == Time.A)
                 TimeA.Add(personagem);
             else
                 TimeB.Add(personagem);

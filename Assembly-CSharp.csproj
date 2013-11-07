@@ -45,7 +45,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Personagem.cs" />
-     <Compile Include="Assets\Scripts\Progressao\IProgressaoJogo.cs" />
+     <Compile Include="Assets\Scripts\Progressao\IProgressaoPartida.cs" />
      <Compile Include="Assets\Scripts\Progressao\ProgressaoAssimetrica.cs" />
      <Compile Include="Assets\Scripts\Progressao\ProgressaoLinear.cs" />
      <Compile Include="Assets\Scripts\Progressao\RepositorioPersonagens.cs" />
@@ -57,7 +57,8 @@
      <Compile Include="Assets\Scripts\Sequenciador\InputManager.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\Sequencia.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\Sequenciador.cs" />
-     <Compile Include="Assets\Scripts\Sequenciador\Times.cs" />
+     <Compile Include="Assets\Scripts\Sequenciador\Time.cs" />
+     <Compile Include="Assets\Scripts\Sequenciador\TipoEvolucaoPartida.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\UnityRandomizer.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\ValidadorAtaques.cs" />
      <Compile Include="Assets\Scripts\Utils\Messaging\MessageType.cs" />

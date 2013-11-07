@@ -3,15 +3,15 @@ namespace SSaME.Core.Testes
     public class PersonagemFake :IPersonagem
     {
         private int id;
-        private readonly Times time;
+        private readonly Time time;
 
-        public PersonagemFake(int id, Times time)
+        public PersonagemFake(int id, Time time)
         {
             this.id = id;
             this.time = time;
         }
 
-        public Times Time
+        public Time Time
         {
             get { return time; }
         }

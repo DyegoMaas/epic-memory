@@ -4,7 +4,7 @@ namespace SSaME.Core
 {
     public interface IPersonagem
     {
-        Times Time { get; }
+        Time Time { get; }
         int Id { get; }
         int Nivel { get; }
 
@@ -12,6 +12,7 @@ namespace SSaME.Core
         void Selecionar();
         void Atacar();
         void SubirNivel();
+        void ResetarNivel();
         Collider GetCollider();
     }
 }

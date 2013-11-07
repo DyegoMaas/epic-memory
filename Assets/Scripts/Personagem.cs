@@ -1,14 +1,23 @@
 using SSaME.Core;
 using UnityEngine;
 using System.Collections;
+using Time = SSaME.Core.Time;
 
 public class Personagem : MonoBehaviour, IPersonagem {
 
-    public Times Time { get; private set; }
+    public Time Time { get; private set; }
     public int Id { get; private set; }
-    public int Nivel { get; private set; }
 
-    public Times TimePersonagem = Times.TimeA;
+    [SerializeField]
+    private int nivel;
+
+    public int Nivel
+    {
+        get { return nivel; }
+        set { nivel = value; }
+    }
+
+    public Time TimePersonagem = Time.A;
     public AudioClip SomSelecao;
     public AudioClip SomAtaque;
 
@@ -63,7 +72,13 @@ public class Personagem : MonoBehaviour, IPersonagem {
 
     public void SubirNivel()
     {
-        throw new System.NotImplementedException();
+        nivel++;
+        Debug.Log(string.Format("{0} subiu para o nível {1}", gameObject.name, nivel));
+    }
+
+    public void ResetarNivel()
+    {
+        nivel = 0;
     }
 
     public Collider GetCollider()

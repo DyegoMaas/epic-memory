@@ -1,6 +1,6 @@
 using SSaME.Core;
 
-public class ProgressaoAssimetrica : IProgressaoJogo
+public class ProgressaoAssimetrica : IProgressaoPartida
 {
     public void AtualizarProgressao(Ataque ataque)
     {
