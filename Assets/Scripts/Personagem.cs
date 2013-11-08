@@ -3,13 +3,15 @@ using UnityEngine;
 using System.Collections;
 using Time = SSaME.Core.Time;
 
-public class Personagem : MonoBehaviour, IPersonagem {
+public class Personagem : MonoBehaviour, IPersonagem
+{
+    private const int NivelInicial = 1;
 
     public Time Time { get; private set; }
     public int Id { get; private set; }
 
     [SerializeField]
-    private int nivel;
+    private int nivel = NivelInicial;
 
     public int Nivel
     {
@@ -78,7 +80,7 @@ public class Personagem : MonoBehaviour, IPersonagem {
 
     public void ResetarNivel()
     {
-        nivel = 0;
+        nivel = NivelInicial;
     }
 
     public Collider GetCollider()

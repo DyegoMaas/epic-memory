@@ -2,13 +2,14 @@ using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.Progressao;
 using SSaME.Core;
 using UnityEngine;
 
+[RequireComponent(typeof(ProgressaoPartidaFactory))]
 public class Sequenciador : MonoBehaviour
 {
     public Camera Camera;
-    public TipoEvolucaoPartida EvolucaoPartida = TipoEvolucaoPartida.Linear;
     public int DuracaoAtaque = 1;
     public int TempoEsperaAntesDeRecomecarReproducao = 1;
 
@@ -17,6 +18,7 @@ public class Sequenciador : MonoBehaviour
     private readonly List<Ataque> ataquesGerados = new List<Ataque>();
     private RepositorioPersonagens repositorioPersonagens;
     private IProgressaoPartida progressaoPartida;
+    private IProgressaoPartidaFactory progressaoPartidaFactory;
 
     // jogador
     private readonly Stack<IPersonagem> personagensSelecionados = new Stack<IPersonagem>(2);
@@ -31,6 +33,7 @@ public class Sequenciador : MonoBehaviour
         repositorioPersonagens = new RepositorioPersonagens();
         inputManager = new InputManager(repositorioPersonagens);
         geradorAtaques = new GeradorAtaques(repositorioPersonagens, new UnityRandomizer());
+        progressaoPartidaFactory = GetComponent<ProgressaoPartidaFactory>();
 
         var personagens = FindObjectsOfType(typeof(Personagem)) as Personagem[];
         if (personagens != null)
@@ -42,16 +45,6 @@ public class Sequenciador : MonoBehaviour
         }
 
         StartCoroutine(ComecarProximaRodada());
-    }
-
-    private IProgressaoPartida DefinirProgressaoPartida()
-    {
-        switch (EvolucaoPartida)
-        {
-            case TipoEvolucaoPartida.Linear: return new ProgressaoLinear(repositorioPersonagens, 3);
-            case TipoEvolucaoPartida.Assimetrica: return new ProgressaoAssimetrica();
-        }
-        throw new InvalidOperationException("Não existe progressor de partida do tipo " + EvolucaoPartida);
     }
 
     // Update is called once per frame
@@ -146,7 +139,7 @@ public class Sequenciador : MonoBehaviour
 
     private IEnumerator ComecarProximaRodada()
     {
-        progressaoPartida = DefinirProgressaoPartida();
+        progressaoPartida = progressaoPartidaFactory.CriarProgressorPartida(repositorioPersonagens);
         ResetarNivelPersonagens();
         sequenciaAtaques = new Sequencia();
         yield return new WaitForSeconds(TempoEsperaAntesDeRecomecarReproducao);
@@ -185,14 +178,3 @@ public class Sequenciador : MonoBehaviour
         ataque.Atacante.Atacar();
     }
 }
-
-//public static class ProgressaoPartidaFactory
-//{
-//    public static IProgressaoPartida CriarProgressor(TipoEvolucaoPartida evolucaoPartida)
-//    {
-//        switch (evolucaoPartida)
-//        {
-//                case TipoEvolucaoPartida.Linear:return new ProgressaoLinear();
-//        }
-//    }
-//}
