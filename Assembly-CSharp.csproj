@@ -62,6 +62,11 @@
      <Compile Include="Assets\Scripts\Sequenciador\TipoProgressaoPartida.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\UnityRandomizer.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\ValidadorAtaques.cs" />
+     <Compile Include="Assets\Scripts\UI\TextoGUI.cs" />
+     <Compile Include="Assets\Scripts\Utils\Messaging\FSM\RegisterAsListener.cs" />
+     <Compile Include="Assets\Scripts\Utils\Messaging\FSM\SendMessageToListeners.cs" />
+     <Compile Include="Assets\Scripts\Utils\Messaging\FSM\UnregisterAsListener.cs" />
+     <Compile Include="Assets\Scripts\Utils\Messaging\Listeners.cs" />
      <Compile Include="Assets\Scripts\Utils\Messaging\MessageType.cs" />
      <Compile Include="Assets\Scripts\Utils\Messaging\Messages.cs" />
      <Compile Include="Assets\Scripts\Utils\Messaging\Messenger.cs" />

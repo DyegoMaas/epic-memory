@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using Assets.Scripts.Progressao;
+using Messaging;
 using SSaME.Core;
 using UnityEngine;
 
@@ -112,6 +113,7 @@ public class Sequenciador : MonoBehaviour
 
                 if (sequenciaAtaques.EstaCompleta(ataquesGerados))
                 {
+                    Messenger.Broadcast(MessageType.AtaqueDesferido);
                     StartCoroutine(ComecarProximaRodada());
                 }
             }
@@ -131,6 +133,7 @@ public class Sequenciador : MonoBehaviour
         jogadorPodeInteragir = false;
         ataquesGerados.Clear();
         sequenciaAtaques = new Sequencia();
+        Messenger.Broadcast(MessageType.GameOver);
 
         yield return new WaitForSeconds(TempoEsperaAntesDeRecomecarReproducao);
 

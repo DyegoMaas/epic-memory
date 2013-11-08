@@ -4,6 +4,21 @@ using UnityEngine;
 
 namespace Messaging
 {
+
+    /// <summary>
+    /// Name that maps to a variable inside a Playmaker FSM
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
+    public class FsmMessageVariableAttribute : Attribute
+    {
+        public string FsmVariableName { get; private set; }
+
+        public FsmMessageVariableAttribute(string fsmVariableName)
+        {
+            this.FsmVariableName = fsmVariableName;
+        }
+    }
+
     /// <summary>
     /// Generic message
     /// </summary>
@@ -20,6 +35,8 @@ namespace Messaging
             Value = value;
         }
     }
+
+
 
     // You message classes here:
     // See some examples:

@@ -7,10 +7,8 @@ namespace Messaging
     /// </summary>
     public enum MessageType
     {
-        MessageTypeA = 1,
-        MessageTypeB = 2,
-        
-        // other message types
+        GameOver = 1,
+        AtaqueDesferido = 2,
 
         Unknown = 100
     }
