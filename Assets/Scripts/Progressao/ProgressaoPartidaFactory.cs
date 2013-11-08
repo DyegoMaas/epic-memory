@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Assets.Scripts.Progressao
@@ -31,7 +30,7 @@ namespace Assets.Scripts.Progressao
                 case TipoProgressaoPartida.Linear: return new ProgressaoLinear(repositorio, numeroPartidasSubirNivel);
                 case TipoProgressaoPartida.Assimetrica: return new ProgressaoAssimetrica();
             }
-            throw new InvalidOperationException("Não existe progressor de partida do tipo " + TipoProgressaoPartida);
+            throw new UnityException("Não existe progressor de partida do tipo " + TipoProgressaoPartida);
         }
     }
 }

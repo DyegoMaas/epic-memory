@@ -18,7 +18,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_ANDROID;ENABLE_MICROPHONE;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;ENABLE_AUDIO_FMOD;ENABLE_NETWORK;ENABLE_MONO;ENABLE_PHYSICS;ENABLE_TERRAIN;ENABLE_CACHING;ENABLE_SUBSTANCE;ENABLE_GENERICS;UNITY_ANDROID_API;ENABLE_CLOTH;ENABLE_AUDIO;ENABLE_WWW;ENABLE_SHADOWS;UNITY_4_1_2;UNITY_4_1;ENABLE_PROFILER;UNITY_EDITOR;UNITY_TEAM_LICENSE;ENABLE_DUCK_TYPING</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_ANDROID;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_AUDIO_FMOD;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;UNITY_ANDROID_API;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;UNITY_4_2_2;UNITY_4_2;DEVELOPMENT_BUILD;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN;ENABLE_DUCK_TYPING</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -44,16 +44,6 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\ThirdParty\Photon Unity Networking\Editor\PhotonNetwork\AccountService.cs" />
-     <Compile Include="Assets\ThirdParty\Photon Unity Networking\Editor\PhotonNetwork\PhotonConverter.cs" />
-     <Compile Include="Assets\ThirdParty\Photon Unity Networking\Editor\PhotonNetwork\PhotonEditor.cs" />
-     <Compile Include="Assets\ThirdParty\Photon Unity Networking\Editor\PhotonNetwork\PhotonViewHandler.cs" />
-     <Compile Include="Assets\ThirdParty\Photon Unity Networking\Editor\PhotonNetwork\PhotonViewInspector.cs" />
-     <Compile Include="Assets\ThirdParty\Photon Unity Networking\Editor\PhotonNetwork\PhotonViewPrefabApply.cs" />
-     <Compile Include="Assets\ThirdParty\Photon Unity Networking\Editor\PhotonNetwork\ServerSettingsInspector.cs" />
-     <Compile Include="Assets\ThirdParty\Photon Unity Networking\PlayMaker\Editor\PlayMakerPhotonEditorUtility.cs" />
-     <Compile Include="Assets\ThirdParty\Photon Unity Networking\PlayMaker\Editor\PlayMakerPhotonGameObjectProxyEditor.cs" />
-     <Compile Include="Assets\ThirdParty\Photon Unity Networking\PlayMaker\Editor\PlayMakerPhotonWizard.cs" />
      <Compile Include="Assets\ThirdParty\PlayMaker\Actions\Editor\LookAtActionEditor.cs" />
      <Compile Include="Assets\ThirdParty\PlayMaker\Actions\Editor\MoveTowardsActionEditor.cs" />
      <Compile Include="Assets\ThirdParty\PlayMaker\Actions\Editor\SetCameraFOVActionEditor.cs" />
@@ -170,7 +160,6 @@
      <Compile Include="Assets\ThirdParty\TK2DROOT\tk2dUI\Editor\Core\tk2dUIMethodBindingHelper.cs" />
      <Compile Include="Assets\ThirdParty\TK2DROOT\tk2dUI\Editor\Core\tk2dUISpriteAnimatorEditor.cs" />
      <Compile Include="Assets\ThirdParty\iTween\PlayMaker\Editor\iTweenMoveToActionEditor.cs" />
-     <None Include="Assets\ThirdParty\Photon Unity Networking\PlayMaker\ReleaseNotes.txt" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Shaders\LitSolidVertexColor.shader" />
      <None Include="Assets\ThirdParty\PlayMaker\Readme.txt" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Goodies\TexturePacker\Exporter\2dtoolkit\exporter.xml" />
@@ -181,9 +170,7 @@
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Shaders\PremulVertexColor.shader" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d_demo\Credits.txt" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Shaders\goodies\PackedTextMesh.shader" />
-     <None Include="Assets\ThirdParty\Photon Unity Networking\Plugins\PhotonNetwork\library\Photon3Unity3D.xml" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Shaders\Blend2TexVertexColor.shader" />
-     <None Include="Assets\ThirdParty\Photon Unity Networking\Plugins\PhotonNetwork\library\release_history.txt" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2dUI\Shaders\DepthMaskSolid.shader" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2dUI_demo\Assets\Dark\Fonts\Nunito24.fnt" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Shaders\resources\BlendVertexColor.shader" />
@@ -193,19 +180,11 @@
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d_demo\demobmfont\test.fnt" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2dUI_demo\Assets\Font\OldSansBlack\OldSansBlack.fnt" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Shaders\LitBlendVertexColor.shader" />
-     <None Include="Assets\ThirdParty\Photon Unity Networking\readme.txt" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2dUI_demo\Assets\Dark\Fonts\Nunito16.fnt" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2dUI_demo\Assets\Dark\Fonts\Nunito32.fnt" />
      <None Include="Assets\ThirdParty\PlayMaker\Versions\readme.txt" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Shaders\AdditiveVertexColor.shader" />
-     <None Include="Assets\ThirdParty\Photon Unity Networking\changelog.txt" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d_demo\democameradata\source\democamerafont.fnt" />
- <Reference Include="Newtonsoft.Json">
- <HintPath>Assets\ThirdParty\Photon Unity Networking\Editor\PhotonNetwork\Newtonsoft.Json.dll</HintPath>
- </Reference>
- <Reference Include="Photon3Unity3D">
- <HintPath>Assets\ThirdParty\Photon Unity Networking\Plugins\PhotonNetwork\library\Photon3Unity3D.dll</HintPath>
- </Reference>
  <Reference Include="PlayMaker">
  <HintPath>Assets\ThirdParty\PlayMaker\PlayMaker.dll</HintPath>
  </Reference>
@@ -253,6 +232,21 @@
  </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>C:\Program Files (x86)\Unity\Editor\Data\Managed\UnityEditor.Graphs.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.iOS.Extensions">
+ <HintPath>C:\Program Files (x86)\Unity\Editor\Data\PlaybackEngines\iPhonePlayer\EditorExtensions\UnityEditor.iOS.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.WP8.Extensions">
+ <HintPath>C:\Program Files (x86)\Unity\Editor\Data\PlaybackEngines\WP8Support\EditorExtensions\UnityEditor.WP8.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.Metro.Extensions">
+ <HintPath>C:\Program Files (x86)\Unity\Editor\Data\PlaybackEngines\MetroSupport\EditorExtensions\UnityEditor.Metro.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.BB10.Extensions">
+ <HintPath>C:\Program Files (x86)\Unity\Editor\Data\PlaybackEngines\BB10Player\EditorExtensions\UnityEditor.BB10.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.Android.Extensions">
+ <HintPath>C:\Program Files (x86)\Unity\Editor\Data\PlaybackEngines\AndroidPlayer\EditorExtensions\UnityEditor.Android.Extensions.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

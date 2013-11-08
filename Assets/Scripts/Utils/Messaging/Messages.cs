@@ -1,10 +1,7 @@
 using System;
-using System.Collections;
-using UnityEngine;
 
 namespace Messaging
 {
-
     /// <summary>
     /// Name that maps to a variable inside a Playmaker FSM
     /// </summary>
@@ -15,7 +12,7 @@ namespace Messaging
 
         public FsmMessageVariableAttribute(string fsmVariableName)
         {
-            this.FsmVariableName = fsmVariableName;
+            FsmVariableName = fsmVariableName;
         }
     }
 
@@ -35,7 +32,6 @@ namespace Messaging
             Value = value;
         }
     }
-
 
 
     // You message classes here:
