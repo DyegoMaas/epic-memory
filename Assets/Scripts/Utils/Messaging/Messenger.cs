@@ -87,6 +87,8 @@ public class Messenger : MonoBehaviour
 
     #endregion
 
+    public bool DoNotDestroyOnLoad = true;
+
     private readonly Dictionary<MessageType, List<Listener>> listeners = new Dictionary<MessageType, List<Listener>>();
 
     void Awake()
@@ -94,6 +96,14 @@ public class Messenger : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+        }
+    }
+
+    void Start()
+    {
+        if (DoNotDestroyOnLoad)
+        {
+            DontDestroyOnLoad(gameObject);
         }
     }
 
