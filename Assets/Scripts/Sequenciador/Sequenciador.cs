@@ -9,14 +9,13 @@ using UnityEngine;
 [RequireComponent(typeof(ProgressaoPartidaFactory))]
 public class Sequenciador : MonoBehaviour
 {
-    public Camera Camera;
     public float DuracaoAtaque = 1.5f;
     public float TempoEsperaAntesDeRecomecarReproducao = 1.5f;
 
     // máquina
     private GeradorAtaques geradorAtaques;
     private readonly List<Ataque> ataquesGerados = new List<Ataque>();
-    private RepositorioPersonagens repositorioPersonagens;
+    private readonly RepositorioPersonagens repositorioPersonagens = new RepositorioPersonagens();
     private IProgressaoPartida progressaoPartida;
     private IProgressaoPartidaFactory progressaoPartidaFactory;
 
@@ -30,12 +29,17 @@ public class Sequenciador : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        repositorioPersonagens = new RepositorioPersonagens();
         inputManager = new InputManager(repositorioPersonagens);
         geradorAtaques = new GeradorAtaques(repositorioPersonagens, new UnityRandomizer());
         progressaoPartidaFactory = GetComponent<ProgressaoPartidaFactory>();
+        AdicionarTodosOsPersonagensNoRepositorio();
 
-        var personagens = FindObjectsOfType(typeof(Personagem)) as Personagem[];
+        StartCoroutine(ComecarProximaRodada());
+    }
+
+    private void AdicionarTodosOsPersonagensNoRepositorio()
+    {
+        var personagens = FindObjectsOfType(typeof (Personagem)) as Personagem[];
         if (personagens != null)
         {
             foreach (var personagem in personagens)
@@ -43,8 +47,6 @@ public class Sequenciador : MonoBehaviour
                 repositorioPersonagens.Adicionar(personagem);
             }
         }
-
-        StartCoroutine(ComecarProximaRodada());
     }
 
     // Update is called once per frame
@@ -67,15 +69,6 @@ public class Sequenciador : MonoBehaviour
         }
     }
 
-    private bool OJogadorEscolheuUmPersonagemDoMesmoTime(IPersonagem personagem)
-    {
-        var personagemJaSelecionado = personagensSelecionados.Pop();
-        bool mesmoTime = personagem.Equipe == personagemJaSelecionado.Equipe;
-        personagensSelecionados.Push(personagemJaSelecionado);
-
-        return mesmoTime;
-    }
-
     private void SelecionarPersonagem(IPersonagem personagem)
     {
         if (personagensSelecionados.Count == 1)
@@ -88,6 +81,15 @@ public class Sequenciador : MonoBehaviour
 
         personagensSelecionados.Push(personagem);
         personagem.Selecionar();
+    }
+
+    private bool OJogadorEscolheuUmPersonagemDoMesmoTime(IPersonagem personagem)
+    {
+        var personagemJaSelecionado = personagensSelecionados.Pop();
+        bool mesmoTime = personagem.Equipe == personagemJaSelecionado.Equipe;
+        personagensSelecionados.Push(personagemJaSelecionado);
+
+        return mesmoTime;
     }
 
     private bool JogadorCompletouUmAtaque()
@@ -171,7 +173,8 @@ public class Sequenciador : MonoBehaviour
         }
         jogadorPodeInteragir = true;
 
-        yield return new WaitForSeconds(.5f);
+        const float tempoMostrandoONivel = .5f;
+        yield return new WaitForSeconds(tempoMostrandoONivel);
         progressaoPartida.ResetarProgressoPartida();
 
         Messenger.Broadcast(MessageType.JogadaCompleta);
