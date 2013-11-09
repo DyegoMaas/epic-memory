@@ -44,6 +44,8 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\MenuPrincipal\MenuPrincipal.cs" />
+     <Compile Include="Assets\Scripts\MenuPrincipal\Novo.cs" />
      <Compile Include="Assets\Scripts\Personagem.cs" />
      <Compile Include="Assets\Scripts\Progressao\IProgressaoPartida.cs" />
      <Compile Include="Assets\Scripts\Progressao\ProgressaoAssimetrica.cs" />
