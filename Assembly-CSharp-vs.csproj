@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\Progressao\ProgressaoLinear.cs" />
      <Compile Include="Assets\Scripts\Progressao\ProgressaoPartidaFactory.cs" />
      <Compile Include="Assets\Scripts\Progressao\RepositorioPersonagens.cs" />
+     <Compile Include="Assets\Scripts\SeletorAnimacaoAtaque.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\Ataque.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\Equipe.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\GeradorAtaques.cs" />

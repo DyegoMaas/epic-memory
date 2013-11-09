@@ -1,6 +1,5 @@
 using SSaME.Core;
 using UnityEngine;
-using System.Collections;
 using Messaging;
 
 [RequireComponent(typeof(AnimadorSelecao))]
@@ -34,6 +33,7 @@ public class Personagem : MonoBehaviour, IPersonagem
     private tk2dSpriteAnimator spriteAnimator;
     private AnimadorSelecao animadorSelecao;
     private IndicadorNivelPersonagem indicadorNivel;
+    private SeletorAnimacaoAtaque seletorAnimacaoAtaque;
 
     void Awake()
     {
@@ -43,7 +43,8 @@ public class Personagem : MonoBehaviour, IPersonagem
 	void Start ()
 	{
 	    spriteAnimator = GetComponent<tk2dSpriteAnimator>();
-	    animadorSelecao = GetComponent<AnimadorSelecao>();
+        seletorAnimacaoAtaque = new SeletorAnimacaoAtaque(spriteAnimator);
+        animadorSelecao = GetComponent<AnimadorSelecao>();
 	    indicadorNivel = GetComponentInChildren<IndicadorNivelPersonagem>();
 	}
 
@@ -81,7 +82,9 @@ public class Personagem : MonoBehaviour, IPersonagem
         {
             AudioSource.PlayClipAtPoint(SomAtaque, transform.position);
         }
-        spriteAnimator.Play("Ataque");
+
+        var clip = seletorAnimacaoAtaque.BuscarClipe(Nivel);
+        spriteAnimator.Play(clip);
     }
 
     public void SubirNivel()
@@ -96,7 +99,6 @@ public class Personagem : MonoBehaviour, IPersonagem
 
     private void DefinirNivel(int novoNivel)
     {
-        Debug.Log("novo nivel");
         nivel = novoNivel;
         indicadorNivel.AtualizarNivelPersonagem(novoNivel);
     }
