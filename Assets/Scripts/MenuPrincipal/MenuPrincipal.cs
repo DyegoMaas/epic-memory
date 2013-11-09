@@ -1,23 +1,29 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(AnimadorSelecao))]
 public class MenuPrincipal : MonoBehaviour
 {
-    public string NomeLevelNovoJogo = "load_sceen";
     public GameObject BotaoNovo;
     public GameObject BotaoJogo;
+    public GameObject BotaoSair;
+    public string NomeLevelNovoJogo = "load_sceen";
     public float IntervaloEntreBotoesDica = 1f;
     public float IntervaloEntreDicas = 15f;
 
     private const int IdBotaoNovo = 1;
     private const int IdBotaoJogo = 2;
+    private const int IdBotaoSair = 3;
 
-    private readonly Stack<int> clicks = new Stack<int>();
     private AnimadorSelecao animadorSelecao;
     private bool jogadorPodeInteragir = true;
-    private bool jogadorSelecionouUmaOpcao = false;
+    private bool jogadorSelecionouUmaOpcao;
+    private bool fecharJogo;
+
+
+    private int ultimoBotao;
+    private int penultimoBotao;
+    private int clickCount;
 
     // Use this for initialization
     void Start()
@@ -36,10 +42,18 @@ public class MenuPrincipal : MonoBehaviour
         }
     }
 
+    private IEnumerator DarDicaMenu()
+    {
+        jogadorPodeInteragir = false;
+        animadorSelecao.AnimarSelecao(BotaoNovo);
+        yield return new WaitForSeconds(IntervaloEntreBotoesDica);
+        animadorSelecao.AnimarSelecao(BotaoJogo);
+        jogadorPodeInteragir = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
-
     }
 
     void BotaoNovoClick()
@@ -47,8 +61,16 @@ public class MenuPrincipal : MonoBehaviour
         if (!jogadorPodeInteragir)
             return;
 
-        clicks.Push(IdBotaoNovo);
+        Clicar(IdBotaoNovo);
         animadorSelecao.AnimarSelecao(BotaoNovo);
+    }
+
+    private void Clicar(int idBotao)
+    {
+        clickCount++;
+
+        penultimoBotao = ultimoBotao;
+        ultimoBotao = idBotao;
     }
 
     void BotaoJogoClick()
@@ -56,25 +78,37 @@ public class MenuPrincipal : MonoBehaviour
         if (!jogadorPodeInteragir)
             return;
 
-        clicks.Push(IdBotaoJogo);
+        Clicar(IdBotaoJogo);
         animadorSelecao.AnimarSelecao(BotaoJogo);
 
         VerificarCarregamentoDoMapa();
+        VerificarSaida();
+    }
+
+    void BotaoSairClick()
+    {
+        if (!jogadorPodeInteragir)
+            return;
+
+        Clicar(IdBotaoSair);
+        animadorSelecao.AnimarSelecao(BotaoSair);
     }
 
     private void VerificarCarregamentoDoMapa()
     {
-        if (clicks.Count % 2 != 0)
+        if (!JogadorCompletouUmaJogada())
             return;
 
-        var ultimoClick = clicks.Pop();
-        var penultimoClick = clicks.Pop();
-
-        if (penultimoClick == IdBotaoNovo && ultimoClick == IdBotaoJogo)
+        if (penultimoBotao == IdBotaoNovo && ultimoBotao == IdBotaoJogo)
         {
             jogadorSelecionouUmaOpcao = true;
             StartCoroutine(CarregarCenario());
         }
+    }
+
+    private bool JogadorCompletouUmaJogada()
+    {
+        return clickCount >= 2 && clickCount % 2 == 0;
     }
 
     private IEnumerator CarregarCenario()
@@ -83,13 +117,21 @@ public class MenuPrincipal : MonoBehaviour
         Application.LoadLevel(NomeLevelNovoJogo);
     }
 
-
-    private IEnumerator DarDicaMenu()
+    private void VerificarSaida()
     {
-        jogadorPodeInteragir = false;
-        animadorSelecao.AnimarSelecao(BotaoNovo);
-        yield return new WaitForSeconds(IntervaloEntreBotoesDica);
-        animadorSelecao.AnimarSelecao(BotaoJogo);
-        jogadorPodeInteragir = true;
+        if (!JogadorCompletouUmaJogada())
+            return;
+
+        if (penultimoBotao == IdBotaoSair && ultimoBotao == IdBotaoJogo)
+        {
+            jogadorPodeInteragir = false;
+            StartCoroutine(FecharEmAlgunsSegundos(1f));
+        }
+    }
+
+    private IEnumerator FecharEmAlgunsSegundos(float tempo)
+    {
+        yield return new WaitForSeconds(tempo);
+        Application.Quit();
     }
 }
