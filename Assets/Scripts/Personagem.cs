@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using Messaging;
 
+[RequireComponent(typeof(AnimadorSelecao))]
 public class Personagem : MonoBehaviour, IPersonagem
 {
     private const int NivelInicial = 1;
@@ -31,6 +32,7 @@ public class Personagem : MonoBehaviour, IPersonagem
     public AudioClip SomAtaque;
 
     private tk2dSpriteAnimator spriteAnimator;
+    private AnimadorSelecao animadorSelecao;
 
     void Awake()
     {
@@ -40,6 +42,7 @@ public class Personagem : MonoBehaviour, IPersonagem
 	void Start ()
 	{
 	    spriteAnimator = GetComponent<tk2dSpriteAnimator>();
+	    animadorSelecao = GetComponent<AnimadorSelecao>();
 	}
 
     // Update is called once per frame
@@ -62,19 +65,12 @@ public class Personagem : MonoBehaviour, IPersonagem
 
         NotificarSelecaoPersonagem();
 
-        StartCoroutine(AnimarSelecao());
+        animadorSelecao.AnimarSelecao();
     }
 
     private void NotificarSelecaoPersonagem()
     {
         Messenger.Broadcast(MessageType.JogadorSelecionado, new Message<Equipe>(equipe));
-    }
-
-    private IEnumerator AnimarSelecao()
-    {
-        iTween.ScaleTo(gameObject, new Vector3(1.5f, 1.5f, 1), .2f);
-        yield return new WaitForSeconds(.1f);
-        iTween.ScaleTo(gameObject, new Vector3(1, 1, 1), .2f);
     }
 
     public void Atacar()
