@@ -21,7 +21,7 @@ public class RepositorioPersonagens : IArena
         personagem.Inicializar(ProximoId());
         Personagens.Add(personagem.Id, personagem);
 
-        var time = (personagem.Time == Time.A) ? TimeA : TimeB;
+        var time = (personagem.Equipe == Equipe.A) ? TimeA : TimeB;
         time.Add(personagem);
     }
 

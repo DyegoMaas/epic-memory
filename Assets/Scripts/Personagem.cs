@@ -1,14 +1,19 @@
 using SSaME.Core;
 using UnityEngine;
 using System.Collections;
-using Time = SSaME.Core.Time;
+using Messaging;
 
 public class Personagem : MonoBehaviour, IPersonagem
 {
     private const int NivelInicial = 1;
 
-    public Time Time { get; private set; }
     public int Id { get; private set; }
+
+    public Equipe Equipe
+    {
+        get { return equipe; }
+        set { equipe = value; }
+    }
 
     [SerializeField]
     private int nivel = NivelInicial;
@@ -19,7 +24,9 @@ public class Personagem : MonoBehaviour, IPersonagem
         set { nivel = value; }
     }
 
-    public Time TimePersonagem = Time.A;
+    [SerializeField]
+    private Equipe equipe = Equipe.A;
+
     public AudioClip SomSelecao;
     public AudioClip SomAtaque;
 
@@ -27,7 +34,6 @@ public class Personagem : MonoBehaviour, IPersonagem
 
     void Awake()
     {
-        Time = TimePersonagem;
     }
     
     // Use this for initialization
@@ -53,7 +59,15 @@ public class Personagem : MonoBehaviour, IPersonagem
         {
             AudioSource.PlayClipAtPoint(SomSelecao, transform.position);
         }
+
+        NotificarSelecaoPersonagem();
+
         StartCoroutine(AnimarSelecao());
+    }
+
+    private void NotificarSelecaoPersonagem()
+    {
+        Messenger.Broadcast(MessageType.JogadorSelecionado, new Message<Equipe>(equipe));
     }
 
     private IEnumerator AnimarSelecao()

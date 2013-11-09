@@ -32,7 +32,7 @@ namespace Messaging
             Value = value;
         }
     }
-
+    
 
     // You message classes here:
     // See some examples:

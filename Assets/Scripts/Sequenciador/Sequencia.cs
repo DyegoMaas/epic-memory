@@ -21,7 +21,7 @@ namespace SSaME.Core
                 var ataqueGravado = ataquesGravacao[i];
                 var ataqueReproducao = ataquesReproducao[i];
 
-                if (ataqueGravado.Atacante.Time != ataqueReproducao.Atacante.Time)
+                if (ataqueGravado.Atacante.Equipe != ataqueReproducao.Atacante.Equipe)
                     return false;
 
                 if (ataqueGravado.Atacante != ataqueReproducao.Atacante)

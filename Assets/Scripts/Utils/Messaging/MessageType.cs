@@ -7,6 +7,8 @@ namespace Messaging
     {
         GameOver = 1,
         AtaqueDesferido = 2,
+        JogadorSelecionado = 3,
+        JogadaCompleta = 4,
 
         Unknown = 100
     }

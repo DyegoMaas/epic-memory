@@ -18,7 +18,7 @@ namespace SSaME.Core
 
             IPersonagem idAtacante;
             IPersonagem idAlvo;
-            if (EscolherTimeAtacante() == Time.A)
+            if (EscolherTimeAtacante() == Equipe.A)
             {
                 idAtacante = arena.TimeA[indiceTimeA];
                 idAlvo = arena.TimeB[indiceTimeB];
@@ -32,9 +32,9 @@ namespace SSaME.Core
             return new Ataque(idAtacante, idAlvo);
         }
 
-        private Time EscolherTimeAtacante()
+        private Equipe EscolherTimeAtacante()
         {
-            return random.Bool() ? Time.A : Time.B;
+            return random.Bool() ? Equipe.A : Equipe.B;
         }
     }
 }

@@ -4,7 +4,7 @@ namespace SSaME.Core
 {
     public interface IPersonagem
     {
-        Time Time { get; }
+        Equipe Equipe { get; }
         int Id { get; }
         int Nivel { get; }
 

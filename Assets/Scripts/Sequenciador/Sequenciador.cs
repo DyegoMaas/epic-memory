@@ -10,8 +10,8 @@ using UnityEngine;
 public class Sequenciador : MonoBehaviour
 {
     public Camera Camera;
-    public int DuracaoAtaque = 1;
-    public int TempoEsperaAntesDeRecomecarReproducao = 1;
+    public float DuracaoAtaque = 1.5f;
+    public float TempoEsperaAntesDeRecomecarReproducao = 1.5f;
 
     // máquina
     private GeradorAtaques geradorAtaques;
@@ -70,7 +70,7 @@ public class Sequenciador : MonoBehaviour
     private bool OJogadorEscolheuUmPersonagemDoMesmoTime(IPersonagem personagem)
     {
         var personagemJaSelecionado = personagensSelecionados.Pop();
-        bool mesmoTime = personagem.Time == personagemJaSelecionado.Time;
+        bool mesmoTime = personagem.Equipe == personagemJaSelecionado.Equipe;
         personagensSelecionados.Push(personagemJaSelecionado);
 
         return mesmoTime;
@@ -109,10 +109,11 @@ public class Sequenciador : MonoBehaviour
             if (sequenciaAtaques.Validar(ataquesGerados))
             {
                 progressaoPartida.AtualizarProgressao(ataque);
+                Messenger.Broadcast(MessageType.AtaqueDesferido, new Message<Ataque>(ataque));
 
                 if (sequenciaAtaques.EstaCompleta(ataquesGerados))
                 {
-                    Messenger.Broadcast(MessageType.AtaqueDesferido);
+                    Messenger.Broadcast(MessageType.JogadaCompleta);
                     StartCoroutine(ComecarProximaRodada());
                 }
             }
@@ -166,10 +167,13 @@ public class Sequenciador : MonoBehaviour
         jogadorPodeInteragir = false;
         foreach (var ataque in ataquesGerados.ToList())
         {
-            StartCoroutine(ReproduzirAtaque(ataque));
             yield return new WaitForSeconds(DuracaoAtaque);
+            StartCoroutine(ReproduzirAtaque(ataque));
         }
         jogadorPodeInteragir = true;
+
+        yield return new WaitForSeconds(.5f);
+        Messenger.Broadcast(MessageType.JogadaCompleta);
     }
 
     private IEnumerator ReproduzirAtaque(Ataque ataque)
@@ -177,6 +181,8 @@ public class Sequenciador : MonoBehaviour
         ataque.Atacante.Selecionar();
         yield return new WaitForSeconds(.5f);
         ataque.Alvo.Selecionar();
+
         ataque.Atacante.Atacar();
+        Messenger.Broadcast(MessageType.AtaqueDesferido);
     }
 }
