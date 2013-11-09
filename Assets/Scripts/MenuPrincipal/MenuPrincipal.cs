@@ -20,7 +20,6 @@ public class MenuPrincipal : MonoBehaviour
     private bool jogadorSelecionouUmaOpcao;
     private bool fecharJogo;
 
-
     private int ultimoBotao;
     private int penultimoBotao;
     private int clickCount;
@@ -108,7 +107,7 @@ public class MenuPrincipal : MonoBehaviour
 
     private bool JogadorCompletouUmaJogada()
     {
-        return clickCount >= 2 && clickCount % 2 == 0;
+        return clickCount >= 2;
     }
 
     private IEnumerator CarregarCenario()
