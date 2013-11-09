@@ -26,7 +26,7 @@ public class JogadorAtivo : MonoBehaviour
     {
         if (mensagem.Value == Perfil)
         {
-            DescerElemento();            
+            StartCoroutine(DescerElemento());
         }
         else
         {
@@ -34,8 +34,9 @@ public class JogadorAtivo : MonoBehaviour
         }
     }
 
-    void DescerElemento()
+    IEnumerator DescerElemento()
     {
+        yield return new WaitForSeconds(.5f);
         iTween.MoveTo(gameObject, iTween.Hash("position", PosicaoFinal, "time", .4f, "easetype", EaseType, "islocal", true));
     }
 
