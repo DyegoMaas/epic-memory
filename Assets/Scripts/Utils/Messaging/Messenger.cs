@@ -97,10 +97,7 @@ public class Messenger : MonoBehaviour
         {
             instance = this;
         }
-    }
 
-    void Start()
-    {
         if (DoNotDestroyOnLoad)
         {
             DontDestroyOnLoad(gameObject);

@@ -128,35 +128,31 @@ public class Sequenciador : MonoBehaviour
         }
     }
 
-    private IEnumerator ManipularErroAtaque()
-    {
-        jogadorPodeInteragir = false;
-        ataquesGerados.Clear();
-        sequenciaAtaques = new Sequencia();
-        Messenger.Broadcast(MessageType.GameOver);
-
-        yield return new WaitForSeconds(TempoEsperaAntesDeRecomecarReproducao);
-
-        StartCoroutine(ComecarProximaRodada());
-    }
-
     private IEnumerator ComecarProximaRodada()
     {
         Messenger.Broadcast(MessageType.PerfilJogadorAtivado,
                             new Message<PerfilJogadorAtivo>(PerfilJogadorAtivo.Maquina));
+        sequenciaAtaques = new Sequencia();
 
         progressaoPartida = progressaoPartidaFactory.CriarProgressorPartida(repositorioPersonagens);
-        ResetarNivelPersonagens();
-        sequenciaAtaques = new Sequencia();
         yield return new WaitForSeconds(TempoEsperaAntesDeRecomecarReproducao);
+        progressaoPartida.ResetarProgressoPartida();
 
         GerarAtaque();
         StartCoroutine(ReproduzirSequenciaAtaques());
     }
 
-    private void ResetarNivelPersonagens()
+    private IEnumerator ManipularErroAtaque()
     {
-        repositorioPersonagens.BuscarTodos().ForEach(p => p.ResetarNivel());
+        jogadorPodeInteragir = false;
+        ataquesGerados.Clear();
+        sequenciaAtaques = new Sequencia();
+        progressaoPartida.ResetarProgressoPartida();
+        Messenger.Broadcast(MessageType.GameOver);
+
+        yield return new WaitForSeconds(TempoEsperaAntesDeRecomecarReproducao);
+
+        StartCoroutine(ComecarProximaRodada());
     }
 
     private void GerarAtaque()
@@ -171,11 +167,13 @@ public class Sequenciador : MonoBehaviour
         foreach (var ataque in ataquesGerados.ToList())
         {
             yield return new WaitForSeconds(DuracaoAtaque);
-            StartCoroutine(ReproduzirAtaque(ataque));
+            yield return StartCoroutine(ReproduzirAtaque(ataque));
         }
         jogadorPodeInteragir = true;
 
         yield return new WaitForSeconds(.5f);
+        progressaoPartida.ResetarProgressoPartida();
+
         Messenger.Broadcast(MessageType.JogadaCompleta);
         Messenger.Broadcast(MessageType.PerfilJogadorAtivado,
                             new Message<PerfilJogadorAtivo>(PerfilJogadorAtivo.Jogador));
@@ -188,6 +186,7 @@ public class Sequenciador : MonoBehaviour
         ataque.Alvo.Selecionar();
 
         ataque.Atacante.Atacar();
+        progressaoPartida.AtualizarProgressao(ataque);
         Messenger.Broadcast(MessageType.AtaqueDesferido);
     }
 }

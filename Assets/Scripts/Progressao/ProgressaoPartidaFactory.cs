@@ -28,7 +28,7 @@ namespace Assets.Scripts.Progressao
             switch (TipoProgressaoPartida)
             {
                 case TipoProgressaoPartida.Linear: return new ProgressaoLinear(repositorio, numeroPartidasSubirNivel);
-                case TipoProgressaoPartida.Assimetrica: return new ProgressaoAssimetrica();
+                case TipoProgressaoPartida.Assimetrica: return new ProgressaoAssimetrica(repositorio);
             }
             throw new UnityException("Não existe progressor de partida do tipo " + TipoProgressaoPartida);
         }

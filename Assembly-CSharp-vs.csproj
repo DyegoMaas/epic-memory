@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\AnimadorSelecao.cs" />
+     <Compile Include="Assets\Scripts\IndicadorNivelPersonagem.cs" />
      <Compile Include="Assets\Scripts\LoadScreen\CarregamentoObjetos.cs" />
      <Compile Include="Assets\Scripts\MenuPrincipal\MenuPrincipal.cs" />
      <Compile Include="Assets\Scripts\Personagem.cs" />

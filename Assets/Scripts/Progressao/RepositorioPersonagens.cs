@@ -30,6 +30,14 @@ public class RepositorioPersonagens : IArena
         return Personagens.Values.ToList();
     }
 
+    public void ResetarNivelPersonagens()
+    {
+        foreach (var personagem in Personagens.Values)
+        {
+            personagem.ResetarNivel();
+        }
+    }
+
     private static int ProximoId()
     {
         return ++idAtual;

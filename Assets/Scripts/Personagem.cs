@@ -33,6 +33,7 @@ public class Personagem : MonoBehaviour, IPersonagem
 
     private tk2dSpriteAnimator spriteAnimator;
     private AnimadorSelecao animadorSelecao;
+    private IndicadorNivelPersonagem indicadorNivel;
 
     void Awake()
     {
@@ -43,6 +44,7 @@ public class Personagem : MonoBehaviour, IPersonagem
 	{
 	    spriteAnimator = GetComponent<tk2dSpriteAnimator>();
 	    animadorSelecao = GetComponent<AnimadorSelecao>();
+	    indicadorNivel = GetComponentInChildren<IndicadorNivelPersonagem>();
 	}
 
     // Update is called once per frame
@@ -84,13 +86,19 @@ public class Personagem : MonoBehaviour, IPersonagem
 
     public void SubirNivel()
     {
-        nivel++;
-        Debug.Log(string.Format("{0} subiu para o nível {1}", gameObject.name, nivel));
+        DefinirNivel(nivel + 1);
     }
 
     public void ResetarNivel()
     {
-        nivel = NivelInicial;
+        DefinirNivel(NivelInicial);
+    }
+
+    private void DefinirNivel(int novoNivel)
+    {
+        Debug.Log("novo nivel");
+        nivel = novoNivel;
+        indicadorNivel.AtualizarNivelPersonagem(novoNivel);
     }
 
     public Collider GetCollider()

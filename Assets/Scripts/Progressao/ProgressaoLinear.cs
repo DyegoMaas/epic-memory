@@ -22,6 +22,11 @@ public class ProgressaoLinear : IProgressaoPartida
         }
     }
 
+    public void ResetarProgressoPartida()
+    {
+        repositorioPersonagens.ResetarNivelPersonagens();
+    }
+
     private void SubirNivelTodosPersonagens()
     {
         var personagens = repositorioPersonagens.BuscarTodos();

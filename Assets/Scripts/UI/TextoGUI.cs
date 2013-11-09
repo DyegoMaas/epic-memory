@@ -28,8 +28,8 @@ public class TextoGUI : MonoBehaviour {
     IEnumerator DescerTexto()
     {
         transform.position = StartPosition;
-        iTween.MoveTo(gameObject, iTween.Hash("position", MiddlePosition, "time", .4f, "easetype", EaseOutType));
+        iTween.MoveTo(gameObject, iTween.Hash("position", MiddlePosition, "time", .4f, "easetype", EaseOutType, "islocal", true));
         yield return new WaitForSeconds(TempoExibicao);
-        iTween.MoveTo(gameObject, iTween.Hash("position", EndPosition, "time", .4f, "easetype", EaseInType));
+        iTween.MoveTo(gameObject, iTween.Hash("position", EndPosition, "time", .4f, "easetype", EaseInType, "islocal", true));
     }
 }
