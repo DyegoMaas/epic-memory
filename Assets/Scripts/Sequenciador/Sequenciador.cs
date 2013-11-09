@@ -142,6 +142,9 @@ public class Sequenciador : MonoBehaviour
 
     private IEnumerator ComecarProximaRodada()
     {
+        Messenger.Broadcast(MessageType.PerfilJogadorAtivado,
+                            new Message<PerfilJogadorAtivo>(PerfilJogadorAtivo.Maquina));
+
         progressaoPartida = progressaoPartidaFactory.CriarProgressorPartida(repositorioPersonagens);
         ResetarNivelPersonagens();
         sequenciaAtaques = new Sequencia();
@@ -174,6 +177,8 @@ public class Sequenciador : MonoBehaviour
 
         yield return new WaitForSeconds(.5f);
         Messenger.Broadcast(MessageType.JogadaCompleta);
+        Messenger.Broadcast(MessageType.PerfilJogadorAtivado,
+                            new Message<PerfilJogadorAtivo>(PerfilJogadorAtivo.Jogador));
     }
 
     private IEnumerator ReproduzirAtaque(Ataque ataque)

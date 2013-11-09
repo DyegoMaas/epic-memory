@@ -65,6 +65,8 @@
      <Compile Include="Assets\Scripts\Sequenciador\UnityRandomizer.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\ValidadorAtaques.cs" />
      <Compile Include="Assets\Scripts\UI\IndicadorAtaque.cs" />
+     <Compile Include="Assets\Scripts\UI\JogadorAtivo.cs" />
+     <Compile Include="Assets\Scripts\UI\PerfilJogadorAtivo.cs" />
      <Compile Include="Assets\Scripts\UI\TextoGUI.cs" />
      <Compile Include="Assets\Scripts\Utils\Messaging\FSM\RegisterAsListener.cs" />
      <Compile Include="Assets\Scripts\Utils\Messaging\FSM\SendMessageToListeners.cs" />

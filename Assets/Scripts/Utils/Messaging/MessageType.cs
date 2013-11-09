@@ -9,6 +9,7 @@ namespace Messaging
         AtaqueDesferido = 2,
         JogadorSelecionado = 3,
         JogadaCompleta = 4,
+        PerfilJogadorAtivado = 5,
 
         Unknown = 100
     }
