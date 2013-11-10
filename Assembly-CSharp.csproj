@@ -44,6 +44,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Dificuldade\Dificuldade.cs" />
      <Compile Include="Assets\Dificuldade\GerenciadorDificuldade.cs" />
      <Compile Include="Assets\Scripts\AnimadorSelecao.cs" />
      <Compile Include="Assets\Scripts\IndicadorNivelPersonagem.cs" />
