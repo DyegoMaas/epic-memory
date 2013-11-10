@@ -111,11 +111,11 @@ public class Sequenciador : MonoBehaviour
             if (sequenciaAtaques.Validar(ataquesGerados))
             {
                 progressaoPartida.AtualizarProgressao(ataque);
-                Messenger.Broadcast(MessageType.AtaqueDesferido, new Message<Ataque>(ataque));
+                Messenger.Send(MessageType.AtaqueDesferido, new Message<Ataque>(ataque));
 
                 if (sequenciaAtaques.EstaCompleta(ataquesGerados))
                 {
-                    Messenger.Broadcast(MessageType.JogadaCompleta);
+                    Messenger.Send(MessageType.JogadaCompleta);
                     StartCoroutine(ComecarProximaRodada());
                 }
             }
@@ -132,7 +132,7 @@ public class Sequenciador : MonoBehaviour
 
     private IEnumerator ComecarProximaRodada()
     {
-        Messenger.Broadcast(MessageType.PerfilJogadorAtivado,
+        Messenger.Send(MessageType.PerfilJogadorAtivado,
                             new Message<PerfilJogadorAtivo>(PerfilJogadorAtivo.Maquina));
         sequenciaAtaques = new Sequencia();
 
@@ -150,7 +150,7 @@ public class Sequenciador : MonoBehaviour
         ataquesGerados.Clear();
         sequenciaAtaques = new Sequencia();
         progressaoPartida.ResetarProgressoPartida();
-        Messenger.Broadcast(MessageType.GameOver);
+        Messenger.Send(MessageType.GameOver);
 
         yield return new WaitForSeconds(TempoEsperaAntesDeRecomecarReproducao);
 
@@ -177,8 +177,8 @@ public class Sequenciador : MonoBehaviour
         yield return new WaitForSeconds(tempoMostrandoONivel);
         progressaoPartida.ResetarProgressoPartida();
 
-        Messenger.Broadcast(MessageType.JogadaCompleta);
-        Messenger.Broadcast(MessageType.PerfilJogadorAtivado,
+        Messenger.Send(MessageType.JogadaCompleta);
+        Messenger.Send(MessageType.PerfilJogadorAtivado,
                             new Message<PerfilJogadorAtivo>(PerfilJogadorAtivo.Jogador));
     }
 
@@ -190,6 +190,6 @@ public class Sequenciador : MonoBehaviour
 
         ataque.Atacante.Atacar();
         progressaoPartida.AtualizarProgressao(ataque);
-        Messenger.Broadcast(MessageType.AtaqueDesferido);
+        Messenger.Send(MessageType.AtaqueDesferido);
     }
 }

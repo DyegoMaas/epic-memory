@@ -73,7 +73,7 @@ public class Personagem : MonoBehaviour, IPersonagem
 
     private void NotificarSelecaoPersonagem()
     {
-        Messenger.Broadcast(MessageType.JogadorSelecionado, new Message<Equipe>(equipe));
+        Messenger.Send(MessageType.JogadorSelecionado, new Message<Equipe>(equipe));
     }
 
     public void Atacar()
