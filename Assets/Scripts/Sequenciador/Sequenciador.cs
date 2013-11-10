@@ -39,7 +39,7 @@ public class Sequenciador : MonoBehaviour
 
     private void AdicionarTodosOsPersonagensNoRepositorio()
     {
-        var personagens = FindObjectsOfType(typeof (Personagem)) as Personagem[];
+        var personagens = FindObjectsOfType(typeof(Personagem)) as Personagem[];
         if (personagens != null)
         {
             foreach (var personagem in personagens)
@@ -168,7 +168,7 @@ public class Sequenciador : MonoBehaviour
         jogadorPodeInteragir = false;
         foreach (var ataque in ataquesGerados.ToList())
         {
-            yield return new WaitForSeconds(DuracaoAtaque);
+            yield return new WaitForSeconds(DuracaoAtaque / 2f);
             yield return StartCoroutine(ReproduzirAtaque(ataque));
         }
         jogadorPodeInteragir = true;
