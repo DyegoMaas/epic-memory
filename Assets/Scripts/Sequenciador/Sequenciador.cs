@@ -177,7 +177,6 @@ public class Sequenciador : MonoBehaviour
         yield return new WaitForSeconds(tempoMostrandoONivel);
         progressaoPartida.ResetarProgressoPartida();
 
-        Messenger.Send(MessageType.JogadaCompleta);
         Messenger.Send(MessageType.PerfilJogadorAtivado,
                             new Message<PerfilJogadorAtivo>(PerfilJogadorAtivo.Jogador));
     }

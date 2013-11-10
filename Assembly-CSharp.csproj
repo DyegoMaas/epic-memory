@@ -49,6 +49,8 @@
      <Compile Include="Assets\Scripts\LoadScreen\CarregamentoObjetos.cs" />
      <Compile Include="Assets\Scripts\MenuPrincipal\MenuPrincipal.cs" />
      <Compile Include="Assets\Scripts\Personagem.cs" />
+     <Compile Include="Assets\Scripts\Pontuacao\Pontuacao.cs" />
+     <Compile Include="Assets\Scripts\Pontuacao\PontuacaoGUI.cs" />
      <Compile Include="Assets\Scripts\Progressao\IProgressaoPartida.cs" />
      <Compile Include="Assets\Scripts\Progressao\ProgressaoAssimetrica.cs" />
      <Compile Include="Assets\Scripts\Progressao\ProgressaoLinear.cs" />
