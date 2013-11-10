@@ -17,6 +17,6 @@ public class PontuacaoGUI : MonoBehaviour {
 
     void AtualizarPontuacao(int pontos)
     {
-        textMesh.text = pontos + "x";
+        textMesh.text = pontos + " x";
     }
 }
