@@ -11,6 +11,19 @@ public class GerenciadorDificuldade : MonoBehaviour {
         get { return dificuldade; }
     }
     
+    /// <summary>
+    /// 0 == impossível
+    /// 1 == fácil
+    /// </summary>
+    public float CoeficietenteFacilidade
+    {
+        get
+        {
+            if (Dificuldade == Dificuldade.Facil)
+                return 1f;
+            return .5f;
+        }
+    }
 
 	// Use this for initialization
 	void Start () {
@@ -25,5 +38,6 @@ public class GerenciadorDificuldade : MonoBehaviour {
     public void EscolherDificuldade(Dificuldade novaDificuldade)
     {
         dificuldade = novaDificuldade;
+        Debug.Log(dificuldade.ToString());
     }
 }

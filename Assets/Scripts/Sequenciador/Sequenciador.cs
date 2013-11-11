@@ -9,8 +9,23 @@ using UnityEngine;
 [RequireComponent(typeof(ProgressaoPartidaFactory))]
 public class Sequenciador : MonoBehaviour
 {
-    public float DuracaoAtaque = 1.5f;
-    public float TempoEsperaAntesDeRecomecarReproducao = 1.5f;
+    [SerializeField]
+    private float duracaoAtaque = 1.5f;
+
+    public float DuracaoAtaque
+    {
+        get { return duracaoAtaque * gerenciadorDificuldade.CoeficietenteFacilidade; }
+        set { duracaoAtaque = value; }
+    }
+
+    [SerializeField]
+    private float tempoEsperaAntesDeRecomecarReproducao = 1.5f;
+
+    public float TempoEsperaAntesDeRecomecarReproducao
+    {
+        get { return tempoEsperaAntesDeRecomecarReproducao * gerenciadorDificuldade.CoeficietenteFacilidade; }
+        set { tempoEsperaAntesDeRecomecarReproducao = value; }
+    }
 
     // máquina
     private GeradorAtaques geradorAtaques;
@@ -18,6 +33,7 @@ public class Sequenciador : MonoBehaviour
     private readonly RepositorioPersonagens repositorioPersonagens = new RepositorioPersonagens();
     private IProgressaoPartida progressaoPartida;
     private IProgressaoPartidaFactory progressaoPartidaFactory;
+    private GerenciadorDificuldade gerenciadorDificuldade;
 
     // jogador
     private readonly Stack<IPersonagem> personagensSelecionados = new Stack<IPersonagem>(2);
@@ -32,6 +48,7 @@ public class Sequenciador : MonoBehaviour
         inputManager = new InputManager(repositorioPersonagens);
         geradorAtaques = new GeradorAtaques(repositorioPersonagens, new UnityRandomizer());
         progressaoPartidaFactory = GetComponent<ProgressaoPartidaFactory>();
+        gerenciadorDificuldade = FindObjectOfType(typeof (GerenciadorDificuldade)) as GerenciadorDificuldade;
         AdicionarTodosOsPersonagensNoRepositorio();
 
         StartCoroutine(ComecarProximaRodada());
