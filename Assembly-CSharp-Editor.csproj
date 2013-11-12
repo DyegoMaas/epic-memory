@@ -163,6 +163,7 @@
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Shaders\LitSolidVertexColor.shader" />
      <None Include="Assets\ThirdParty\PlayMaker\Readme.txt" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Goodies\TexturePacker\Exporter\2dtoolkit\exporter.xml" />
+     <None Include="Assets\Som\enderecos.txt" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Shaders\SolidVertexColor.shader" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2dUI\Shaders\DepthMask.shader" />
      <None Include="Assets\ThirdParty\iTween\ReadMe!\ReadMe!.txt" />
