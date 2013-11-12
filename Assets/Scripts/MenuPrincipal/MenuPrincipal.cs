@@ -7,6 +7,7 @@ public class MenuPrincipal : MonoBehaviour
     public GameObject BotaoNovo;
     public GameObject BotaoJogo;
     public GameObject BotaoSair;
+    public GameObject CarregandoTextMesh;
     public string NomeLevelNovoJogo = "load_sceen";
     public float IntervaloEntreBotoesDica = 1f;
     public float IntervaloEntreDicas = 15f;
@@ -112,6 +113,7 @@ public class MenuPrincipal : MonoBehaviour
 
     private IEnumerator CarregarCenario()
     {
+        CarregandoTextMesh.SetActive(true);
         yield return new WaitForSeconds(animadorSelecao.DuracaoAnimacao + .5f);
         Application.LoadLevel(NomeLevelNovoJogo);
     }
