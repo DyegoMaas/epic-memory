@@ -75,9 +75,9 @@ namespace SSaME.Core.Testes
             ASequenciaDeveEstarValida(listaAtaquesGravados, sequencia);
         }
 
-        private static Sequencia DadoUmaSequenciaVazia()
+        private static SequenciaAtaque DadoUmaSequenciaVazia()
         {
-            return new Sequencia();
+            return new SequenciaAtaque();
         }
 
         private Ataque DadoUmAtaqueDoTimeA()
@@ -100,22 +100,22 @@ namespace SSaME.Core.Testes
             return new List<Ataque>(ataques);
         }
 
-        private static void QuandoOUsuarioReproduzirOsAtaques(Sequencia sequencia, params Ataque[] ataques)
+        private static void QuandoOUsuarioReproduzirOsAtaques(SequenciaAtaque sequenciaAtaque, params Ataque[] ataques)
         {
             foreach (var ataque in ataques)
             {
-                sequencia.ArmazenarAtaque(ataque);
+                sequenciaAtaque.ArmazenarAtaque(ataque);
             }
         }
 
-        private static void ASequenciaDeveEstarValida(List<Ataque> listaAtaques, Sequencia sequencia)
+        private static void ASequenciaDeveEstarValida(List<Ataque> listaAtaques, SequenciaAtaque sequenciaAtaque)
         {
-            sequencia.Validar(listaAtaques).Should().BeTrue();
+            sequenciaAtaque.Validar(listaAtaques).Should().BeTrue();
         }
 
-        private static void ASequenciaDeveEstarInvalida(List<Ataque> listaAtaques, Sequencia sequencia)
+        private static void ASequenciaDeveEstarInvalida(List<Ataque> listaAtaques, SequenciaAtaque sequenciaAtaque)
         {
-            sequencia.Validar(listaAtaques).Should().BeFalse();
+            sequenciaAtaque.Validar(listaAtaques).Should().BeFalse();
         }
     }
 }

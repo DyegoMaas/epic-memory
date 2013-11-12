@@ -2,13 +2,19 @@ using System.Collections.Generic;
 
 namespace SSaME.Core
 {
-    public class Sequencia  
+    public class SequenciaAtaque  
     {
         private readonly List<Ataque> ataquesReproducao = new List<Ataque>(); 
 
         public void ArmazenarAtaque(Ataque ataque)
         {
             ataquesReproducao.Add(ataque);
+        }
+
+        public void RemoverAtaque(Ataque ataque)
+        {
+            if (ataquesReproducao.Contains(ataque))
+                ataquesReproducao.Remove(ataque);
         }
 
         public bool Validar(List<Ataque> ataquesGravacao)

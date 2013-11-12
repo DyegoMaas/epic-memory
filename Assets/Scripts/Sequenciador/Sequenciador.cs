@@ -27,9 +27,12 @@ public class Sequenciador : MonoBehaviour
         set { tempoEsperaAntesDeRecomecarReproducao = value; }
     }
 
+    public int NumeroTentativas = 3;
+    private int numeroTentativasFaltando;
+
     // máquina
     private GeradorAtaques geradorAtaques;
-    private readonly List<Ataque> ataquesGerados = new List<Ataque>();
+    private readonly List<Ataque> ataquesGeradosPelaMaquina = new List<Ataque>();
     private readonly RepositorioPersonagens repositorioPersonagens = new RepositorioPersonagens();
     private IProgressaoPartida progressaoPartida;
     private IProgressaoPartidaFactory progressaoPartidaFactory;
@@ -38,13 +41,15 @@ public class Sequenciador : MonoBehaviour
     // jogador
     private readonly Stack<IPersonagem> personagensSelecionados = new Stack<IPersonagem>(2);
     private readonly ValidadorAtaques validadorAtaques = new ValidadorAtaques();
-    private Sequencia sequenciaAtaques = new Sequencia();
+    private SequenciaAtaque sequenciaAtaqueAtaquesDoJogador = new SequenciaAtaque();
     private InputManager inputManager;
     private bool jogadorPodeInteragir;
 
     // Use this for initialization
     void Start()
     {
+        numeroTentativasFaltando = NumeroTentativas;
+
         inputManager = new InputManager(repositorioPersonagens);
         geradorAtaques = new GeradorAtaques(repositorioPersonagens, new UnityRandomizer());
         progressaoPartidaFactory = GetComponent<ProgressaoPartidaFactory>();
@@ -124,13 +129,13 @@ public class Sequenciador : MonoBehaviour
 
         if (validadorAtaques.AtaqueValido(ataque))
         {
-            sequenciaAtaques.ArmazenarAtaque(ataque);
-            if (sequenciaAtaques.Validar(ataquesGerados))
+            sequenciaAtaqueAtaquesDoJogador.ArmazenarAtaque(ataque);
+            if (sequenciaAtaqueAtaquesDoJogador.Validar(ataquesGeradosPelaMaquina))
             {
                 progressaoPartida.AtualizarProgressao(ataque);
                 Messenger.Send(MessageType.AtaqueDesferido, new Message<Ataque>(ataque));
 
-                if (sequenciaAtaques.EstaCompleta(ataquesGerados))
+                if (sequenciaAtaqueAtaquesDoJogador.EstaCompleta(ataquesGeradosPelaMaquina))
                 {
                     Messenger.Send(MessageType.JogadaCompleta);
                     StartCoroutine(ComecarProximaRodada());
@@ -138,6 +143,7 @@ public class Sequenciador : MonoBehaviour
             }
             else
             {
+                InvalidarAtaque(ataque);
                 StartCoroutine(ManipularErroAtaque());
             }
         }
@@ -151,7 +157,7 @@ public class Sequenciador : MonoBehaviour
     {
         Messenger.Send(MessageType.PerfilJogadorAtivado,
                             new Message<PerfilJogadorAtivo>(PerfilJogadorAtivo.Maquina));
-        sequenciaAtaques = new Sequencia();
+        sequenciaAtaqueAtaquesDoJogador = new SequenciaAtaque();
 
         progressaoPartida = progressaoPartidaFactory.CriarProgressorPartida(repositorioPersonagens);
         yield return new WaitForSeconds(TempoEsperaAntesDeRecomecarReproducao);
@@ -163,27 +169,59 @@ public class Sequenciador : MonoBehaviour
 
     private IEnumerator ManipularErroAtaque()
     {
-        jogadorPodeInteragir = false;
-        ataquesGerados.Clear();
-        sequenciaAtaques = new Sequencia();
+        PrepararNovaTentativa();
+
+        numeroTentativasFaltando--;
+        if (FimdeJogo())
+        {
+            Messenger.Send(MessageType.GameOver);
+            PrepararNovoJogo();
+
+            yield return new WaitForSeconds(TempoEsperaAntesDeRecomecarReproducao);
+            StartCoroutine(ComecarProximaRodada());
+        }
+        else
+        {
+            Messenger.Send(MessageType.ErroJogador, new Message<int>(numeroTentativasFaltando));
+            
+            yield return new WaitForSeconds(TempoEsperaAntesDeRecomecarReproducao);
+            StartCoroutine(ReproduzirSequenciaAtaques());
+        }
+    }
+
+    private bool FimdeJogo()
+    {
+        return numeroTentativasFaltando == 0;
+    }
+
+    private void PrepararNovaTentativa()
+    {
         progressaoPartida.ResetarProgressoPartida();
-        Messenger.Send(MessageType.GameOver);
+        jogadorPodeInteragir = false;
+        sequenciaAtaqueAtaquesDoJogador = new SequenciaAtaque();
+    }
 
-        yield return new WaitForSeconds(TempoEsperaAntesDeRecomecarReproducao);
-
-        StartCoroutine(ComecarProximaRodada());
+    private void PrepararNovoJogo()
+    {
+        numeroTentativasFaltando = NumeroTentativas;
+        ataquesGeradosPelaMaquina.Clear();
     }
 
     private void GerarAtaque()
     {
         var ataque = geradorAtaques.GerarAtaque();
-        ataquesGerados.Add(ataque);
+        ataquesGeradosPelaMaquina.Add(ataque);
+    }
+
+    private void InvalidarAtaque(Ataque ataque)
+    {
+        sequenciaAtaqueAtaquesDoJogador.RemoverAtaque(ataque);
     }
 
     private IEnumerator ReproduzirSequenciaAtaques()
     {
         jogadorPodeInteragir = false;
-        foreach (var ataque in ataquesGerados.ToList())
+        foreach (var ataque in ataquesGeradosPelaMaquina.ToList())
         {
             yield return new WaitForSeconds(DuracaoAtaque / 2f);
             yield return StartCoroutine(ReproduzirAtaque(ataque));
