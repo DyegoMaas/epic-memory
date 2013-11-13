@@ -250,9 +250,19 @@ public class tk2dClippedSprite : tk2dBaseSprite
 	protected override void UpdateCollider()
 	{
 		if (CreateBoxCollider) {
-			if (boxCollider != null) {
-				boxCollider.size = 2 * boundsExtents;
-				boxCollider.center = boundsCenter;
+			if (CurrentSprite.physicsEngine == tk2dSpriteDefinition.PhysicsEngine.Physics3D) {
+				if (boxCollider != null) {
+					boxCollider.size = 2 * boundsExtents;
+					boxCollider.center = boundsCenter;
+				}
+			}
+			else if (CurrentSprite.physicsEngine == tk2dSpriteDefinition.PhysicsEngine.Physics2D) {
+	#if !(UNITY_3_5 || UNITY_4_0 || UNITY_4_0_1 || UNITY_4_1 || UNITY_4_2)
+				if (boxCollider2D != null) {
+					boxCollider2D.size = 2 * boundsExtents;
+					boxCollider2D.center = boundsCenter;
+				}
+	#endif
 			}
 		}
 	}
@@ -276,6 +286,9 @@ public class tk2dClippedSprite : tk2dBaseSprite
 
 #if UNITY_EDITOR
 	public override void EditMode__CreateCollider() {
+		if (CreateBoxCollider) {
+			base.CreateSimpleBoxCollider();
+		}
 		UpdateCollider();
 	}
 #endif
