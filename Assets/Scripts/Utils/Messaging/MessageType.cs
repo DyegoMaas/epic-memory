@@ -12,6 +12,9 @@ namespace Messaging
         PerfilJogadorAtivado = 5,
         ErroJogador = 6,
 
+        NovoJogoAguardar = 10,
+        NovoJogoIniciar = 11,
+        
         Unknown = 100
     }
 }

@@ -8,8 +8,8 @@ public class TextoGUI : MonoBehaviour {
     public Vector3 MiddlePosition;
     public Vector3 EndPosition;
 
-    public iTween.EaseType EaseInType = iTween.EaseType.easeInBack;
-    public iTween.EaseType EaseOutType = iTween.EaseType.easeOutBack;
+    public iTween.EaseType EaseInType = iTween.EaseType.easeInCubic;
+    public iTween.EaseType EaseOutType = iTween.EaseType.easeOutCubic;
     
     public MessageType TipoMensagem = MessageType.Unknown;
     public float TempoExibicao = 1f;

@@ -45,6 +45,8 @@ public class Sequenciador : MonoBehaviour
     private InputManager inputManager;
     private bool jogadorPodeInteragir;
 
+    private bool jogoIniciado;
+
     // Use this for initialization
     void Start()
     {
@@ -55,8 +57,26 @@ public class Sequenciador : MonoBehaviour
         progressaoPartidaFactory = GetComponent<ProgressaoPartidaFactory>();
         gerenciadorDificuldade = FindObjectOfType(typeof (GerenciadorDificuldade)) as GerenciadorDificuldade;
         AdicionarTodosOsPersonagensNoRepositorio();
+        Messenger.Subscribe(MessageType.NovoJogoIniciar, gameObject, "IniciarNovoJogo");
 
-        StartCoroutine(ComecarProximaRodada());
+        StartCoroutine(AguardarNovoJogo());
+    }
+
+    private void IniciarNovoJogo()
+    {
+        jogoIniciado = true;
+    }
+
+    IEnumerator AguardarNovoJogo()
+    {
+        Messenger.Send(MessageType.NovoJogoAguardar);
+        while (!jogoIniciado)
+        {
+            yield return null;
+        }
+        jogoIniciado = false;
+        Debug.Log("começando nova partida");
+        yield return StartCoroutine(ComecarProximaRodada());
     }
 
     private void AdicionarTodosOsPersonagensNoRepositorio()
@@ -178,7 +198,7 @@ public class Sequenciador : MonoBehaviour
             PrepararNovoJogo();
 
             yield return new WaitForSeconds(TempoEsperaAntesDeRecomecarReproducao);
-            StartCoroutine(ComecarProximaRodada());
+            StartCoroutine(AguardarNovoJogo());
         }
         else
         {

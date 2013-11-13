@@ -17,6 +17,7 @@ public class IndicadorAtaque : MonoBehaviour
     {
         Messenger.Subscribe(MessageType.AtaqueDesferido, gameObject, "Reiniciar");
         Messenger.Subscribe(MessageType.GameOver, gameObject, "Reiniciar");
+        Messenger.Subscribe(MessageType.ErroJogador, gameObject, "Reiniciar");
         Messenger.Subscribe(MessageType.JogadorSelecionado, gameObject, "SubirElemento");
     }
 
