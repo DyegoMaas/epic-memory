@@ -15,6 +15,7 @@ public class JogadorAtivo : MonoBehaviour
     void Start()
     {
         Messenger.Subscribe(MessageType.PerfilJogadorAtivado, gameObject, "VerificarAcao");
+        Messenger.Subscribe(MessageType.GameOver, gameObject, "SubirElemento");
     }
 
     // Update is called once per frame
