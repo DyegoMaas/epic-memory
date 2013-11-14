@@ -62,6 +62,18 @@ public class Sequenciador : MonoBehaviour
         StartCoroutine(AguardarNovoJogo());
     }
 
+    private void AdicionarTodosOsPersonagensNoRepositorio()
+    {
+        var personagens = FindObjectsOfType(typeof(Personagem)) as Personagem[];
+        if (personagens != null)
+        {
+            foreach (var personagem in personagens)
+            {
+                repositorioPersonagens.Adicionar(personagem);
+            }
+        }
+    }
+    
     private void IniciarNovoJogo()
     {
         jogoIniciado = true;
@@ -77,18 +89,6 @@ public class Sequenciador : MonoBehaviour
         jogoIniciado = false;
         Debug.Log("começando nova partida");
         yield return StartCoroutine(ComecarProximaRodada());
-    }
-
-    private void AdicionarTodosOsPersonagensNoRepositorio()
-    {
-        var personagens = FindObjectsOfType(typeof(Personagem)) as Personagem[];
-        if (personagens != null)
-        {
-            foreach (var personagem in personagens)
-            {
-                repositorioPersonagens.Adicionar(personagem);
-            }
-        }
     }
 
     // Update is called once per frame
