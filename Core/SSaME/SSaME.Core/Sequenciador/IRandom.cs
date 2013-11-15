@@ -1,4 +1,4 @@
-namespace SSaME.Core
+namespace SSaME.Core.Sequenciador
 {
     public interface IRandom  
     {

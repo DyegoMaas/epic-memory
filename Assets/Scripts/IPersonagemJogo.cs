@@ -1,4 +1,4 @@
-﻿using SSaME.Core;
+﻿using SSaME.Core.Sequenciador;
 using UnityEngine;
 
 public interface IPersonagemJogo : IPersonagem

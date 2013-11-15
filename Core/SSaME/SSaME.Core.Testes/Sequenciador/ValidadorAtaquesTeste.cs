@@ -1,7 +1,8 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using NUnit.Framework;
+using SSaME.Core.Sequenciador;
 
-namespace SSaME.Core.Testes
+namespace SSaME.Core.Testes.Sequenciador
 {
     [TestFixture]
     public class ValidadorAtaquesTeste

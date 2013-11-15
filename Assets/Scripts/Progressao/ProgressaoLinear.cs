@@ -1,4 +1,5 @@
-using SSaME.Core;
+using Assets.Scripts;
+using SSaME.Core.Sequenciador;
 
 public class ProgressaoLinear : IProgressaoPartida
 {

@@ -1,6 +1,4 @@
-using System;
-
-namespace SSaME.Core
+namespace SSaME.Core.Sequenciador
 {
     public class GeradorAtaques   
     {

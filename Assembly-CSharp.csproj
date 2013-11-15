@@ -63,7 +63,7 @@
      <Compile Include="Assets\Scripts\Progressao\ProgressaoAssimetrica.cs" />
      <Compile Include="Assets\Scripts\Progressao\ProgressaoLinear.cs" />
      <Compile Include="Assets\Scripts\Progressao\ProgressaoPartidaFactory.cs" />
-     <Compile Include="Assets\Scripts\Progressao\RepositorioPersonagens.cs" />
+     <Compile Include="Assets\Scripts\RepositorioPersonagens.cs" />
      <Compile Include="Assets\Scripts\SeletorAnimacaoAtaque.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\Ataque.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\Equipe.cs" />
@@ -77,6 +77,7 @@
      <Compile Include="Assets\Scripts\Sequenciador\TipoProgressaoPartida.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\UnityRandomizer.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\ValidadorAtaques.cs" />
+     <Compile Include="Assets\Scripts\Temas\Temas.cs" />
      <Compile Include="Assets\Scripts\UI\BotaoComecarJogo.cs" />
      <Compile Include="Assets\Scripts\UI\IndicadorAtaque.cs" />
      <Compile Include="Assets\Scripts\UI\JogadorAtivo.cs" />

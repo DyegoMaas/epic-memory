@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace SSaME.Core
+namespace SSaME.Core.Sequenciador
 {
     public class SequenciaAtaque  
     {

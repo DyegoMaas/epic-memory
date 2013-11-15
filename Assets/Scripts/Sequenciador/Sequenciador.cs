@@ -1,9 +1,10 @@
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts;
 using Assets.Scripts.Progressao;
 using Messaging;
-using SSaME.Core;
+using SSaME.Core.Sequenciador;
 using UnityEngine;
 
 [RequireComponent(typeof(ProgressaoPartidaFactory))]

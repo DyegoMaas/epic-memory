@@ -1,5 +1,6 @@
 using System.Collections.Generic;
-using SSaME.Core;
+using Assets.Scripts;
+using SSaME.Core.Sequenciador;
 using UnityEngine;
 
 public class InputManager

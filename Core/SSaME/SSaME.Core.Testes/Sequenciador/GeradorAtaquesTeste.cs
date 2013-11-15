@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using FluentAssertions;
 using NSubstitute;
 using NUnit.Framework;
+using SSaME.Core.Sequenciador;
 
-namespace SSaME.Core.Testes
+namespace SSaME.Core.Testes.Sequenciador
 {
     [TestFixture]
     public class GeradorAtaquesTeste

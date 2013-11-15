@@ -1,4 +1,6 @@
-namespace SSaME.Core.Testes
+using SSaME.Core.Sequenciador;
+
+namespace SSaME.Core.Testes.Sequenciador
 {
     public class PersonagemTesteBuilder
     {
