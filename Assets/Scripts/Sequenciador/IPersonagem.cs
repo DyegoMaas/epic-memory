@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace SSaME.Core
+﻿namespace SSaME.Core
 {
     public interface IPersonagem
     {
@@ -13,6 +11,5 @@ namespace SSaME.Core
         void Atacar();
         void SubirNivel();
         void ResetarNivel();
-        Collider GetCollider();
     }
 }

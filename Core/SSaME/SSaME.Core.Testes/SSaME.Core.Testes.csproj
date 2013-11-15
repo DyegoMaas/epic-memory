@@ -49,7 +49,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArenaTeste.cs" />
     <Compile Include="GeradorAtaquesTeste.cs" />
     <Compile Include="PersonagemFake.cs" />
     <Compile Include="PersonagemTesteBuilder.cs" />

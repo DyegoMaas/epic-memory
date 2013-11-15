@@ -13,7 +13,7 @@ namespace SSaME.Core
 
         public void RemoverAtaque(Ataque ataque)
         {
-            if(ataquesReproducao.Contains(ataque))
+            if (ataquesReproducao.Contains(ataque))
                 ataquesReproducao.Remove(ataque);
         }
 

@@ -3,17 +3,17 @@ namespace SSaME.Core.Testes
     public class PersonagemFake :IPersonagem
     {
         private int id;
-        private readonly Time time;
+        private readonly Equipe equipe;
 
-        public PersonagemFake(int id, Time time)
+        public PersonagemFake(int id, Equipe equipe)
         {
             this.id = id;
-            this.time = time;
+            this.equipe = equipe;
         }
 
-        public Time Time
+        public Equipe Equipe
         {
-            get { return time; }
+            get { return equipe; }
         }
 
         public int Id
@@ -41,6 +41,10 @@ namespace SSaME.Core.Testes
         }
 
         public void SubirNivel()
+        {
+        }
+
+        public void ResetarNivel()
         {
         }
     }

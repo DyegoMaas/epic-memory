@@ -7,9 +7,9 @@ namespace SSaME.Core.Testes
     [TestFixture]
     public class SequenciaTeste
     {
-        private readonly IPersonagem jogadorATimeA = new PersonagemFake(1, Time.A);
-        private readonly IPersonagem jogadorBTimeA = new PersonagemFake(2, Time.A);
-        private readonly IPersonagem jogadorATimeB = new PersonagemFake(3, Time.A);
+        private readonly IPersonagem jogadorATimeA = new PersonagemFake(1, Equipe.A);
+        private readonly IPersonagem jogadorBTimeA = new PersonagemFake(2, Equipe.A);
+        private readonly IPersonagem jogadorATimeB = new PersonagemFake(3, Equipe.A);
 
         [Test]
         public void o_usuario_reproduz_um_ataque_corretamente()

@@ -6,7 +6,7 @@ namespace SSaME.Core
     {
         public bool AtaqueValido(Ataque ataque)
         {
-            return ataque.Atacante.Time != ataque.Alvo.Time;
+            return ataque.Atacante.Equipe != ataque.Alvo.Equipe;
         }
     }
 }

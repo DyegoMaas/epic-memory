@@ -3,7 +3,7 @@ using UnityEngine;
 using Messaging;
 
 [RequireComponent(typeof(AnimadorSelecao))]
-public class Personagem : MonoBehaviour, IPersonagem
+public class Personagem : MonoBehaviour, IPersonagemJogo
 {
     private const int NivelInicial = 1;
 

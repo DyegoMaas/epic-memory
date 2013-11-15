@@ -8,10 +8,10 @@ namespace SSaME.Core.Testes
     [TestFixture]
     public class GeradorAtaquesTeste
     {
-        private readonly IPersonagem jogadorATimeA = new PersonagemFake(1, Time.A);
-        private readonly IPersonagem jogadorBTimeA = new PersonagemFake(2, Time.A);
-        private readonly IPersonagem jogadorATimeB = new PersonagemFake(3, Time.B);
-        private readonly IPersonagem jogadorBTimeB = new PersonagemFake(4, Time.B);
+        private readonly IPersonagem jogadorATimeA = new PersonagemFake(1, Equipe.A);
+        private readonly IPersonagem jogadorBTimeA = new PersonagemFake(2, Equipe.A);
+        private readonly IPersonagem jogadorATimeB = new PersonagemFake(3, Equipe.B);
+        private readonly IPersonagem jogadorBTimeB = new PersonagemFake(4, Equipe.B);
 
         [Test]
         public void sequenciador_gera_um_ataque()
@@ -60,7 +60,7 @@ namespace SSaME.Core.Testes
 
         private void AlvoEAtavanteNaoDevemEstarNoMesmoTime(IArena arena, Ataque ataque)
         {
-            if (ataque.Atacante.Time == Time.A)
+            if (ataque.Atacante.Equipe == Equipe.A)
                 arena.TimeA.Should().NotContain(ataque.Alvo);
             else
                 arena.TimeA.Should().NotContain(ataque.Atacante);

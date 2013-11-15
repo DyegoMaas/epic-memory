@@ -7,14 +7,14 @@ namespace SSaME.Core.Testes
     public class ValidadorAtaquesTeste
     {
         [Test]
-        [TestCase(Time.A, Time.B, true)]
-        [TestCase(Time.A, Time.A, false)]
-        [TestCase(Time.B, Time.A, true)]
-        [TestCase(Time.B, Time.B, false)]
-        public void o_atacante_deve_atacar_um_alvo_do_outro_time(Time timeAtacante, Time timeAlvo, bool ataqueValido)
+        [TestCase(Equipe.A, Equipe.B, true)]
+        [TestCase(Equipe.A, Equipe.A, false)]
+        [TestCase(Equipe.B, Equipe.A, true)]
+        [TestCase(Equipe.B, Equipe.B, false)]
+        public void o_atacante_deve_atacar_um_alvo_do_outro_time(Equipe equipeAtacante, Equipe equipeAlvo, bool ataqueValido)
         {
-            var atacante = new PersonagemFake(0, timeAtacante);
-            var alvo = new PersonagemFake(0, timeAlvo);
+            var atacante = new PersonagemFake(0, equipeAtacante);
+            var alvo = new PersonagemFake(0, equipeAlvo);
 
             var ataque = new Ataque(atacante, alvo);
             var validadorAtaque = new ValidadorAtaques();

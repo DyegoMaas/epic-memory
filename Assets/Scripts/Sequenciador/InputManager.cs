@@ -42,7 +42,8 @@ public class InputManager
         {
             foreach (var personagem in repositorio.BuscarTodos())
             {
-                if (PersonagemFoiSelecionado(hit, personagem))
+                //TODO: arrumar esse cast estranho
+                if (PersonagemFoiSelecionado(hit, personagem as IPersonagemJogo))
                 {
                     return personagem;
                 }
@@ -50,8 +51,8 @@ public class InputManager
         }
         return null;
     }
-
-    private bool PersonagemFoiSelecionado(RaycastHit hit, IPersonagem personagem)
+    
+    private bool PersonagemFoiSelecionado(RaycastHit hit, IPersonagemJogo personagem)
     {
         return personagem.GetCollider().transform == hit.transform;
     }

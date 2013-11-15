@@ -1,3 +1,5 @@
+using System;
+
 namespace SSaME.Core
 {
     public class GeradorAtaques   

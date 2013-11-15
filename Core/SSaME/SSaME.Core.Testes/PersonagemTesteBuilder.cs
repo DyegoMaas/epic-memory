@@ -3,7 +3,7 @@ namespace SSaME.Core.Testes
     public class PersonagemTesteBuilder
     {
         private int idPersonagem;
-        private Time time = Time.A;
+        private Equipe equipe = Equipe.A;
 
         public PersonagemTesteBuilder ComId(int idPersonagem)
         {
@@ -11,15 +11,15 @@ namespace SSaME.Core.Testes
             return this;
         }
 
-        public PersonagemTesteBuilder DoTime(Time time)
+        public PersonagemTesteBuilder DoTime(Equipe equipe)
         {
-            this.time = time;
+            this.equipe = equipe;
             return this;
         }
 
         public IPersonagem Construir()
         {
-            return new PersonagemFake(idPersonagem, time);
+            return new PersonagemFake(idPersonagem, equipe);
         }
     }
 }
