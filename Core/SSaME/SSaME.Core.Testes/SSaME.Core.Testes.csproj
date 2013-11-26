@@ -55,6 +55,7 @@
     <Compile Include="Sequenciador\PersonagemTesteBuilder.cs" />
     <Compile Include="Sequenciador\SequenciaTeste.cs" />
     <Compile Include="Sequenciador\ValidadorAtaquesTeste.cs" />
+    <Compile Include="Temas\GuardiaoChavesTeste.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SSaME.Core\SSaME.Core.csproj">
@@ -65,9 +66,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Temas\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

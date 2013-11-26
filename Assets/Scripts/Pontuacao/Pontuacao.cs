@@ -4,6 +4,7 @@ using UnityEngine;
 public class Pontuacao : MonoBehaviour
 {
     private int pontuacao;
+    private int rodada;
 
     // Use this for initialization
     void Start()
@@ -21,11 +22,13 @@ public class Pontuacao : MonoBehaviour
     void ZerarPontuacao()
     {
         DefinirPontuacao(0);
+        rodada = 0;
     }
 
     void Pontuar()
     {
-        DefinirPontuacao(CalcularPontuacao());
+        rodada++;
+        DefinirPontuacao(pontuacao + CalcularPontosJogada());
     }
 
     private void DefinirPontuacao(int pontos)
@@ -34,8 +37,8 @@ public class Pontuacao : MonoBehaviour
         BroadcastMessage("AtualizarPontuacao", pontuacao);
     }
 
-    private int CalcularPontuacao()
+    private int CalcularPontosJogada()
     {
-        return pontuacao + 1;
+        return rodada * 2;
     }
 }

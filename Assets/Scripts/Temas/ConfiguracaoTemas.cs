@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Temas : MonoBehaviour
+public class ConfiguracaoTemas : MonoBehaviour
 {
 
     // Use this for initialization

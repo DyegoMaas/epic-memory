@@ -77,7 +77,7 @@
      <Compile Include="Assets\Scripts\Sequenciador\TipoProgressaoPartida.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\UnityRandomizer.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\ValidadorAtaques.cs" />
-     <Compile Include="Assets\Scripts\Temas\Temas.cs" />
+     <Compile Include="Assets\Scripts\Temas\ConfiguracaoTemas.cs" />
      <Compile Include="Assets\Scripts\UI\BotaoComecarJogo.cs" />
      <Compile Include="Assets\Scripts\UI\IndicadorAtaque.cs" />
      <Compile Include="Assets\Scripts\UI\JogadorAtivo.cs" />
