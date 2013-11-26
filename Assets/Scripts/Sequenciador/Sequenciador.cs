@@ -196,6 +196,7 @@ public class Sequenciador : MonoBehaviour
         if (FimdeJogo())
         {
             Messenger.Send(MessageType.GameOver);
+            Messenger.Send(MessageType.PerfilJogadorAtivado, new Message<PerfilJogadorAtivo>(PerfilJogadorAtivo.Maquina));
             PrepararNovoJogo();
 
             yield return new WaitForSeconds(TempoEsperaAntesDeRecomecarReproducao);
@@ -204,6 +205,7 @@ public class Sequenciador : MonoBehaviour
         else
         {
             Messenger.Send(MessageType.ErroJogador, new Message<int>(numeroTentativasFaltando));
+            Messenger.Send(MessageType.PerfilJogadorAtivado, new Message<PerfilJogadorAtivo>(PerfilJogadorAtivo.Maquina));
             
             yield return new WaitForSeconds(TempoEsperaAntesDeRecomecarReproducao);
             StartCoroutine(ReproduzirSequenciaAtaques());
