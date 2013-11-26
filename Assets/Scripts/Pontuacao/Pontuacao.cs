@@ -39,6 +39,6 @@ public class Pontuacao : MonoBehaviour
 
     private int CalcularPontosJogada()
     {
-        return rodada * 2;
+        return (int)(rodada + Mathf.Pow(rodada, 2) / 10f);
     }
 }
