@@ -11,10 +11,10 @@ public class MenuPrincipal : MonoBehaviour
     public string NomeLevelNovoJogo = "load_sceen";
     public float IntervaloEntreBotoesDica = 1f;
     public float IntervaloEntreDicas = 15f;
+    public float TempoParaNovoJogo = 1f;
 
     private const int IdBotaoNovo = 1;
     private const int IdBotaoJogo = 2;
-    private const int IdBotaoSair = 3;
 
     private AnimadorSelecao animadorSelecao;
     private bool jogadorPodeInteragir = true;
@@ -25,16 +25,19 @@ public class MenuPrincipal : MonoBehaviour
     private int penultimoBotao;
     private int clickCount;
 
+    private bool dentroDoTempoLimiteParaClicarEmJogo = false;
+
     // Use this for initialization
     void Start()
     {
         animadorSelecao = GetComponent<AnimadorSelecao>();
+
         StartCoroutine(DarDicaACadaXSegundos());
     }
 
     private IEnumerator DarDicaACadaXSegundos()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(2);
         while (!jogadorSelecionouUmaOpcao)
         {
             yield return StartCoroutine(DarDicaMenu());
@@ -63,6 +66,15 @@ public class MenuPrincipal : MonoBehaviour
 
         Clicar(IdBotaoNovo);
         animadorSelecao.AnimarSelecao(BotaoNovo);
+
+        StartCoroutine(ContagemCliqueJogo());
+    }
+
+    private IEnumerator ContagemCliqueJogo()
+    {
+        dentroDoTempoLimiteParaClicarEmJogo = true;
+        yield return new WaitForSeconds(TempoParaNovoJogo);
+        dentroDoTempoLimiteParaClicarEmJogo = false;
     }
 
     private void Clicar(int idBotao)
@@ -78,11 +90,13 @@ public class MenuPrincipal : MonoBehaviour
         if (!jogadorPodeInteragir)
             return;
 
-        Clicar(IdBotaoJogo);
         animadorSelecao.AnimarSelecao(BotaoJogo);
 
+        if (!dentroDoTempoLimiteParaClicarEmJogo)
+            return;
+
+        Clicar(IdBotaoJogo);
         VerificarCarregamentoDoMapa();
-        VerificarSaida();
     }
 
     void BotaoSairClick()
@@ -90,8 +104,10 @@ public class MenuPrincipal : MonoBehaviour
         if (!jogadorPodeInteragir)
             return;
 
-        Clicar(IdBotaoSair);
         animadorSelecao.AnimarSelecao(BotaoSair);
+
+        jogadorPodeInteragir = false;
+        StartCoroutine(FecharEmAlgunsSegundos(1f));
     }
 
     private void VerificarCarregamentoDoMapa()
@@ -118,20 +134,9 @@ public class MenuPrincipal : MonoBehaviour
         Application.LoadLevel(NomeLevelNovoJogo);
     }
 
-    private void VerificarSaida()
-    {
-        if (!JogadorCompletouUmaJogada())
-            return;
-
-        if (penultimoBotao == IdBotaoSair && ultimoBotao == IdBotaoJogo)
-        {
-            jogadorPodeInteragir = false;
-            StartCoroutine(FecharEmAlgunsSegundos(1f));
-        }
-    }
-
     private IEnumerator FecharEmAlgunsSegundos(float tempo)
     {
+        Debug.Log("saindo");
         yield return new WaitForSeconds(tempo);
         Application.Quit();
     }
