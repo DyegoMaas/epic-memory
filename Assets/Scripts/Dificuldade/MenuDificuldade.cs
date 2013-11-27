@@ -22,6 +22,7 @@ public class MenuDificuldade : MonoBehaviour {
 
     void ToggleState()
     {
+        Debug.Log("dificuldade");
         expandido = !expandido;
 
         if (expandido)
