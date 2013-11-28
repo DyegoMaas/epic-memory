@@ -772,6 +772,7 @@
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Shaders\Blend2TexVertexColor.shader" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2dUI\Shaders\DepthMaskSolid.shader" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2dUI_demo\Assets\Dark\Fonts\Nunito24.fnt" />
+     <None Include="Assets\Arte\GUI\footlight.fnt" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Shaders\resources\BlendVertexColor.shader" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Shaders\LitCutoutVertexColor.shader" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Editor\EditorUtility.shader" />
