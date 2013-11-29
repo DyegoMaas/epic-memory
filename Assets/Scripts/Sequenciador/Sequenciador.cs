@@ -28,6 +28,8 @@ public class Sequenciador : MonoBehaviour
         set { tempoEsperaAntesDeRecomecarReproducao = value; }
     }
 
+    public float TempoEsperaComecarJogo = 1f;
+
     public int NumeroTentativas = 3;
     private int numeroTentativasFaltando;
 
@@ -49,7 +51,7 @@ public class Sequenciador : MonoBehaviour
     private bool jogoIniciado;
 
     // Use this for initialization
-    void Start()
+    IEnumerator Start()
     {
         numeroTentativasFaltando = NumeroTentativas;
 
@@ -58,6 +60,8 @@ public class Sequenciador : MonoBehaviour
         progressaoPartidaFactory = GetComponent<ProgressaoPartidaFactory>();
         gerenciadorDificuldade = FindObjectOfType(typeof (GerenciadorDificuldade)) as GerenciadorDificuldade;
         AdicionarTodosOsPersonagensNoRepositorio();
+
+        yield return new WaitForSeconds(TempoEsperaComecarJogo);
         Messenger.Subscribe(MessageType.NovoJogoIniciar, gameObject, "IniciarNovoJogo");
 
         StartCoroutine(AguardarNovoJogo());
@@ -246,7 +250,7 @@ public class Sequenciador : MonoBehaviour
         jogadorPodeInteragir = false;
         foreach (var ataque in ataquesGeradosPelaMaquina.ToList())
         {
-            yield return new WaitForSeconds(DuracaoAtaque / 2f);
+            yield return new WaitForSeconds(duracaoAtaque / 2f);
             yield return StartCoroutine(ReproduzirAtaque(ataque));
         }
         jogadorPodeInteragir = true;

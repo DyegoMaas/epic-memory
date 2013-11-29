@@ -5,6 +5,7 @@ public class CarregamentoObjetos : MonoBehaviour
 {
     public GameObject MessageManager;
     public string NomeLevelCarregar = "jogo";
+    public bool CarregarLevel = true;
 
     public tk2dTextMesh PercentualCarregamento;
 
@@ -17,8 +18,16 @@ public class CarregamentoObjetos : MonoBehaviour
     void Start ()
 	{
 	    CarregarObjetos();
-        Application.LoadLevel(NomeLevelCarregar);
+
+        if(CarregarLevel)
+            Application.LoadLevel(NomeLevelCarregar);
 	}
+
+    private void CarregarObjetos()
+    {
+        if(MessageManager)
+            Instantiate(MessageManager, new Vector3(100, 0, 0), new Quaternion());
+    }
 
     // Update is called once per frame
     void Update ()
@@ -28,21 +37,15 @@ public class CarregamentoObjetos : MonoBehaviour
 
     private void AtualizarPercentualCarregamento()
     {
-        if (PercentualCarregamento)
+        if (!PercentualCarregamento)
+            return;
+        
+        string novoPercentual = string.Format("{0}%", PercentualCarregado);
+        if (novoPercentual != PercentualCarregamento.text)
         {
-            PercentualCarregamento.text = string.Format("{0}%", PercentualCarregado);
+            Debug.Log(novoPercentual);
+            PercentualCarregamento.text = novoPercentual;
             PercentualCarregamento.Commit();
         }
-    }
-
-    private void CarregarObjetos()
-    {
-        if(MessageManager)
-            CarregarMessageManager(MessageManager);
-    }
-
-    private void CarregarMessageManager(GameObject prefab)
-    {
-        Instantiate(prefab, new Vector3(100, 0, 0), new Quaternion());
     }
 }

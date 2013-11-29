@@ -1,8 +1,14 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using Messaging;
 
 public class BotaoComecarJogo : MonoBehaviour {
-    
+    private const float TempoAnimacao = .8f;
+
+    public Vector3 StartPosition;
+    public Vector3 MiddlePosition;
+    public Vector3 EndPosition;
+
     // Use this for initialization
     void Start()
     {
@@ -15,19 +21,26 @@ public class BotaoComecarJogo : MonoBehaviour {
 
     }
 
-    void OnClick()
+    IEnumerator OnClick()
     {
+        yield return StartCoroutine(Esconder());
         Messenger.Send(MessageType.NovoJogoIniciar);
-        HabilitarFilhos(false);
     }
 
     void MostrarBotao()
     {
-        HabilitarFilhos(true);   
+        Mostrar();
     }
 
-    void HabilitarFilhos(bool ativo)
+    void Mostrar()
     {
-        transform.GetChild(0).gameObject.SetActive(ativo);
+        transform.position = StartPosition;
+        iTween.MoveTo(gameObject, iTween.Hash("position", MiddlePosition, "time", .4f, "easetype", iTween.EaseType.easeOutCubic, "islocal", true));
+    }
+
+    IEnumerator Esconder()
+    {
+        iTween.MoveTo(gameObject, iTween.Hash("position", EndPosition, "time", TempoAnimacao, "easetype", iTween.EaseType.easeOutCubic, "islocal", true));
+        yield return new WaitForSeconds(TempoAnimacao);
     }
 }
