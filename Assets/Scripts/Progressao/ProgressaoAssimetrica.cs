@@ -1,9 +1,10 @@
+using AllLogic.Sequenciador;
 using Assets.Scripts;
 using SSaME.Core.Sequenciador;
 
 public class ProgressaoAssimetrica : IProgressaoPartida
 {
-    private RepositorioPersonagens repositorioPersonagens;
+    private readonly RepositorioPersonagens repositorioPersonagens;
 
     public ProgressaoAssimetrica(RepositorioPersonagens repositorioPersonagens)
     {

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using AllLogic.Sequenciador;
 
 namespace SSaME.Core.Sequenciador
 {

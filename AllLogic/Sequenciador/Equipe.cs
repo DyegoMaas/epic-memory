@@ -1,4 +1,4 @@
-namespace SSaME.Core.Sequenciador
+namespace AllLogic.Sequenciador
 {
     public enum Equipe
     {

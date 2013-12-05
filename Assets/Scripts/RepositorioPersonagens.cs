@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using AllLogic.Sequenciador;
 using SSaME.Core.Sequenciador;
 
 namespace Assets.Scripts

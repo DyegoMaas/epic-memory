@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using AllLogic.Sequenciador;
 using Assets.Scripts;
 using Assets.Scripts.Progressao;
 using Messaging;

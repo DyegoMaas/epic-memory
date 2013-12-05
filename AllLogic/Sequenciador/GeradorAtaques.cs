@@ -1,3 +1,5 @@
+using AllLogic.Sequenciador;
+
 namespace SSaME.Core.Sequenciador
 {
     public class GeradorAtaques   

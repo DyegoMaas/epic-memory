@@ -1,3 +1,4 @@
+using AllLogic.Sequenciador;
 using Assets.Scripts;
 using SSaME.Core.Sequenciador;
 

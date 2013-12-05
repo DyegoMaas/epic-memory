@@ -1,4 +1,6 @@
-namespace SSaME.Core.Sequenciador
+using SSaME.Core.Sequenciador;
+
+namespace AllLogic.Sequenciador
 {
     public struct Ataque
     {

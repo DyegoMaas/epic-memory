@@ -1,4 +1,5 @@
-﻿using SSaME.Core.Sequenciador;
+﻿using AllLogic.Sequenciador;
+using SSaME.Core.Sequenciador;
 using UnityEngine;
 using System.Collections;
 using Messaging;
