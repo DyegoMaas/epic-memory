@@ -6,6 +6,7 @@ using Messaging;
 public class Personagem : MonoBehaviour, IPersonagemJogo
 {
     private const int NivelInicial = 1;
+    private const int VidaInicial = 100;
 
     public int Id { get; private set; }
 
@@ -23,6 +24,16 @@ public class Personagem : MonoBehaviour, IPersonagemJogo
         get { return nivel; }
         set { nivel = value; }
     }
+
+    [SerializeField]
+    private int vida = VidaInicial;
+
+    public int Vida
+    {
+        get { return vida; }
+        set { vida = value; }
+    }
+    
 
     [SerializeField]
     private Equipe equipe = Equipe.A;
@@ -95,6 +106,23 @@ public class Personagem : MonoBehaviour, IPersonagemJogo
     public void ResetarNivel()
     {
         DefinirNivel(NivelInicial);
+    }
+
+    public void AdicionarVida(int qtdVida)
+    {
+        if (qtdVida > 0)
+        {
+            Vida = Mathf.Clamp(Vida + qtdVida, 0, 100);
+            Debug.Log(string.Format("Personagem {0}, vida: {1}", gameObject.name, Vida));
+        }
+
+        if (qtdVida == 0)
+            Morrer();
+    }
+
+    private void Morrer()
+    {
+        Debug.Log(string.Format("Eu ({0}) morri.", gameObject.name));
     }
 
     private void DefinirNivel(int novoNivel)
