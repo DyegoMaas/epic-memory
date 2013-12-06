@@ -1,9 +1,9 @@
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
-using AllLogic.Sequenciador;
 using Assets.Scripts;
 using Assets.Scripts.Progressao;
+using EpicMemory.Sequenciador;
 using Messaging;
 using SSaME.Core.Sequenciador;
 using UnityEngine;
@@ -16,7 +16,7 @@ public class Sequenciador : MonoBehaviour
 
     public float DuracaoAtaque
     {
-        get { return duracaoAtaque * gerenciadorDificuldade.CoeficietenteFacilidade; }
+        get { return duracaoAtaque * gerenciadorDificuldade.CoeficienteFacilidade; }
         set { duracaoAtaque = value; }
     }
 
@@ -25,7 +25,7 @@ public class Sequenciador : MonoBehaviour
 
     public float TempoEsperaAntesDeRecomecarReproducao
     {
-        get { return tempoEsperaAntesDeRecomecarReproducao * gerenciadorDificuldade.CoeficietenteFacilidade; }
+        get { return tempoEsperaAntesDeRecomecarReproducao * gerenciadorDificuldade.CoeficienteFacilidade; }
         set { tempoEsperaAntesDeRecomecarReproducao = value; }
     }
 

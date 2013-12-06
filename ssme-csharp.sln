@@ -1,14 +1,9 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-vs", "Assembly-CSharp-vs.csproj", "{D8FB5CE0-1241-D037-AE6B-30FA6840E679}"
+# Visual Studio 2008
+
+Project("{9C403BBE-2317-4D22-7A55-08C9895E3DD5}") = "ssme", "Assembly-CSharp-vs.csproj", "{D8FB5CE0-1241-D037-AE6B-30FA6840E679}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor-vs", "Assembly-CSharp-Editor-vs.csproj", "{83583AC3-930A-D2F5-B709-D961A1E66571}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testes", "Testes", "{B9740849-89A5-4A97-A61A-267360968778}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AllLogic", "AllLogic\AllLogic.csproj", "{CEF75F69-6DF9-497B-8593-F99B11949C81}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testes.Unidade", "Testes\Testes.Unidade\Testes.Unidade.csproj", "{84783F4C-892B-4F5C-9298-C0C33ED4E22E}"
+Project("{9C403BBE-2317-4D22-7A55-08C9895E3DD5}") = "ssme", "Assembly-CSharp-Editor-vs.csproj", "{83583AC3-930A-D2F5-B709-D961A1E66571}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,22 +19,11 @@ Global
 		{83583AC3-930A-D2F5-B709-D961A1E66571}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83583AC3-930A-D2F5-B709-D961A1E66571}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83583AC3-930A-D2F5-B709-D961A1E66571}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CEF75F69-6DF9-497B-8593-F99B11949C81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CEF75F69-6DF9-497B-8593-F99B11949C81}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CEF75F69-6DF9-497B-8593-F99B11949C81}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CEF75F69-6DF9-497B-8593-F99B11949C81}.Release|Any CPU.Build.0 = Release|Any CPU
-		{84783F4C-892B-4F5C-9298-C0C33ED4E22E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{84783F4C-892B-4F5C-9298-C0C33ED4E22E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{84783F4C-892B-4F5C-9298-C0C33ED4E22E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{84783F4C-892B-4F5C-9298-C0C33ED4E22E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{84783F4C-892B-4F5C-9298-C0C33ED4E22E} = {B9740849-89A5-4A97-A61A-267360968778}
-	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
+																																																																																																																																										GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
@@ -57,4 +41,5 @@ Global
 		$3.inheritsScope = text/plain
 		$3.scope = text/plain
 	EndGlobalSection
+
 EndGlobal

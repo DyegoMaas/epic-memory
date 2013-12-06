@@ -1,4 +1,4 @@
-namespace AllLogic.Sequenciador
+namespace EpicMemory.Sequenciador
 {
     public enum Equipe
     {

@@ -1,6 +1,6 @@
 using SSaME.Core.Sequenciador;
 
-namespace AllLogic.Sequenciador
+namespace EpicMemory.Sequenciador
 {
     public struct Ataque
     {

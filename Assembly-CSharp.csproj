@@ -53,6 +53,10 @@
      <Compile Include="Assets\Scripts\Dificuldade\ToggleButtonDificuldade.cs" />
      <Compile Include="Assets\Scripts\IPersonagemJogo.cs" />
      <Compile Include="Assets\Scripts\IndicadorNivelPersonagem.cs" />
+     <Compile Include="Assets\Scripts\IoC\DependencyConfiguration.cs" />
+     <Compile Include="Assets\Scripts\IoC\DependencyInjector.cs" />
+     <Compile Include="Assets\Scripts\IoC\InjectionBehaviour.cs" />
+     <Compile Include="Assets\Scripts\IoC\Teste.cs" />
      <Compile Include="Assets\Scripts\LoadScreen\CarregamentoObjetos.cs" />
      <Compile Include="Assets\Scripts\MenuPrincipal\Creditos.cs" />
      <Compile Include="Assets\Scripts\MenuPrincipal\MenuPrincipal.cs" />
@@ -752,6 +756,7 @@
      <Compile Include="Assets\ThirdParty\iTween\iTween.cs" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Shaders\LitSolidVertexColor.shader" />
      <None Include="Assets\ThirdParty\PlayMaker\Readme.txt" />
+     <None Include="Assets\Scripts\IoC\Autofac License.txt" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Goodies\TexturePacker\Exporter\2dtoolkit\exporter.xml" />
      <None Include="Assets\Som\enderecos.txt" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Shaders\SolidVertexColor.shader" />
@@ -760,8 +765,10 @@
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Shaders\LitPremulVertexColor.shader" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Shaders\PremulVertexColor.shader" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d_demo\Credits.txt" />
+     <None Include="Assets\Scripts\IoC\Autofac.xml" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Shaders\goodies\PackedTextMesh.shader" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Shaders\Blend2TexVertexColor.shader" />
+     <None Include="Assets\Scripts\IoC\License.txt" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2dUI\Shaders\DepthMaskSolid.shader" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2dUI_demo\Assets\Dark\Fonts\Nunito24.fnt" />
      <None Include="Assets\Arte\GUI\footlight.fnt" />
@@ -779,6 +786,12 @@
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d_demo\democameradata\source\democamerafont.fnt" />
  <Reference Include="PlayMaker">
  <HintPath>Assets\ThirdParty\PlayMaker\PlayMaker.dll</HintPath>
+ </Reference>
+ <Reference Include="AllLogic">
+ <HintPath>Assets\bin\AllLogic.dll</HintPath>
+ </Reference>
+ <Reference Include="Autofac">
+ <HintPath>Assets\Scripts\IoC\Autofac.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

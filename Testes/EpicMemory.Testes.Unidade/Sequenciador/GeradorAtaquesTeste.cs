@@ -1,12 +1,11 @@
 using System.Collections.Generic;
-using AllLogic.Sequenciador;
+using EpicMemory.Sequenciador;
 using FluentAssertions;
 using NSubstitute;
 using NUnit.Framework;
 using SSaME.Core.Sequenciador;
-using SSaME.Core.Testes.Sequenciador;
 
-namespace Testes.Unidade.Sequenciador
+namespace EpicMemory.Testes.Unidade.Sequenciador
 {
     [TestFixture]
     public class GeradorAtaquesTeste

@@ -1,5 +1,4 @@
-using AllLogic.Sequenciador;
-using SSaME.Core.Sequenciador;
+using EpicMemory.Sequenciador;
 using UnityEngine;
 using System.Collections;
 

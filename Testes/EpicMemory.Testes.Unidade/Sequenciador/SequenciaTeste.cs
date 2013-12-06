@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using AllLogic.Sequenciador;
+using EpicMemory.Sequenciador;
 using FluentAssertions;
 using NUnit.Framework;
 using SSaME.Core.Sequenciador;
 
-namespace SSaME.Core.Testes.Sequenciador
+namespace EpicMemory.Testes.Unidade.Sequenciador
 {
     [TestFixture]
     public class SequenciaTeste

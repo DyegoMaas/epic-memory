@@ -1,6 +1,5 @@
-using AllLogic.Sequenciador;
 using Assets.Scripts;
-using SSaME.Core.Sequenciador;
+using EpicMemory.Sequenciador;
 
 public class ProgressaoAssimetrica : IProgressaoPartida
 {

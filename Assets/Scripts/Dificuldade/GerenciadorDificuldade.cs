@@ -15,7 +15,7 @@ public class GerenciadorDificuldade : MonoBehaviour {
     /// 0 == impossível
     /// 1 == fácil
     /// </summary>
-    public float CoeficietenteFacilidade
+    public float CoeficienteFacilidade
     {
         get
         {

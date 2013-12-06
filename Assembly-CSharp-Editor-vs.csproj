@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Editor\UpgradeVSProject.cs" />
      <Compile Include="Assets\ThirdParty\PlayMaker\Actions\Editor\LookAtActionEditor.cs" />
      <Compile Include="Assets\ThirdParty\PlayMaker\Actions\Editor\MoveTowardsActionEditor.cs" />
      <Compile Include="Assets\ThirdParty\PlayMaker\Actions\Editor\SetCameraFOVActionEditor.cs" />
@@ -165,6 +166,7 @@
      <Compile Include="Assets\ThirdParty\iTween\PlayMaker\Editor\iTweenMoveToActionEditor.cs" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Shaders\LitSolidVertexColor.shader" />
      <None Include="Assets\ThirdParty\PlayMaker\Readme.txt" />
+     <None Include="Assets\Scripts\IoC\Autofac License.txt" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Goodies\TexturePacker\Exporter\2dtoolkit\exporter.xml" />
      <None Include="Assets\Som\enderecos.txt" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Shaders\SolidVertexColor.shader" />
@@ -173,8 +175,10 @@
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Shaders\LitPremulVertexColor.shader" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Shaders\PremulVertexColor.shader" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d_demo\Credits.txt" />
+     <None Include="Assets\Scripts\IoC\Autofac.xml" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Shaders\goodies\PackedTextMesh.shader" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Shaders\Blend2TexVertexColor.shader" />
+     <None Include="Assets\Scripts\IoC\License.txt" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2dUI\Shaders\DepthMaskSolid.shader" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2dUI_demo\Assets\Dark\Fonts\Nunito24.fnt" />
      <None Include="Assets\Arte\GUI\footlight.fnt" />
@@ -252,6 +256,12 @@
  </Reference>
  <Reference Include="UnityEditor.Android.Extensions">
  <HintPath>C:\Program Files (x86)\Unity\Editor\Data\PlaybackEngines\AndroidPlayer\EditorExtensions\UnityEditor.Android.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="AllLogic">
+ <HintPath>Assets\bin\AllLogic.dll</HintPath>
+ </Reference>
+ <Reference Include="Autofac">
+ <HintPath>Assets\Scripts\IoC\Autofac.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

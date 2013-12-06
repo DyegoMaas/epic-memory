@@ -1,4 +1,4 @@
-using AllLogic.Sequenciador;
+using EpicMemory.Sequenciador;
 using UnityEngine;
 using Messaging;
 

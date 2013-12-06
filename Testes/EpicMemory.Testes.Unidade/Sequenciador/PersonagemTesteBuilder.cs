@@ -1,7 +1,7 @@
-using AllLogic.Sequenciador;
+using EpicMemory.Sequenciador;
 using SSaME.Core.Sequenciador;
 
-namespace SSaME.Core.Testes.Sequenciador
+namespace EpicMemory.Testes.Unidade.Sequenciador
 {
     public class PersonagemTesteBuilder
     {
