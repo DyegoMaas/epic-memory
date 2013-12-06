@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EpicMemory", "EpicMemory\EpicMemory.csproj", "{CEF75F69-6DF9-497B-8593-F99B11949C81}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EpicMemory", "Core\app\EpicMemory\EpicMemory.csproj", "{CEF75F69-6DF9-497B-8593-F99B11949C81}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testes", "Testes", "{D6CBA625-8CE1-471E-87F2-37ADDA8EF29B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testes", "Core\testes", "{D6CBA625-8CE1-471E-87F2-37ADDA8EF29B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EpicMemory.Testes.Unidade", "Testes\EpicMemory.Testes.Unidade\EpicMemory.Testes.Unidade.csproj", "{84783F4C-892B-4F5C-9298-C0C33ED4E22E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EpicMemory.Testes.Unidade", "Core\testes\EpicMemory.Testes.Unidade\EpicMemory.Testes.Unidade.csproj", "{84783F4C-892B-4F5C-9298-C0C33ED4E22E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
