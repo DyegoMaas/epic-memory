@@ -53,7 +53,7 @@
     <Compile Include="Sequenciador\GeradorAtaquesTeste.cs" />
     <Compile Include="Sequenciador\PersonagemFake.cs" />
     <Compile Include="Sequenciador\PersonagemTesteBuilder.cs" />
-    <Compile Include="Sequenciador\SequenciaTeste.cs" />
+    <Compile Include="Sequenciador\SequenciaAtaqueTeste.cs" />
     <Compile Include="Sequenciador\ValidadorAtaquesTeste.cs" />
   </ItemGroup>
   <ItemGroup>

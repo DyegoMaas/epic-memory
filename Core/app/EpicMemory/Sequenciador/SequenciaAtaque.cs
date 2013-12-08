@@ -17,14 +17,16 @@ namespace EpicMemory.Sequenciador
                 ataquesReproducao.Remove(ataque);
         }
 
-        public bool Validar(List<Ataque> ataquesGravacao)
+        public bool Validar(SequenciaAtaque outraSequencia)
         {
-            if (ataquesReproducao.Count > ataquesGravacao.Count)
+            var ataquesOutraSequencia = outraSequencia.ataquesReproducao;
+
+            if (ataquesReproducao.Count > ataquesOutraSequencia.Count)
                 return false;
 
             for (int i = 0; i < ataquesReproducao.Count; i++)
             {
-                var ataqueGravado = ataquesGravacao[i];
+                var ataqueGravado = ataquesOutraSequencia[i];
                 var ataqueReproducao = ataquesReproducao[i];
 
                 if (ataqueGravado.Atacante.Equipe != ataqueReproducao.Atacante.Equipe)
@@ -40,9 +42,14 @@ namespace EpicMemory.Sequenciador
             return true;
         }
 
-        public bool EstaCompleta(List<Ataque> ataquesGravacao)
+        public bool EstaCompleta(SequenciaAtaque outraSequencia)
         {
-            return ataquesGravacao.Count == ataquesReproducao.Count;
+            return outraSequencia.ataquesReproducao.Count == ataquesReproducao.Count;
+        }
+
+        public IList<Ataque> ToList()
+        {
+            return ataquesReproducao;
         }
     }
 }

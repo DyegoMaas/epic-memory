@@ -46,8 +46,8 @@ public class Sequenciador : InjectionBehaviour
     [InjectedDependency] private GerenciadorEstadoJogo gerenciadorEstadoJogo;
     [InjectedDependency] private GerenciadorGUI gerenciadorGui;
     
-    private SequenciaAtaque sequenciaAtaqueAtaquesDoJogador;
-    private readonly List<Ataque> ataquesGeradosPelaMaquina = new List<Ataque>();
+    private SequenciaAtaque sequenciaAtaquesDoJogador;
+    private SequenciaAtaque sequenciaAtaquesDaMaquina;
     private IProgressaoPartida progressaoPartida;
     private IProgressaoPartidaFactory progressaoPartidaFactory;
     private SelecaoPersonagens selecaoPersonagens;
@@ -63,7 +63,8 @@ public class Sequenciador : InjectionBehaviour
     {
         selecaoPersonagens = GetComponent<SelecaoPersonagens>();
         progressaoPartidaFactory = GetComponent<ProgressaoPartidaFactory>();
-        sequenciaAtaqueAtaquesDoJogador = sequenciaAtaqueFactory.CriarSequenciaAtaque();
+        sequenciaAtaquesDoJogador = sequenciaAtaqueFactory.CriarSequenciaAtaque();
+        sequenciaAtaquesDaMaquina = sequenciaAtaqueFactory.CriarSequenciaAtaque();
 
         yield return new WaitForSeconds(TempoEsperaComecarJogo);
 
@@ -109,13 +110,13 @@ public class Sequenciador : InjectionBehaviour
     {
         if (validadorAtaques.AtaqueValido(ataque))
         {
-            sequenciaAtaqueAtaquesDoJogador.ArmazenarAtaque(ataque);
-            if (sequenciaAtaqueAtaquesDoJogador.Validar(ataquesGeradosPelaMaquina))
+            sequenciaAtaquesDoJogador.ArmazenarAtaque(ataque);
+            if (sequenciaAtaquesDoJogador.Validar(sequenciaAtaquesDaMaquina))
             {
                 progressaoPartida.AtualizarProgressao(ataque);
                 Messenger.Send(MessageType.AtaqueDesferido, new Message<Ataque>(ataque));
 
-                if (sequenciaAtaqueAtaquesDoJogador.EstaCompleta(ataquesGeradosPelaMaquina))
+                if (sequenciaAtaquesDoJogador.EstaCompleta(sequenciaAtaquesDaMaquina))
                 {
                     Messenger.Send(MessageType.JogadaCompleta);
                     StartCoroutine(ComecarProximaRodada());
@@ -136,7 +137,7 @@ public class Sequenciador : InjectionBehaviour
     private IEnumerator ComecarProximaRodada()
     {
         Messenger.Send(MessageType.PerfilJogadorAtivado, new Message<PerfilJogadorAtivo>(PerfilJogadorAtivo.Maquina));
-        sequenciaAtaqueAtaquesDoJogador = sequenciaAtaqueFactory.CriarSequenciaAtaque();
+        sequenciaAtaquesDoJogador = sequenciaAtaqueFactory.CriarSequenciaAtaque();
         progressaoPartida = progressaoPartidaFactory.CriarProgressorPartida();
         yield return new WaitForSeconds(TempoEsperaAntesDeRecomecarReproducao);
         progressaoPartida.ResetarProgressoPartida();
@@ -173,30 +174,30 @@ public class Sequenciador : InjectionBehaviour
     {
         progressaoPartida.ResetarProgressoPartida();
         jogadorPodeInteragir = false;
-        sequenciaAtaqueAtaquesDoJogador = new SequenciaAtaque();
+        sequenciaAtaquesDoJogador = new SequenciaAtaque();
     }
 
     private void PrepararNovoJogo()
     {
         contadorTentativas.Resetar();
-        ataquesGeradosPelaMaquina.Clear();
+        sequenciaAtaquesDaMaquina = sequenciaAtaqueFactory.CriarSequenciaAtaque();
     }
 
     private void GerarAtaque()
     {
         var ataque = geradorAtaques.GerarAtaque();
-        ataquesGeradosPelaMaquina.Add(ataque);
+        sequenciaAtaquesDaMaquina.ArmazenarAtaque(ataque);
     }
 
     private void InvalidarAtaque(Ataque ataque)
     {
-        sequenciaAtaqueAtaquesDoJogador.RemoverAtaque(ataque);
+        sequenciaAtaquesDoJogador.RemoverAtaque(ataque);
     }
 
     private IEnumerator ReproduzirSequenciaAtaques()
     {
         jogadorPodeInteragir = false;
-        foreach (var ataque in ataquesGeradosPelaMaquina.ToList())
+        foreach (var ataque in sequenciaAtaquesDaMaquina.ToList())
         {
             yield return new WaitForSeconds(duracaoAtaque / 2f);
             yield return StartCoroutine(ReproduzirAtaque(ataque));
