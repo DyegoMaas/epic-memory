@@ -194,6 +194,9 @@
      <None Include="Assets\ThirdParty\PlayMaker\Versions\readme.txt" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Shaders\AdditiveVertexColor.shader" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d_demo\democameradata\source\democamerafont.fnt" />
+ <Reference Include="EpicMemory">
+ <HintPath>Assets\bin\EpicMemory.dll</HintPath>
+ </Reference>
  <Reference Include="Autofac">
  <HintPath>Assets\Scripts\IoC\Autofac.dll</HintPath>
  </Reference>
@@ -259,9 +262,6 @@
  </Reference>
  <Reference Include="UnityEditor.Android.Extensions">
  <HintPath>C:\Program Files (x86)\Unity\Editor\Data\PlaybackEngines\AndroidPlayer\EditorExtensions\UnityEditor.Android.Extensions.dll</HintPath>
- </Reference>
- <Reference Include="EpicMemory">
- <HintPath>Assets\bin\EpicMemory.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

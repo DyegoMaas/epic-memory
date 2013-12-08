@@ -74,6 +74,9 @@
      <Compile Include="Assets\Scripts\SeletorAnimacaoAtaque.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\ConfiguradorTentativas.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\ContadorTentativas.cs" />
+     <Compile Include="Assets\Scripts\Sequenciador\EstadoJogo.cs" />
+     <Compile Include="Assets\Scripts\Sequenciador\EstadoJogoScript.cs" />
+     <Compile Include="Assets\Scripts\Sequenciador\GerenciadorEstadoJogo.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\IContadorTentativas.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\IInputManager.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\InicializadorRepositorio.cs" />
@@ -793,14 +796,14 @@
      <None Include="Assets\ThirdParty\PlayMaker\Versions\readme.txt" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Shaders\AdditiveVertexColor.shader" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d_demo\democameradata\source\democamerafont.fnt" />
+ <Reference Include="EpicMemory">
+ <HintPath>Assets\bin\EpicMemory.dll</HintPath>
+ </Reference>
  <Reference Include="Autofac">
  <HintPath>Assets\Scripts\IoC\Autofac.dll</HintPath>
  </Reference>
  <Reference Include="PlayMaker">
  <HintPath>Assets\ThirdParty\PlayMaker\PlayMaker.dll</HintPath>
- </Reference>
- <Reference Include="EpicMemory">
- <HintPath>Assets\bin\EpicMemory.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
