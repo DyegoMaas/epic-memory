@@ -8,6 +8,7 @@ using EpicMemory.Sequenciador;
 using Messaging;
 using UnityEngine;
 
+[RequireComponent(typeof(ConfiguradorTentativas))]
 [RequireComponent(typeof(ProgressaoPartidaFactory))]
 public class Sequenciador : InjectionBehaviour
 {
@@ -30,9 +31,6 @@ public class Sequenciador : InjectionBehaviour
     }
 
     public float TempoEsperaComecarJogo = 1f;
-    public int NumeroTentativas = 3;
-
-    private int numeroTentativasFaltando;
 
     // máquina
     [InjectedDependency] private IGeradorAtaques geradorAtaques;
@@ -49,6 +47,8 @@ public class Sequenciador : InjectionBehaviour
     [InjectedDependency] private ValidadorAtaques validadorAtaques;
     [InjectedDependency] private SequenciaAtaqueFactory sequenciaAtaqueFactory;
     [InjectedDependency] private IInputManager inputManager;
+
+    [InjectedDependency] private IContadorTentativas contadorTentativas;
     
     private SequenciaAtaque sequenciaAtaqueAtaquesDoJogador;
 
@@ -62,7 +62,6 @@ public class Sequenciador : InjectionBehaviour
 
     IEnumerator MyStart()
     {
-        numeroTentativasFaltando = NumeroTentativas;
         progressaoPartidaFactory = GetComponent<ProgressaoPartidaFactory>();
         sequenciaAtaqueAtaquesDoJogador = sequenciaAtaqueFactory.CriarSequenciaAtaque();
         AdicionarTodosOsPersonagensNoRepositorio();
@@ -201,7 +200,6 @@ public class Sequenciador : InjectionBehaviour
     {
         PrepararNovaTentativa();
 
-        numeroTentativasFaltando--;
         if (FimdeJogo())
         {
             Messenger.Send(MessageType.GameOver);
@@ -213,7 +211,8 @@ public class Sequenciador : InjectionBehaviour
         }
         else
         {
-            Messenger.Send(MessageType.ErroJogador, new Message<int>(numeroTentativasFaltando));
+            contadorTentativas.ErroJogador();
+            Messenger.Send(MessageType.ErroJogador, new Message<int>(contadorTentativas.NumeroTentativasRestantes));
             Messenger.Send(MessageType.PerfilJogadorAtivado, new Message<PerfilJogadorAtivo>(PerfilJogadorAtivo.Maquina));
             
             yield return new WaitForSeconds(TempoEsperaAntesDeRecomecarReproducao);
@@ -223,7 +222,7 @@ public class Sequenciador : InjectionBehaviour
 
     private bool FimdeJogo()
     {
-        return numeroTentativasFaltando == 0;
+        return contadorTentativas.NumeroTentativasRestantes == 0;
     }
 
     private void PrepararNovaTentativa()
@@ -235,7 +234,7 @@ public class Sequenciador : InjectionBehaviour
 
     private void PrepararNovoJogo()
     {
-        numeroTentativasFaltando = NumeroTentativas;
+        contadorTentativas.Resetar();
         ataquesGeradosPelaMaquina.Clear();
     }
 

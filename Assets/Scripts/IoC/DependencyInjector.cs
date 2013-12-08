@@ -33,6 +33,7 @@ public class DependencyInjector : MonoBehaviour
         builder.RegisterType<GerenciadorDificuldade>().As<GerenciadorDificuldade>().SingleInstance();
         builder.RegisterType<ValidadorAtaques>().As<ValidadorAtaques>().SingleInstance();
         builder.RegisterType<SequenciaAtaqueFactory>().As<SequenciaAtaqueFactory>().SingleInstance();
+        builder.RegisterType<ContadorTentativas>().As<IContadorTentativas>().SingleInstance();
 
         container = builder.Build();
     }
