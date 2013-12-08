@@ -50,6 +50,7 @@
      <Compile Include="Assets\Scripts\Dificuldade\Dificuldade.cs" />
      <Compile Include="Assets\Scripts\Dificuldade\GerenciadorDificuldade.cs" />
      <Compile Include="Assets\Scripts\Dificuldade\MenuDificuldade.cs" />
+     <Compile Include="Assets\Scripts\Dificuldade\SeletorDificuldade.cs" />
      <Compile Include="Assets\Scripts\Dificuldade\ToggleButtonDificuldade.cs" />
      <Compile Include="Assets\Scripts\IPersonagemJogo.cs" />
      <Compile Include="Assets\Scripts\IndicadorNivelPersonagem.cs" />
@@ -73,6 +74,7 @@
      <Compile Include="Assets\Scripts\SeletorAnimacaoAtaque.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\IInputManager.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\InputManager.cs" />
+     <Compile Include="Assets\Scripts\Sequenciador\SequenciaAtaqueFactory.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\Sequenciador.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\TipoProgressaoPartida.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\UnityRandomizer.cs" />

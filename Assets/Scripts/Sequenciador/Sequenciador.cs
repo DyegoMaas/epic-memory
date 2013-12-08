@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
@@ -29,30 +30,27 @@ public class Sequenciador : InjectionBehaviour
     }
 
     public float TempoEsperaComecarJogo = 1f;
-
     public int NumeroTentativas = 3;
+
     private int numeroTentativasFaltando;
 
     // máquina
-    [InjectedDependency]
-    private IGeradorAtaques geradorAtaques;
+    [InjectedDependency] private IGeradorAtaques geradorAtaques;
+    [InjectedDependency] private RepositorioPersonagens repositorioPersonagens;
+    [InjectedDependency] private GerenciadorDificuldade gerenciadorDificuldade;
 
     private readonly List<Ataque> ataquesGeradosPelaMaquina = new List<Ataque>();
-    
-    [InjectedDependency]
-    private RepositorioPersonagens repositorioPersonagens;
-    
     private IProgressaoPartida progressaoPartida;
     private IProgressaoPartidaFactory progressaoPartidaFactory;
-    private GerenciadorDificuldade gerenciadorDificuldade;
 
     // jogador
     private readonly Stack<IPersonagem> personagensSelecionados = new Stack<IPersonagem>(2);
-    private readonly ValidadorAtaques validadorAtaques = new ValidadorAtaques();
-    private SequenciaAtaque sequenciaAtaqueAtaquesDoJogador = new SequenciaAtaque();
+
+    [InjectedDependency] private ValidadorAtaques validadorAtaques;
+    [InjectedDependency] private SequenciaAtaqueFactory sequenciaAtaqueFactory;
+    [InjectedDependency] private IInputManager inputManager;
     
-    [InjectedDependency]
-    private IInputManager inputManager;
+    private SequenciaAtaque sequenciaAtaqueAtaquesDoJogador;
 
     private bool jogadorPodeInteragir;
     private bool jogoIniciado;
@@ -66,7 +64,7 @@ public class Sequenciador : InjectionBehaviour
     {
         numeroTentativasFaltando = NumeroTentativas;
         progressaoPartidaFactory = GetComponent<ProgressaoPartidaFactory>();
-        gerenciadorDificuldade = FindObjectOfType(typeof (GerenciadorDificuldade)) as GerenciadorDificuldade;
+        sequenciaAtaqueAtaquesDoJogador = sequenciaAtaqueFactory.CriarSequenciaAtaque();
         AdicionarTodosOsPersonagensNoRepositorio();
 
         yield return new WaitForSeconds(TempoEsperaComecarJogo);
@@ -190,7 +188,7 @@ public class Sequenciador : InjectionBehaviour
     {
         Messenger.Send(MessageType.PerfilJogadorAtivado,
                             new Message<PerfilJogadorAtivo>(PerfilJogadorAtivo.Maquina));
-        sequenciaAtaqueAtaquesDoJogador = new SequenciaAtaque();
+        sequenciaAtaqueAtaquesDoJogador = sequenciaAtaqueFactory.CriarSequenciaAtaque();
         progressaoPartida = progressaoPartidaFactory.CriarProgressorPartida();
         yield return new WaitForSeconds(TempoEsperaAntesDeRecomecarReproducao);
         progressaoPartida.ResetarProgressoPartida();

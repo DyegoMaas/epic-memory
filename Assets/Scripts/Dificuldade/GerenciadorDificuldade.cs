@@ -1,43 +1,26 @@
-Ôªøusing UnityEngine;
-using System.Collections;
+using UnityEngine;
 
-public class GerenciadorDificuldade : MonoBehaviour {
+public class GerenciadorDificuldade
+{
+    public Dificuldade DificuldadeSelecionada { get; private set; }
 
-    [SerializeField]
-    private Dificuldade dificuldade = Dificuldade.Facil;
-
-    public Dificuldade Dificuldade
+    public void EscolherDificuldade(Dificuldade novaDificuldade)
     {
-        get { return dificuldade; }
+        DificuldadeSelecionada = novaDificuldade;
+        Debug.Log(novaDificuldade.ToString());
     }
-    
+
     /// <summary>
-    /// 0 == imposs√≠vel
-    /// 1 == f√°cil
+    /// 0 == impossÌvel
+    /// 1 == f·cil
     /// </summary>
     public float CoeficienteFacilidade
     {
         get
         {
-            if (Dificuldade == Dificuldade.Facil)
+            if (DificuldadeSelecionada == Dificuldade.Facil)
                 return 1f;
             return .5f;
         }
-    }
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
-    public void EscolherDificuldade(Dificuldade novaDificuldade)
-    {
-        dificuldade = novaDificuldade;
-        Debug.Log(dificuldade.ToString());
     }
 }
