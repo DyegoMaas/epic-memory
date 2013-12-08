@@ -14,6 +14,7 @@ public class GerenciadorPontuacao
     public void ZerarPontuacao()
     {
         Pontuacao = 0;
+        Rodada = 0;
     }
 
     private int CalcularPontosJogada()

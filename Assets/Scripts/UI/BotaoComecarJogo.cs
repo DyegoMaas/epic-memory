@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Messaging;
 
@@ -14,7 +13,6 @@ public class BotaoComecarJogo : InjectionBehaviour, IGuiListener {
     protected override void StartOverride()
     {
         gerenciadorGui.Registrar(this);
-        //Messenger.Subscribe(MessageType.NovoJogoAguardar, gameObject, "MostrarBotao");
     }
 
     // Update is called once per frame
@@ -33,15 +31,7 @@ public class BotaoComecarJogo : InjectionBehaviour, IGuiListener {
         yield return StartCoroutine(Esconder());
         Messenger.Send(MessageType.NovoJogoIniciar);
     }
-
-    //void MostrarBotao()
-
-    //{
-
-    //    Mostrar();
-
-    //}
-
+    
     void Mostrar()
     {
         transform.position = StartPosition;
@@ -53,25 +43,4 @@ public class BotaoComecarJogo : InjectionBehaviour, IGuiListener {
         iTween.MoveTo(gameObject, iTween.Hash("position", EndPosition, "time", .4f, "easetype", iTween.EaseType.easeOutCubic, "islocal", true));
         yield return new WaitForSeconds(.8f);
     }
-}
-
-public class GerenciadorGUI
-{
-    private readonly List<IGuiListener> listeners = new List<IGuiListener>();
-    
-    public void Registrar(IGuiListener listener)
-    {
-        if(!listeners.Contains(listener))
-            listeners.Add(listener);
-    }
-
-    public void MostrarBotaoComecar()
-    {
-        listeners.ForEach(l => l.MostrarBotaoComecar());
-    }
-}
-
-public interface IGuiListener
-{
-    void MostrarBotaoComecar();
 }

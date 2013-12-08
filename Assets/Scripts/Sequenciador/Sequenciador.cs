@@ -45,6 +45,7 @@ public class Sequenciador : InjectionBehaviour
     [InjectedDependency] private IContadorTentativas contadorTentativas;
     [InjectedDependency] private GerenciadorEstadoJogo gerenciadorEstadoJogo;
     [InjectedDependency] private GerenciadorGUI gerenciadorGui;
+    [InjectedDependency] private GerenciadorPontuacao gerenciadorPontuacao;
     
     private SequenciaAtaque sequenciaAtaquesDoJogador;
     private SequenciaAtaque sequenciaAtaquesDaMaquina;
@@ -118,7 +119,7 @@ public class Sequenciador : InjectionBehaviour
 
                 if (sequenciaAtaquesDoJogador.EstaCompleta(sequenciaAtaquesDaMaquina))
                 {
-                    Messenger.Send(MessageType.JogadaCompleta);
+                    Pontuar();
                     StartCoroutine(ComecarProximaRodada());
                 }
             }
@@ -132,6 +133,12 @@ public class Sequenciador : InjectionBehaviour
         {
             StartCoroutine(ManipularErroAtaque());
         }
+    }
+
+    private void Pontuar()
+    {
+        Messenger.Send(MessageType.JogadaCompleta);
+        gerenciadorPontuacao.Pontuar();
     }
 
     private IEnumerator ComecarProximaRodada()
@@ -154,6 +161,7 @@ public class Sequenciador : InjectionBehaviour
         {
             Messenger.Send(MessageType.GameOver);
             Messenger.Send(MessageType.PerfilJogadorAtivado, new Message<PerfilJogadorAtivo>(PerfilJogadorAtivo.Maquina));
+
             PrepararNovoJogo();
 
             yield return new WaitForSeconds(TempoEsperaAntesDeRecomecarReproducao);
@@ -180,6 +188,8 @@ public class Sequenciador : InjectionBehaviour
     private void PrepararNovoJogo()
     {
         contadorTentativas.Resetar();
+        gerenciadorPontuacao.ZerarPontuacao();
+
         sequenciaAtaquesDaMaquina = sequenciaAtaqueFactory.CriarSequenciaAtaque();
     }
 

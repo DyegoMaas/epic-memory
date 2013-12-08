@@ -1,32 +1,27 @@
-﻿using Messaging;
-
-public class Pontuacao : InjectionBehaviour
+﻿public class Pontuacao : InjectionBehaviour
 {
     [InjectedDependency]
     private GerenciadorPontuacao gerenciadorPontuacao;
+
+    private int pontuacao;
     
     protected override void StartOverride()
     {
-        Messenger.Subscribe(MessageType.GameOver, gameObject, "ZerarPontuacao");
-        Messenger.Subscribe(MessageType.JogadaCompleta, gameObject, "Pontuar");
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (PontuacaoMudou())
+        {
+            pontuacao = gerenciadorPontuacao.Pontuacao;
+            FazerBroadcastPontuacao();
+        }
     }
 
-    void ZerarPontuacao()
+    private bool PontuacaoMudou()
     {
-        gerenciadorPontuacao.ZerarPontuacao();
-        FazerBroadcastPontuacao();
-    }
-
-    void Pontuar()
-    {
-        gerenciadorPontuacao.Pontuar();
-        FazerBroadcastPontuacao();
+        return pontuacao != gerenciadorPontuacao.Pontuacao;
     }
 
     private void FazerBroadcastPontuacao()
