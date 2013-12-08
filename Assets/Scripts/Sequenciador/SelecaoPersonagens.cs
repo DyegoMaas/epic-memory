@@ -6,6 +6,7 @@ public class SelecaoPersonagens : InjectionBehaviour
     [InjectedDependency] private IInputManager inputManager;
 
     private readonly Stack<IPersonagem> personagensSelecionados = new Stack<IPersonagem>(2);
+    private bool selecaoHabilitada;
 
     public Queue<Ataque> AtaquesGerados { get; private set; }
 
@@ -14,9 +15,22 @@ public class SelecaoPersonagens : InjectionBehaviour
         AtaquesGerados = new Queue<Ataque>(2);    
     }
 
+    public void Habilitar()
+    {
+        selecaoHabilitada = true;
+    }
+
+    public void Desabilitar()
+    {
+        selecaoHabilitada = false;
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (!selecaoHabilitada)
+            return;
+
         IPersonagem personagem;
         if (inputManager.Click(out personagem))
         {

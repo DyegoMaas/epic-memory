@@ -51,7 +51,7 @@ public class Sequenciador : InjectionBehaviour
     private IProgressaoPartidaFactory progressaoPartidaFactory;
     private SelecaoPersonagens selecaoPersonagens;
 
-    private bool jogadorPodeInteragir;
+    //private bool jogadorPodeInteragir;
 
     protected override void StartOverride()
     {
@@ -91,15 +91,9 @@ public class Sequenciador : InjectionBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!jogadorPodeInteragir)
-        {
-            return;
-        }
-
         if (selecaoPersonagens.AtaquesGerados.Count > 0)
         {
             var ataqueGerado = selecaoPersonagens.AtaquesGerados.Dequeue();
-            ataqueGerado.Atacante.Atacar();
 
             ValidarAtaque(ataqueGerado);
         }
@@ -175,7 +169,7 @@ public class Sequenciador : InjectionBehaviour
     private void PrepararNovaTentativa()
     {
         progressaoPartida.ResetarProgressoPartida();
-        jogadorPodeInteragir = false;
+        selecaoPersonagens.Desabilitar();
         sequenciaAtaquesDoJogador = sequenciaAtaqueFactory.CriarSequenciaAtaque();
         gerenciadorPerfis.AtivarPerfilMaquina();
     }
@@ -201,13 +195,13 @@ public class Sequenciador : InjectionBehaviour
 
     private IEnumerator ReproduzirSequenciaAtaques()
     {
-        jogadorPodeInteragir = false;
+        selecaoPersonagens.Desabilitar();
         foreach (var ataque in sequenciaAtaquesDaMaquina.ToList())
         {
             yield return new WaitForSeconds(duracaoAtaque / 2f);
             yield return StartCoroutine(ReproduzirAtaque(ataque));
         }
-        jogadorPodeInteragir = true;
+        selecaoPersonagens.Habilitar();
 
         const float tempoMostrandoONivel = .5f;
         yield return new WaitForSeconds(tempoMostrandoONivel);
