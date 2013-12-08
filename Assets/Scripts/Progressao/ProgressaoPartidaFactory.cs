@@ -1,36 +1,69 @@
+using System;
 using UnityEngine;
 
 namespace Assets.Scripts.Progressao
 {
-    public interface IProgressaoPartidaFactory
+    public class ProgressaoPartidaFactory : InjectionBehaviour, IProgressaoPartidaFactory
     {
-        IProgressaoPartida CriarProgressorPartida(RepositorioPersonagens repositorio);
-    }
-
-    public class ProgressaoPartidaFactory : MonoBehaviour, IProgressaoPartidaFactory
-    {
-
         public TipoProgressaoPartida TipoProgressaoPartida = TipoProgressaoPartida.Linear;
         public int numeroPartidasSubirNivel = 2;
 
-        // Use this for initialization
-        void Start () {
-	
+        [InjectedDependency]
+        private RepositorioPersonagens repositorio;
+
+        protected override void StartOverride()
+        {
+            
         }
-	
+
         // Update is called once per frame
         void Update () {
 	
         }
 
-        public IProgressaoPartida CriarProgressorPartida(RepositorioPersonagens repositorio)
+        public IProgressaoPartida CriarProgressorPartida()
         {
             switch (TipoProgressaoPartida)
             {
                 case TipoProgressaoPartida.Linear: return new ProgressaoLinear(repositorio, numeroPartidasSubirNivel);
                 case TipoProgressaoPartida.Assimetrica: return new ProgressaoAssimetrica(repositorio);
             }
-            throw new UnityException("Não existe progressor de partida do tipo " + TipoProgressaoPartida);
+            throw new InvalidOperationException("Não existe progressor de partida do tipo " + TipoProgressaoPartida);
         }
     }
+
+    public interface IProgressaoPartidaFactory
+    {
+        IProgressaoPartida CriarProgressorPartida();
+    }
+
+    //public class ProgressaoPartidaFactory : IProgressaoPartidaFactory
+    //{
+    //    private readonly RepositorioPersonagens repositorio;
+    //    private ProgressaoLinear progressaoLinear;
+    //    private TipoProgressaoPartida tipoProgressaoSelecionado;
+    //    private ProgressaoAssimetrica progressaoAssimetrica;
+
+    //    public void ConfigurarProgressaoLinear(int numeroPartidasParaSubirNivel)
+    //    {
+    //        progressaoLinear = new ProgressaoLinear(repositorio, numeroPartidasParaSubirNivel);
+    //        tipoProgressaoSelecionado = TipoProgressaoPartida.Linear;
+    //    }
+
+    //    public void ConfigurarProgressaoAssimetrica()
+    //    {
+    //        progressaoAssimetrica = new ProgressaoAssimetrica(repositorio);
+    //        tipoProgressaoSelecionado = TipoProgressaoPartida.Assimetrica;
+    //    }
+
+    //    public IProgressaoPartida CriarProgressorPartida(RepositorioPersonagens repositorio)
+    //    {
+    //        switch (tipoProgressaoSelecionado)
+    //        {
+    //            case TipoProgressaoPartida.Linear: return progressaoLinear;
+    //            case TipoProgressaoPartida.Assimetrica: return progressaoAssimetrica;
+    //        }
+    //        throw new InvalidOperationException("Não existe progressor de partida do tipo " + tipoProgressaoSelecionado);
+    //    }
+    //}
 }

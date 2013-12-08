@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using EpicMemory.Sequenciador;
-using SSaME.Core.Sequenciador;
 
 namespace Assets.Scripts
 {

@@ -3,7 +3,6 @@ using EpicMemory.Sequenciador;
 using FluentAssertions;
 using NSubstitute;
 using NUnit.Framework;
-using SSaME.Core.Sequenciador;
 
 namespace EpicMemory.Testes.Unidade.Sequenciador
 {

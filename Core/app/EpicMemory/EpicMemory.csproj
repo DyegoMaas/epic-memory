@@ -8,8 +8,8 @@
     <ProjectGuid>{CEF75F69-6DF9-497B-8593-F99B11949C81}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AllLogic</RootNamespace>
-    <AssemblyName>AllLogic</AssemblyName>
+    <RootNamespace>EpicMemory</RootNamespace>
+    <AssemblyName>EpicMemory</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\Assets\bin\</OutputPath>
+    <OutputPath>..\..\..\Assets\bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -36,9 +36,11 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Unity\Editor\Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -46,6 +48,7 @@
     <Compile Include="Sequenciador\Equipe.cs" />
     <Compile Include="Sequenciador\GeradorAtaques.cs" />
     <Compile Include="Sequenciador\IArena.cs" />
+    <Compile Include="Sequenciador\IGeradorAtaques.cs" />
     <Compile Include="Sequenciador\IPersonagem.cs" />
     <Compile Include="Sequenciador\IRandom.cs" />
     <Compile Include="Sequenciador\SequenciaAtaque.cs" />

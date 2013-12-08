@@ -1,5 +1,3 @@
-using SSaME.Core.Sequenciador;
-
 namespace EpicMemory.Sequenciador
 {
     public struct Ataque

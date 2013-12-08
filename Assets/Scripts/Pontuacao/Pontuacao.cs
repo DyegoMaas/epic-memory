@@ -1,13 +1,11 @@
 ﻿using Messaging;
-using UnityEngine;
 
-public class Pontuacao : MonoBehaviour
+public class Pontuacao : InjectionBehaviour
 {
-    private int pontuacao;
-    private int rodada;
-
-    // Use this for initialization
-    void Start()
+    [InjectedDependency]
+    private GerenciadorPontuacao gerenciadorPontuacao;
+    
+    protected override void StartOverride()
     {
         Messenger.Subscribe(MessageType.GameOver, gameObject, "ZerarPontuacao");
         Messenger.Subscribe(MessageType.JogadaCompleta, gameObject, "Pontuar");
@@ -21,24 +19,18 @@ public class Pontuacao : MonoBehaviour
 
     void ZerarPontuacao()
     {
-        DefinirPontuacao(0);
-        rodada = 0;
+        gerenciadorPontuacao.ZerarPontuacao();
+        FazerBroadcastPontuacao();
     }
 
     void Pontuar()
     {
-        rodada++;
-        DefinirPontuacao(pontuacao + CalcularPontosJogada());
+        gerenciadorPontuacao.Pontuar();
+        FazerBroadcastPontuacao();
     }
 
-    private void DefinirPontuacao(int pontos)
+    private void FazerBroadcastPontuacao()
     {
-        pontuacao = pontos;
-        BroadcastMessage("AtualizarPontuacao", pontuacao);
-    }
-
-    private int CalcularPontosJogada()
-    {
-        return (int)(rodada + Mathf.Pow(rodada, 2) / 10f);
+        BroadcastMessage("AtualizarPontuacao", gerenciadorPontuacao.Pontuacao);
     }
 }

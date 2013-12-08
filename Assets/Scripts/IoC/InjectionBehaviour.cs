@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 
 abstract public class InjectionBehaviour : MonoBehaviour
 {

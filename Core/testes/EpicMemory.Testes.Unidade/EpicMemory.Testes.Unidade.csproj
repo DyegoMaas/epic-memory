@@ -8,8 +8,8 @@
     <ProjectGuid>{84783F4C-892B-4F5C-9298-C0C33ED4E22E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Testes.Unidade</RootNamespace>
-    <AssemblyName>Testes.Unidade</AssemblyName>
+    <RootNamespace>EpicMemory.Testes.Unidade</RootNamespace>
+    <AssemblyName>EpicMemory.Testes.Unidade</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -62,7 +62,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\app\EpicMemory\EpicMemory.csproj">
       <Project>{CEF75F69-6DF9-497B-8593-F99B11949C81}</Project>
-      <Name>AllLogic</Name>
+      <Name>EpicMemory</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

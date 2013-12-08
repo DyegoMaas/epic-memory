@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace SSaME.Core.Sequenciador
+namespace EpicMemory.Sequenciador
 {
     public interface IArena
     {

@@ -55,12 +55,13 @@
      <Compile Include="Assets\Scripts\IndicadorNivelPersonagem.cs" />
      <Compile Include="Assets\Scripts\IoC\DependencyConfiguration.cs" />
      <Compile Include="Assets\Scripts\IoC\DependencyInjector.cs" />
+     <Compile Include="Assets\Scripts\IoC\InjectedDependencyAttribute.cs" />
      <Compile Include="Assets\Scripts\IoC\InjectionBehaviour.cs" />
-     <Compile Include="Assets\Scripts\IoC\Teste.cs" />
      <Compile Include="Assets\Scripts\LoadScreen\CarregamentoObjetos.cs" />
      <Compile Include="Assets\Scripts\MenuPrincipal\Creditos.cs" />
      <Compile Include="Assets\Scripts\MenuPrincipal\MenuPrincipal.cs" />
      <Compile Include="Assets\Scripts\Personagem.cs" />
+     <Compile Include="Assets\Scripts\Pontuacao\GerenciadorPontuacao.cs" />
      <Compile Include="Assets\Scripts\Pontuacao\Pontuacao.cs" />
      <Compile Include="Assets\Scripts\Pontuacao\PontuacaoGUI.cs" />
      <Compile Include="Assets\Scripts\Pontuacao\PontuacaoSom.cs" />
@@ -70,6 +71,7 @@
      <Compile Include="Assets\Scripts\Progressao\ProgressaoPartidaFactory.cs" />
      <Compile Include="Assets\Scripts\RepositorioPersonagens.cs" />
      <Compile Include="Assets\Scripts\SeletorAnimacaoAtaque.cs" />
+     <Compile Include="Assets\Scripts\Sequenciador\IInputManager.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\InputManager.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\Sequenciador.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\TipoProgressaoPartida.cs" />
@@ -784,14 +786,14 @@
      <None Include="Assets\ThirdParty\PlayMaker\Versions\readme.txt" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Shaders\AdditiveVertexColor.shader" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d_demo\democameradata\source\democamerafont.fnt" />
+ <Reference Include="Autofac">
+ <HintPath>Assets\Scripts\IoC\Autofac.dll</HintPath>
+ </Reference>
  <Reference Include="PlayMaker">
  <HintPath>Assets\ThirdParty\PlayMaker\PlayMaker.dll</HintPath>
  </Reference>
- <Reference Include="AllLogic">
- <HintPath>Assets\bin\AllLogic.dll</HintPath>
- </Reference>
- <Reference Include="Autofac">
- <HintPath>Assets\Scripts\IoC\Autofac.dll</HintPath>
+ <Reference Include="EpicMemory">
+ <HintPath>Assets\bin\EpicMemory.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

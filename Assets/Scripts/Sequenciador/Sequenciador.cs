@@ -5,11 +5,10 @@ using Assets.Scripts;
 using Assets.Scripts.Progressao;
 using EpicMemory.Sequenciador;
 using Messaging;
-using SSaME.Core.Sequenciador;
 using UnityEngine;
 
 [RequireComponent(typeof(ProgressaoPartidaFactory))]
-public class Sequenciador : MonoBehaviour
+public class Sequenciador : InjectionBehaviour
 {
     [SerializeField]
     private float duracaoAtaque = 1.5f;
@@ -35,9 +34,14 @@ public class Sequenciador : MonoBehaviour
     private int numeroTentativasFaltando;
 
     // máquina
-    private GeradorAtaques geradorAtaques;
+    [InjectedDependency]
+    private IGeradorAtaques geradorAtaques;
+
     private readonly List<Ataque> ataquesGeradosPelaMaquina = new List<Ataque>();
-    private readonly RepositorioPersonagens repositorioPersonagens = new RepositorioPersonagens();
+    
+    [InjectedDependency]
+    private RepositorioPersonagens repositorioPersonagens;
+    
     private IProgressaoPartida progressaoPartida;
     private IProgressaoPartidaFactory progressaoPartidaFactory;
     private GerenciadorDificuldade gerenciadorDificuldade;
@@ -46,18 +50,21 @@ public class Sequenciador : MonoBehaviour
     private readonly Stack<IPersonagem> personagensSelecionados = new Stack<IPersonagem>(2);
     private readonly ValidadorAtaques validadorAtaques = new ValidadorAtaques();
     private SequenciaAtaque sequenciaAtaqueAtaquesDoJogador = new SequenciaAtaque();
-    private InputManager inputManager;
-    private bool jogadorPodeInteragir;
+    
+    [InjectedDependency]
+    private IInputManager inputManager;
 
+    private bool jogadorPodeInteragir;
     private bool jogoIniciado;
 
-    // Use this for initialization
-    IEnumerator Start()
+    protected override void StartOverride()
+    {
+        StartCoroutine(MyStart());
+    }
+
+    IEnumerator MyStart()
     {
         numeroTentativasFaltando = NumeroTentativas;
-
-        inputManager = new InputManager(repositorioPersonagens);
-        geradorAtaques = new GeradorAtaques(repositorioPersonagens, new UnityRandomizer());
         progressaoPartidaFactory = GetComponent<ProgressaoPartidaFactory>();
         gerenciadorDificuldade = FindObjectOfType(typeof (GerenciadorDificuldade)) as GerenciadorDificuldade;
         AdicionarTodosOsPersonagensNoRepositorio();
@@ -184,8 +191,7 @@ public class Sequenciador : MonoBehaviour
         Messenger.Send(MessageType.PerfilJogadorAtivado,
                             new Message<PerfilJogadorAtivo>(PerfilJogadorAtivo.Maquina));
         sequenciaAtaqueAtaquesDoJogador = new SequenciaAtaque();
-
-        progressaoPartida = progressaoPartidaFactory.CriarProgressorPartida(repositorioPersonagens);
+        progressaoPartida = progressaoPartidaFactory.CriarProgressorPartida();
         yield return new WaitForSeconds(TempoEsperaAntesDeRecomecarReproducao);
         progressaoPartida.ResetarProgressoPartida();
 

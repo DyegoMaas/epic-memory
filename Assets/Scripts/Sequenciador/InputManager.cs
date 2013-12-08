@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using Assets.Scripts;
-using SSaME.Core.Sequenciador;
+using EpicMemory.Sequenciador;
 using UnityEngine;
 
-public class InputManager
+public class InputManager : IInputManager
 {
     private readonly RepositorioPersonagens repositorio;
     private readonly List<int> touchesProcessed = new List<int>();

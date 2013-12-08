@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using EpicMemory.Sequenciador;
 using FluentAssertions;
 using NUnit.Framework;
-using SSaME.Core.Sequenciador;
 
 namespace EpicMemory.Testes.Unidade.Sequenciador
 {

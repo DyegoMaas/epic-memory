@@ -1,4 +1,9 @@
+using System;
+using System.Linq;
+using System.Reflection;
+using Assets.Scripts;
 using Autofac;
+using EpicMemory.Sequenciador;
 using UnityEngine;
 
 public class DependencyInjector : MonoBehaviour
@@ -20,39 +25,49 @@ public class DependencyInjector : MonoBehaviour
     {
         var builder = new ContainerBuilder();
 
-        // Autofac registrations go here
-        // AsImplementedInterfaces - When you resolve a Player interface
-        //    (IPlayer) it will return an instance of Player
-        // SingleInstance - All resolves of a Player interface will return
-        //    the same instance of Player
-        //builder.RegisterType()
-        //    .AsImplementedInterfaces()
-        //    .SingleInstance();
-        builder.RegisterType<TesteA>().As<ITeste>();
+        builder.RegisterType<RepositorioPersonagens>().As<RepositorioPersonagens, IArena>().SingleInstance();
+        builder.RegisterType<InputManager>().As<IInputManager>().SingleInstance();
+        builder.RegisterType<UnityRandomizer>().As<IRandom>();
+        builder.RegisterType<GeradorAtaques>().As<IGeradorAtaques>().SingleInstance();
+        builder.RegisterType<GerenciadorPontuacao>().As<GerenciadorPontuacao>().SingleInstance();
 
         container = builder.Build();
     }
 
     private void DefineScriptDependencies()
     {
-        dependencyConfiguration.RegisterConfiguration<Teste>(t => t.TesteX = container.Resolve<ITeste>());
+        //dependencyConfiguration.RegisterConfiguration<Sequenciador>(
+        //    sequenciador =>
+        //    {
+        //        sequenciador.repositorioPersonagens = container.Resolve<RepositorioPersonagens>();
+        //        sequenciador.inputManager = container.Resolve<IInputManager>();
+        //    });
     }
 
     public void Inject(object instance)
     {
         dependencyConfiguration.Inject(instance);
+        InjetarViaReflexao(instance);
     }
-}
 
-public interface ITeste
-{
-    void Testar();
-}
-
-public class TesteA : ITeste
-{
-    public void Testar()
+    private void InjetarViaReflexao(object instance)
     {
-        Debug.Log("XXXXX");
+        var tipo = instance.GetType();
+
+        var properties = tipo
+            .GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+            .Where(prop => Attribute.IsDefined(prop, typeof (InjectedDependencyAttribute))).ToList();
+        foreach (var property in properties)
+        {
+            property.SetValue(instance, container.Resolve(property.PropertyType), null);
+        }
+
+        var fields = tipo
+            .GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+            .Where(prop => Attribute.IsDefined(prop, typeof(InjectedDependencyAttribute))).ToList();
+        foreach (var field in fields)
+        {
+            field.SetValue(instance, container.Resolve(field.FieldType));
+        }
     }
 }

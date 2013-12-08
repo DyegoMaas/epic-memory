@@ -1,5 +1,4 @@
 using EpicMemory.Sequenciador;
-using SSaME.Core.Sequenciador;
 
 namespace EpicMemory.Testes.Unidade.Sequenciador
 {

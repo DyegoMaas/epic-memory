@@ -1,4 +1,4 @@
-using SSaME.Core.Sequenciador;
+using EpicMemory.Sequenciador;
 using UnityEngine;
 
 public class UnityRandomizer : IRandom {

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using EpicMemory.Sequenciador;
 
-namespace SSaME.Core.Sequenciador
+namespace EpicMemory.Sequenciador
 {
     public class SequenciaAtaque  
     {

@@ -1,8 +1,6 @@
-using EpicMemory.Sequenciador;
-
-namespace SSaME.Core.Sequenciador
+namespace EpicMemory.Sequenciador
 {
-    public class GeradorAtaques   
+    public class GeradorAtaques : IGeradorAtaques
     {
         private readonly IArena arena;
         private readonly IRandom random;

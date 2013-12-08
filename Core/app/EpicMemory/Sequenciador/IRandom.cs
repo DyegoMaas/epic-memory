@@ -1,4 +1,4 @@
-namespace SSaME.Core.Sequenciador
+namespace EpicMemory.Sequenciador
 {
     public interface IRandom  
     {
