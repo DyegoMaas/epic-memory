@@ -1,3 +1,5 @@
+using Messaging;
+
 public class ContadorTentativas : IContadorTentativas
 {
     private int numeroTentativasPorJogo;

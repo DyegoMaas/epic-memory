@@ -1,7 +1,4 @@
-using System;
-using System.Linq;
 using System.Collections;
-using System.Collections.Generic;
 using Assets.Scripts;
 using Assets.Scripts.Progressao;
 using EpicMemory.Sequenciador;
@@ -46,6 +43,7 @@ public class Sequenciador : InjectionBehaviour
     [InjectedDependency] private GerenciadorEstadoJogo gerenciadorEstadoJogo;
     [InjectedDependency] private GerenciadorGUI gerenciadorGui;
     [InjectedDependency] private GerenciadorPontuacao gerenciadorPontuacao;
+    [InjectedDependency] private GerenciadorPerfis gerenciadorPerfis;
     
     private SequenciaAtaque sequenciaAtaquesDoJogador;
     private SequenciaAtaque sequenciaAtaquesDaMaquina;
@@ -143,7 +141,7 @@ public class Sequenciador : InjectionBehaviour
 
     private IEnumerator ComecarProximaRodada()
     {
-        Messenger.Send(MessageType.PerfilJogadorAtivado, new Message<PerfilJogadorAtivo>(PerfilJogadorAtivo.Maquina));
+        gerenciadorPerfis.AtivarPerfilMaquina();
         sequenciaAtaquesDoJogador = sequenciaAtaqueFactory.CriarSequenciaAtaque();
         progressaoPartida = progressaoPartidaFactory.CriarProgressorPartida();
         yield return new WaitForSeconds(TempoEsperaAntesDeRecomecarReproducao);
@@ -155,13 +153,11 @@ public class Sequenciador : InjectionBehaviour
 
     private IEnumerator ManipularErroAtaque()
     {
+        contadorTentativas.ErroJogador();
         PrepararNovaTentativa();
 
         if (gerenciadorEstadoJogo.FimDeJogo())
         {
-            Messenger.Send(MessageType.GameOver);
-            Messenger.Send(MessageType.PerfilJogadorAtivado, new Message<PerfilJogadorAtivo>(PerfilJogadorAtivo.Maquina));
-
             PrepararNovoJogo();
 
             yield return new WaitForSeconds(TempoEsperaAntesDeRecomecarReproducao);
@@ -169,9 +165,7 @@ public class Sequenciador : InjectionBehaviour
         }
         else
         {
-            contadorTentativas.ErroJogador();
             Messenger.Send(MessageType.ErroJogador, new Message<int>(contadorTentativas.NumeroTentativasRestantes));
-            Messenger.Send(MessageType.PerfilJogadorAtivado, new Message<PerfilJogadorAtivo>(PerfilJogadorAtivo.Maquina));
             
             yield return new WaitForSeconds(TempoEsperaAntesDeRecomecarReproducao);
             StartCoroutine(ReproduzirSequenciaAtaques());
@@ -182,14 +176,15 @@ public class Sequenciador : InjectionBehaviour
     {
         progressaoPartida.ResetarProgressoPartida();
         jogadorPodeInteragir = false;
-        sequenciaAtaquesDoJogador = new SequenciaAtaque();
+        sequenciaAtaquesDoJogador = sequenciaAtaqueFactory.CriarSequenciaAtaque();
+        gerenciadorPerfis.AtivarPerfilMaquina();
     }
 
     private void PrepararNovoJogo()
     {
-        contadorTentativas.Resetar();
-        gerenciadorPontuacao.ZerarPontuacao();
+        Messenger.Send(MessageType.GameOver);
 
+        gerenciadorEstadoJogo.PrepararNovoJogo();
         sequenciaAtaquesDaMaquina = sequenciaAtaqueFactory.CriarSequenciaAtaque();
     }
 
@@ -218,8 +213,7 @@ public class Sequenciador : InjectionBehaviour
         yield return new WaitForSeconds(tempoMostrandoONivel);
         progressaoPartida.ResetarProgressoPartida();
 
-        Messenger.Send(MessageType.PerfilJogadorAtivado,
-                            new Message<PerfilJogadorAtivo>(PerfilJogadorAtivo.Jogador));
+        gerenciadorPerfis.AtivarPerfilJogador();
     }
 
     private IEnumerator ReproduzirAtaque(Ataque ataque)

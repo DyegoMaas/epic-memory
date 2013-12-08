@@ -36,6 +36,7 @@ public class DependencyInjector : MonoBehaviour
         builder.RegisterType<ContadorTentativas>().As<IContadorTentativas>().SingleInstance();
         builder.RegisterType<GerenciadorEstadoJogo>().As<GerenciadorEstadoJogo>().SingleInstance();
         builder.RegisterType<GerenciadorGUI>().As<GerenciadorGUI>().SingleInstance();
+        builder.RegisterType<GerenciadorPerfis>().As<GerenciadorPerfis>().SingleInstance();
 
         container = builder.Build();
     }

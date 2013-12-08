@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using Messaging;
 
+//TODO: fazer um refatoração para não mais utilizar mensageria
 public class IndicadorAtaque : MonoBehaviour
 {
     public Equipe Equipe = Equipe.A;

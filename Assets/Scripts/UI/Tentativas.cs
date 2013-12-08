@@ -37,7 +37,7 @@ public class Tentativas : MonoBehaviour {
 
     private void AtualizarTexto(int tentativas)
     {
-        textMesh.text = tentativas + " tentativas";
+        textMesh.text = string.Format("{0} tentativa{1}", tentativas, (tentativas > 0) ? "s" : "");
         textMesh.Commit();
     }
 

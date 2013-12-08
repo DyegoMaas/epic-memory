@@ -77,6 +77,7 @@
      <Compile Include="Assets\Scripts\Sequenciador\EstadoJogo.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\EstadoJogoScript.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\GerenciadorEstadoJogo.cs" />
+     <Compile Include="Assets\Scripts\Sequenciador\GerenciadorPerfis.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\IContadorTentativas.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\IInputManager.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\InicializadorRepositorio.cs" />
@@ -88,6 +89,8 @@
      <Compile Include="Assets\Scripts\Sequenciador\UnityRandomizer.cs" />
      <Compile Include="Assets\Scripts\Temas\ConfiguracaoTemas.cs" />
      <Compile Include="Assets\Scripts\UI\BotaoComecarJogo.cs" />
+     <Compile Include="Assets\Scripts\UI\GerenciadorGUI.cs" />
+     <Compile Include="Assets\Scripts\UI\IGuiListener.cs" />
      <Compile Include="Assets\Scripts\UI\IndicadorAtaque.cs" />
      <Compile Include="Assets\Scripts\UI\JogadorAtivo.cs" />
      <Compile Include="Assets\Scripts\UI\PerfilJogadorAtivo.cs" />
