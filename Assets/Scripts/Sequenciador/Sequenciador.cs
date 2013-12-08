@@ -10,6 +10,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(ConfiguradorTentativas))]
 [RequireComponent(typeof(ProgressaoPartidaFactory))]
+[RequireComponent(typeof(SelecaoPersonagens))]
 public class Sequenciador : InjectionBehaviour
 {
     [SerializeField]
@@ -32,28 +33,22 @@ public class Sequenciador : InjectionBehaviour
 
     public float TempoEsperaComecarJogo = 1f;
 
-    // máquina
     [InjectedDependency] private IGeradorAtaques geradorAtaques;
     [InjectedDependency] private RepositorioPersonagens repositorioPersonagens;
     [InjectedDependency] private GerenciadorDificuldade gerenciadorDificuldade;
-
+    [InjectedDependency] private ValidadorAtaques validadorAtaques;
+    [InjectedDependency] private SequenciaAtaqueFactory sequenciaAtaqueFactory;
+    [InjectedDependency] private IInputManager inputManager;
+    [InjectedDependency] private IContadorTentativas contadorTentativas;
+    
+    private SequenciaAtaque sequenciaAtaqueAtaquesDoJogador;
     private readonly List<Ataque> ataquesGeradosPelaMaquina = new List<Ataque>();
     private IProgressaoPartida progressaoPartida;
     private IProgressaoPartidaFactory progressaoPartidaFactory;
 
-    // jogador
-    private readonly Stack<IPersonagem> personagensSelecionados = new Stack<IPersonagem>(2);
-
-    [InjectedDependency] private ValidadorAtaques validadorAtaques;
-    [InjectedDependency] private SequenciaAtaqueFactory sequenciaAtaqueFactory;
-    [InjectedDependency] private IInputManager inputManager;
-
-    [InjectedDependency] private IContadorTentativas contadorTentativas;
-    
-    private SequenciaAtaque sequenciaAtaqueAtaquesDoJogador;
-
     private bool jogadorPodeInteragir;
     private bool jogoIniciado;
+    private SelecaoPersonagens selecaoPersonagens;
 
     protected override void StartOverride()
     {
@@ -62,26 +57,14 @@ public class Sequenciador : InjectionBehaviour
 
     IEnumerator MyStart()
     {
+        selecaoPersonagens = GetComponent<SelecaoPersonagens>();
         progressaoPartidaFactory = GetComponent<ProgressaoPartidaFactory>();
         sequenciaAtaqueAtaquesDoJogador = sequenciaAtaqueFactory.CriarSequenciaAtaque();
-        AdicionarTodosOsPersonagensNoRepositorio();
 
         yield return new WaitForSeconds(TempoEsperaComecarJogo);
         Messenger.Subscribe(MessageType.NovoJogoIniciar, gameObject, "IniciarNovoJogo");
 
         StartCoroutine(AguardarNovoJogo());
-    }
-
-    private void AdicionarTodosOsPersonagensNoRepositorio()
-    {
-        var personagens = FindObjectsOfType(typeof(Personagem)) as Personagem[];
-        if (personagens != null)
-        {
-            foreach (var personagem in personagens)
-            {
-                repositorioPersonagens.Adicionar(personagem);
-            }
-        }
     }
     
     private void IniciarNovoJogo()
@@ -109,53 +92,16 @@ public class Sequenciador : InjectionBehaviour
             return;
         }
 
-        IPersonagem personagem;
-        if (inputManager.Click(out personagem))
+        if (selecaoPersonagens.AtaquesGerados.Count > 0)
         {
-            SelecionarPersonagem(personagem);
-        }
-
-        if (JogadorCompletouUmAtaque())
-        {
-            ValidarAtaque();
+            var ataqueGerado = selecaoPersonagens.AtaquesGerados.Dequeue();
+            ValidarAtaque(ataqueGerado);
         }
     }
-
-    private void SelecionarPersonagem(IPersonagem personagem)
+    
+    private void ValidarAtaque(Ataque ataque)
     {
-        if (personagensSelecionados.Count == 1)
-        {
-            if (OJogadorEscolheuUmPersonagemDoMesmoTime(personagem))
-            {
-                return;
-            }
-        }
-
-        personagensSelecionados.Push(personagem);
-        personagem.Selecionar();
-    }
-
-    private bool OJogadorEscolheuUmPersonagemDoMesmoTime(IPersonagem personagem)
-    {
-        var personagemJaSelecionado = personagensSelecionados.Pop();
-        bool mesmoTime = personagem.Equipe == personagemJaSelecionado.Equipe;
-        personagensSelecionados.Push(personagemJaSelecionado);
-
-        return mesmoTime;
-    }
-
-    private bool JogadorCompletouUmAtaque()
-    {
-        return personagensSelecionados.Count == 2;
-    }
-
-    private void ValidarAtaque()
-    {
-        var alvo = personagensSelecionados.Pop();
-        var atacante = personagensSelecionados.Pop();
-        var ataque = new Ataque(atacante, alvo);
-
-        atacante.Atacar();
+        ataque.Atacante.Atacar();
 
         if (validadorAtaques.AtaqueValido(ataque))
         {

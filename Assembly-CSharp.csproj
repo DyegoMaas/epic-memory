@@ -76,7 +76,9 @@
      <Compile Include="Assets\Scripts\Sequenciador\ContadorTentativas.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\IContadorTentativas.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\IInputManager.cs" />
+     <Compile Include="Assets\Scripts\Sequenciador\InicializadorRepositorio.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\InputManager.cs" />
+     <Compile Include="Assets\Scripts\Sequenciador\SelecaoPersonagens.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\SequenciaAtaqueFactory.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\Sequenciador.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\TipoProgressaoPartida.cs" />
