@@ -54,7 +54,6 @@
      <Compile Include="Assets\Scripts\Dificuldade\ToggleButtonDificuldade.cs" />
      <Compile Include="Assets\Scripts\IPersonagemJogo.cs" />
      <Compile Include="Assets\Scripts\IndicadorNivelPersonagem.cs" />
-     <Compile Include="Assets\Scripts\IoC\DependencyConfiguration.cs" />
      <Compile Include="Assets\Scripts\IoC\DependencyInjector.cs" />
      <Compile Include="Assets\Scripts\IoC\InjectedDependencyAttribute.cs" />
      <Compile Include="Assets\Scripts\IoC\InjectionBehaviour.cs" />

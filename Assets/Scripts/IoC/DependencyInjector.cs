@@ -1,27 +1,22 @@
-using System;
-using System.Linq;
-using System.Reflection;
 using Assets.Scripts;
 using Autofac;
 using EpicMemory.Sequenciador;
 using UnityEngine;
 
-public class DependencyInjector : MonoBehaviour
+public class DependencyInjector : MonoBehaviour, IDependencyInjector
 {
     private IContainer container;
-    private DependencyConfiguration dependencyConfiguration;
+    private IDependencyInjector dependencyInjector;
 
     void Awake()
     {
-        dependencyConfiguration = new DependencyConfiguration();
-
-        InitializeAutofac();
-        DefineScriptDependencies();
+        container = RegisterDependencies();
+        dependencyInjector = new ReflectionInjection(container);
 
         DontDestroyOnLoad(gameObject);
     }
 
-    private void InitializeAutofac()
+    private IContainer RegisterDependencies()
     {
         var builder = new ContainerBuilder();
 
@@ -38,43 +33,11 @@ public class DependencyInjector : MonoBehaviour
         builder.RegisterType<GerenciadorGUI>().As<GerenciadorGUI>().SingleInstance();
         builder.RegisterType<GerenciadorPerfis>().As<GerenciadorPerfis>().SingleInstance();
 
-        container = builder.Build();
-    }
-
-    private void DefineScriptDependencies()
-    {
-        //dependencyConfiguration.RegisterConfiguration<Sequenciador>(
-        //    sequenciador =>
-        //    {
-        //        sequenciador.repositorioPersonagens = container.Resolve<RepositorioPersonagens>();
-        //        sequenciador.inputManager = container.Resolve<IInputManager>();
-        //    });
+        return builder.Build();
     }
 
     public void Inject(object instance)
     {
-        dependencyConfiguration.Inject(instance);
-        InjetarViaReflexao(instance);
-    }
-
-    private void InjetarViaReflexao(object instance)
-    {
-        var tipo = instance.GetType();
-
-        var properties = tipo
-            .GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
-            .Where(prop => Attribute.IsDefined(prop, typeof (InjectedDependencyAttribute))).ToList();
-        foreach (var property in properties)
-        {
-            property.SetValue(instance, container.Resolve(property.PropertyType), null);
-        }
-
-        var fields = tipo
-            .GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
-            .Where(prop => Attribute.IsDefined(prop, typeof(InjectedDependencyAttribute))).ToList();
-        foreach (var field in fields)
-        {
-            field.SetValue(instance, container.Resolve(field.FieldType));
-        }
+        dependencyInjector.Inject(instance);
     }
 }
