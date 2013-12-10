@@ -55,8 +55,10 @@
      <Compile Include="Assets\Scripts\IPersonagemJogo.cs" />
      <Compile Include="Assets\Scripts\IndicadorNivelPersonagem.cs" />
      <Compile Include="Assets\Scripts\IoC\DependencyInjector.cs" />
+     <Compile Include="Assets\Scripts\IoC\IDependencyInjector.cs" />
      <Compile Include="Assets\Scripts\IoC\InjectedDependencyAttribute.cs" />
      <Compile Include="Assets\Scripts\IoC\InjectionBehaviour.cs" />
+     <Compile Include="Assets\Scripts\IoC\ReflectionInjection.cs" />
      <Compile Include="Assets\Scripts\LoadScreen\CarregamentoObjetos.cs" />
      <Compile Include="Assets\Scripts\MenuPrincipal\Creditos.cs" />
      <Compile Include="Assets\Scripts\MenuPrincipal\MenuPrincipal.cs" />
@@ -65,10 +67,10 @@
      <Compile Include="Assets\Scripts\Pontuacao\Pontuacao.cs" />
      <Compile Include="Assets\Scripts\Pontuacao\PontuacaoGUI.cs" />
      <Compile Include="Assets\Scripts\Pontuacao\PontuacaoSom.cs" />
-     <Compile Include="Assets\Scripts\Progressao\IProgressaoPartida.cs" />
+     <Compile Include="Assets\Scripts\Progressao\IProgressaoNivelPartida.cs" />
+     <Compile Include="Assets\Scripts\Progressao\IProgressaoPartidaFactory.cs" />
      <Compile Include="Assets\Scripts\Progressao\ProgressaoAssimetrica.cs" />
      <Compile Include="Assets\Scripts\Progressao\ProgressaoLinear.cs" />
-     <Compile Include="Assets\Scripts\Progressao\ProgressaoPartidaFactory.cs" />
      <Compile Include="Assets\Scripts\RepositorioPersonagens.cs" />
      <Compile Include="Assets\Scripts\SeletorAnimacaoAtaque.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\ConfiguradorTentativas.cs" />
@@ -81,6 +83,7 @@
      <Compile Include="Assets\Scripts\Sequenciador\IInputManager.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\InicializadorRepositorio.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\InputManager.cs" />
+     <Compile Include="Assets\Scripts\Sequenciador\ReprodutorBatalha.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\SelecaoPersonagens.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\SequenciaAtaqueFactory.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\Sequenciador.cs" />

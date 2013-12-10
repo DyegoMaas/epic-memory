@@ -1,6 +1,6 @@
 using EpicMemory.Sequenciador;
 
-public interface IProgressaoPartida
+public interface IProgressaoNivelPartida
 {
     void AtualizarProgressao(Ataque ataque);
     void ResetarProgressoPartida();

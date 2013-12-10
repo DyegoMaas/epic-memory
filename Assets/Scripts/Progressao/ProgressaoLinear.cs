@@ -1,7 +1,7 @@
 using Assets.Scripts;
 using EpicMemory.Sequenciador;
 
-public class ProgressaoLinear : IProgressaoPartida
+public class ProgressaoLinear : IProgressaoNivelPartida
 {
     private readonly RepositorioPersonagens repositorioPersonagens;
     private readonly int numeroAtaquesParaSubirNivel;
