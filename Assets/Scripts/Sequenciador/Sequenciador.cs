@@ -1,5 +1,4 @@
 using System.Collections;
-using Assets.Scripts;
 using EpicMemory.Sequenciador;
 using Messaging;
 using UnityEngine;
@@ -24,11 +23,8 @@ public class Sequenciador : InjectionBehaviour
     public float TempoEsperaComecarJogo = 1f;
 
     [InjectedDependency] private IGeradorAtaques geradorAtaques;
-    [InjectedDependency] private RepositorioPersonagens repositorioPersonagens;
-    [InjectedDependency] private GerenciadorDificuldade gerenciadorDificuldade;
     [InjectedDependency] private ValidadorAtaques validadorAtaques;
     [InjectedDependency] private SequenciaAtaqueFactory sequenciaAtaqueFactory;
-    [InjectedDependency] private IInputManager inputManager;
     [InjectedDependency] private IContadorTentativas contadorTentativas;
     [InjectedDependency] private GerenciadorEstadoJogo gerenciadorEstadoJogo;
     [InjectedDependency] private GerenciadorGUI gerenciadorGui;
