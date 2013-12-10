@@ -81,8 +81,10 @@
      <Compile Include="Assets\Scripts\Sequenciador\GerenciadorPerfis.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\IContadorTentativas.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\IInputManager.cs" />
+     <Compile Include="Assets\Scripts\Sequenciador\IProgressaoBatalha.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\InicializadorRepositorio.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\InputManager.cs" />
+     <Compile Include="Assets\Scripts\Sequenciador\ProgressaoBatalha.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\ReprodutorBatalha.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\SelecaoPersonagens.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\SequenciaAtaqueFactory.cs" />

@@ -16,6 +16,7 @@ public class ReprodutorBatalha : InjectionBehaviour
     }
 
     [InjectedDependency] private IProgressaoNivelPartida progressaoPartida;
+    [InjectedDependency] private IProgressaoBatalha progressaoBatalha;
     [InjectedDependency] private GerenciadorPerfis gerenciadorPerfis;
     [InjectedDependency] private GerenciadorDificuldade gerenciadorDificuldade;
 
@@ -26,13 +27,15 @@ public class ReprodutorBatalha : InjectionBehaviour
         selecaoPersonagens = GetComponent<SelecaoPersonagens>();
     }
 
-    public IEnumerator ReproduzirSequenciaAtaques(SequenciaAtaque sequenciaAtaques)
+    public IEnumerator ReproduzirSequenciaAtaques(SequenciaAtaque sequenciaMaquina)
     {
         selecaoPersonagens.Desabilitar();
-        foreach (var ataque in sequenciaAtaques.ToList())
+        int indiceAtaque = 0;
+        foreach (var ataque in sequenciaMaquina.ToList())
         {
             yield return new WaitForSeconds(DuracaoAtaque / 2f);
             yield return StartCoroutine(ReproduzirAtaque(ataque));
+            progressaoBatalha.AtualizarPercentual(sequenciaMaquina, ++indiceAtaque);
         }
         selecaoPersonagens.Habilitar();
 

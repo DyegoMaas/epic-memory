@@ -33,6 +33,7 @@ public class DependencyInjector : MonoBehaviour, IDependencyInjector
         builder.RegisterType<GerenciadorGUI>().As<GerenciadorGUI>().SingleInstance();
         builder.RegisterType<GerenciadorPerfis>().As<GerenciadorPerfis>().SingleInstance();
         builder.RegisterType<ProgressaoAssimetrica>().As<IProgressaoNivelPartida>().SingleInstance();
+        builder.RegisterType<ProgressaoBatalha>().As<IProgressaoBatalha>().SingleInstance();
 
         return builder.Build();
     }
