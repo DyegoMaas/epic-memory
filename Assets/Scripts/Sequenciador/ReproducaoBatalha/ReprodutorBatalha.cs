@@ -21,7 +21,7 @@ public class ReprodutorBatalha : InjectionBehaviour
     [InjectedDependency] private GerenciadorDificuldade gerenciadorDificuldade;
 
     private SelecaoPersonagens selecaoPersonagens;
-    
+
     protected override void StartOverride()
     {
         selecaoPersonagens = GetComponent<SelecaoPersonagens>();

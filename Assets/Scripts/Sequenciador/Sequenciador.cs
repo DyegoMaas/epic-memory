@@ -31,7 +31,8 @@ public class Sequenciador : InjectionBehaviour
     [InjectedDependency] private GerenciadorPontuacao gerenciadorPontuacao;
     [InjectedDependency] private GerenciadorPerfis gerenciadorPerfis;
     [InjectedDependency] private IProgressaoNivelPartida progressaoNivelPartida;
-    
+    [InjectedDependency] private IProgressaoBatalha progressaoBatalha;
+
     private SequenciaAtaque sequenciaAtaquesDoJogador;
     private SequenciaAtaque sequenciaAtaquesDaMaquina;
     private SelecaoPersonagens selecaoPersonagens;
@@ -90,6 +91,7 @@ public class Sequenciador : InjectionBehaviour
             if (sequenciaAtaquesDoJogador.Validar(sequenciaAtaquesDaMaquina))
             {
                 progressaoNivelPartida.AtualizarProgressao(ataque);
+                progressaoBatalha.AtualizarPercentual(sequenciaAtaquesDaMaquina, sequenciaAtaquesDoJogador.ToList().Count);
                 Messenger.Send(MessageType.AtaqueDesferido, new Message<Ataque>(ataque));
 
                 if (sequenciaAtaquesDoJogador.EstaCompleta(sequenciaAtaquesDaMaquina))
@@ -122,9 +124,11 @@ public class Sequenciador : InjectionBehaviour
         sequenciaAtaquesDoJogador = sequenciaAtaqueFactory.CriarSequenciaAtaque();
         yield return new WaitForSeconds(TempoEsperaAntesDeRecomecarReproducao);
         progressaoNivelPartida.ResetarProgressoPartida();
+        ResetarProgressoBatalha();
 
         GerarAtaque();
-        StartCoroutine(reprodutorBatalha.ReproduzirSequenciaAtaques(sequenciaAtaquesDaMaquina));
+        yield return StartCoroutine(reprodutorBatalha.ReproduzirSequenciaAtaques(sequenciaAtaquesDaMaquina));
+        ResetarProgressoBatalha();
     }
 
     private IEnumerator ManipularErroAtaque()
@@ -148,9 +152,16 @@ public class Sequenciador : InjectionBehaviour
         }
     }
 
+    private void ResetarProgressoBatalha()
+    {
+        progressaoBatalha.AtualizarPercentual(sequenciaAtaquesDaMaquina, 0);
+    }
+
     private void PrepararNovaTentativa()
     {
         progressaoNivelPartida.ResetarProgressoPartida();
+        ResetarProgressoBatalha();
+
         selecaoPersonagens.Desabilitar();
         sequenciaAtaquesDoJogador = sequenciaAtaqueFactory.CriarSequenciaAtaque();
         gerenciadorPerfis.AtivarPerfilMaquina();
