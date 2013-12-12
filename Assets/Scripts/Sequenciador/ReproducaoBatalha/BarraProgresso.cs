@@ -24,12 +24,12 @@ public class BarraProgresso : InjectionBehaviour
 
     private void AnimarEscala()
     {
-        var novaEscala = new Vector3(CalcularEscala(), 1f, 1f);
-        iTween.ScaleTo(gameObject, iTween.Hash("scale", novaEscala, "time", .3f, "easetype", iTween.EaseType.easeOutCubic, "islocal", true));
+        iTween.ScaleTo(gameObject, iTween.Hash("scale", CalcularNovaEscala(), "time", .3f, "easetype", 
+            iTween.EaseType.easeOutCubic, "islocal", true));
     }
 
-    private float CalcularEscala()
+    private Vector3 CalcularNovaEscala()
     {
-        return progressaoBatalha.PercentualCompleto * EscalaFinal;
+        return new Vector3(progressaoBatalha.PercentualCompleto * EscalaFinal, 1f, 1f);
     }
 }
