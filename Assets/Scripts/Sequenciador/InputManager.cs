@@ -17,7 +17,7 @@ public class InputManager : IInputManager
     {
         personagemSelecionado = null;
 
-        if (Input.GetButtonDown("Fire1"))
+        if (CliqueMouse())
         {
             personagemSelecionado = Raycast(Input.mousePosition);
         }
@@ -32,6 +32,11 @@ public class InputManager : IInputManager
         }
 
         return personagemSelecionado != null;
+    }
+
+    private static bool CliqueMouse()
+    {
+        return Input.GetButtonDown("Fire1") || Input.GetButtonUp("Fire1");
     }
 
     private IPersonagem Raycast(Vector3 clickPosition)

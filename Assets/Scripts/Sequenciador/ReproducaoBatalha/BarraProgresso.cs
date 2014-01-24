@@ -2,7 +2,7 @@
 
 public class BarraProgresso : InjectionBehaviour
 {
-    public float EscalaFinal;
+    public float EscalaFinal = .01f;
 
     [InjectedDependency] private IProgressaoBatalha progressaoBatalha;
 
@@ -15,7 +15,7 @@ public class BarraProgresso : InjectionBehaviour
     // Update is called once per frame
 	void Update ()
 	{
-        if (percentual != progressaoBatalha.PercentualCompleto)
+        if (percentual > progressaoBatalha.PercentualCompleto || percentual < progressaoBatalha.PercentualCompleto)
         {
             percentual = progressaoBatalha.PercentualCompleto;
             AnimarEscala();

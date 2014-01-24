@@ -6,6 +6,12 @@ public class ProgressaoBatalha : IProgressaoBatalha
 
     public void AtualizarPercentual(SequenciaAtaque sequenciaMaquina, int ataqueAtual)
     {
-        PercentualCompleto = ataqueAtual / (float)sequenciaMaquina.ToList().Count;
+        var quantidadeAtaques = sequenciaMaquina.ToList().Count;
+        if (quantidadeAtaques == 0)
+        {
+            PercentualCompleto = 0;
+            return;
+        }
+        PercentualCompleto = ataqueAtual / (float)quantidadeAtaques;
     }
 }
