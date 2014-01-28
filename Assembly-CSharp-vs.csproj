@@ -90,6 +90,7 @@
      <Compile Include="Assets\Scripts\Sequenciador\SelecaoPersonagens.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\SequenciaAtaqueFactory.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\Sequenciador.cs" />
+     <Compile Include="Assets\Scripts\Sequenciador\SwipeInputManager.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\TipoProgressaoPartida.cs" />
      <Compile Include="Assets\Scripts\Sequenciador\UnityRandomizer.cs" />
      <Compile Include="Assets\Scripts\Temas\ConfiguracaoTemas.cs" />

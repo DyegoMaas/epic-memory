@@ -122,7 +122,7 @@ public class Personagem : MonoBehaviour, IPersonagemJogo
 
     private void Morrer()
     {
-        Debug.Log(string.Format("Eu ({0}) morri.", gameObject.name));
+        Debug.Log(string.Format("Eu ({0}) morri. Morri. Morri.", gameObject.name));
     }
 
     private void DefinirNivel(int novoNivel)

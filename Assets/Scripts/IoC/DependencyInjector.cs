@@ -21,7 +21,8 @@ public class DependencyInjector : MonoBehaviour, IDependencyInjector
         var builder = new ContainerBuilder();
 
         builder.RegisterType<RepositorioPersonagens>().As<RepositorioPersonagens, IArena>().SingleInstance();
-        builder.RegisterType<InputManager>().As<IInputManager>().SingleInstance();
+        //builder.RegisterType<InputManager>().As<IInputManager>().SingleInstance();
+        builder.RegisterType<SwipeInputManager>().As<IInputManager>().SingleInstance();
         builder.RegisterType<UnityRandomizer>().As<IRandom>();
         builder.RegisterType<GeradorAtaques>().As<IGeradorAtaques>().SingleInstance();
         builder.RegisterType<GerenciadorPontuacao>().As<GerenciadorPontuacao>().SingleInstance();

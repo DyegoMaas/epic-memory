@@ -35,6 +35,7 @@ public class SelecaoPersonagens : InjectionBehaviour
         if (inputManager.Click(out personagem))
         {
             SelecionarPersonagem(personagem);
+            //Debug.Log("personagem " + personagem.Id);
         }
 
         if (JogadorCompletouUmAtaque())
