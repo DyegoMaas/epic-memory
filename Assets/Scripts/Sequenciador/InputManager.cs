@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Assets.Scripts;
 using EpicMemory.Sequenciador;
@@ -32,6 +33,11 @@ public class InputManager : IInputManager
         }
 
         return personagemSelecionado != null;
+    }
+
+    public bool Click(out IPersonagem personagemSelecionado, out Vector3 posicao)
+    {
+        throw new NotImplementedException();
     }
 
     private static bool CliqueMouse()

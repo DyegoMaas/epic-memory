@@ -17,12 +17,17 @@ public class SwipeInputManager : IInputManager
 
     public bool Click(out IPersonagem personagemSelecionado)
     {
+        Vector3 posicao;
+        return Click(out personagemSelecionado, out posicao);
+    }
+
+    public bool Click(out IPersonagem personagemSelecionado, out Vector3 posicao)
+    {
         personagemSelecionado = null;
 
-        Vector3 position;
-        if (Touch(out position))
+        if (Touch(out posicao))
         {
-            var novoPersonagem = Raycast(position);
+            var novoPersonagem = Raycast(posicao);
             if (novoPersonagem != null)
             {
                 if (antigoPersonagem != null)

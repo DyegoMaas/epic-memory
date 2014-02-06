@@ -57,7 +57,15 @@ public class Personagem : MonoBehaviour, IPersonagemJogo
         seletorAnimacaoAtaque = new SeletorAnimacaoAtaque(spriteAnimator);
         animadorSelecao = GetComponent<AnimadorSelecao>();
 	    indicadorNivel = GetComponentInChildren<IndicadorNivelPersonagem>();
+
+        Messenger.Subscribe(MessageType.AtaqueDesferido, gameObject, "AtaqueDesferido");
 	}
+
+    void AtaqueDesferido(Message<Ataque> ataque)
+    {
+        if (ataque.Value.Alvo == this)
+            BroadcastMessage("AnimacaoHit");
+    }
 
     // Update is called once per frame
 	void Update () {
@@ -128,7 +136,9 @@ public class Personagem : MonoBehaviour, IPersonagemJogo
     private void DefinirNivel(int novoNivel)
     {
         nivel = novoNivel;
-        indicadorNivel.AtualizarNivelPersonagem(novoNivel);
+        
+        if(indicadorNivel)
+            indicadorNivel.AtualizarNivelPersonagem(novoNivel);
     }
 
     public Collider GetCollider()

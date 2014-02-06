@@ -54,6 +54,6 @@ public class ReprodutorBatalha : InjectionBehaviour
 
         ataque.Atacante.Atacar();
         progressaoPartida.AtualizarProgressao(ataque);
-        Messenger.Send(MessageType.AtaqueDesferido);
+        Messenger.Send(MessageType.AtaqueDesferido, new Message<Ataque>(ataque));
     }
 }

@@ -47,6 +47,8 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Editor\UpgradeVSProject.cs" />
+     <Compile Include="Assets\ThirdParty\JMO Assets\Cartoon FX Easy Editor\Editor\CFXEasyEditor.cs" />
+     <Compile Include="Assets\ThirdParty\JMO Assets\Cartoon FX\Editor\CFX_SpawnSystemEditor.cs" />
      <Compile Include="Assets\ThirdParty\PlayMaker\Actions\Editor\LookAtActionEditor.cs" />
      <Compile Include="Assets\ThirdParty\PlayMaker\Actions\Editor\MoveTowardsActionEditor.cs" />
      <Compile Include="Assets\ThirdParty\PlayMaker\Actions\Editor\SetCameraFOVActionEditor.cs" />
@@ -166,11 +168,13 @@
      <Compile Include="Assets\ThirdParty\iTween\PlayMaker\Editor\iTweenMoveToActionEditor.cs" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Shaders\LitSolidVertexColor.shader" />
      <None Include="Assets\ThirdParty\PlayMaker\Readme.txt" />
+     <None Include="Assets\ThirdParty\JMO Assets\Cartoon FX\Shaders (Mobile)\CFXM_MobileParticleAdd_Alpha8.shader" />
      <None Include="Assets\Scripts\IoC\Autofac License.txt" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Goodies\TexturePacker\Exporter\2dtoolkit\exporter.xml" />
      <None Include="Assets\Som\enderecos.txt" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Shaders\SolidVertexColor.shader" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2dUI\Shaders\DepthMask.shader" />
+     <None Include="Assets\ThirdParty\JMO Assets\Cartoon FX\CartoonFX Releases Notes.txt" />
      <None Include="Assets\ThirdParty\iTween\ReadMe!\ReadMe!.txt" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Shaders\LitPremulVertexColor.shader" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Shaders\PremulVertexColor.shader" />
@@ -182,9 +186,12 @@
      <None Include="Assets\ThirdParty\TK2DROOT\tk2dUI\Shaders\DepthMaskSolid.shader" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2dUI_demo\Assets\Dark\Fonts\Nunito24.fnt" />
      <None Include="Assets\Arte\GUI\footlight.fnt" />
+     <None Include="Assets\ThirdParty\JMO Assets\Cartoon FX Easy Editor\CartoonFX Easy Editor Readme.txt" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Shaders\resources\BlendVertexColor.shader" />
+     <None Include="Assets\ThirdParty\JMO Assets\!JMO Assets Readme.txt" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Shaders\LitCutoutVertexColor.shader" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Editor\EditorUtility.shader" />
+     <None Include="Assets\ThirdParty\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_WaterWiggle.shader" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Shaders\CutoutVertexColor.shader" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d_demo\demobmfont\test.fnt" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2dUI_demo\Assets\Font\OldSansBlack\OldSansBlack.fnt" />
@@ -193,6 +200,7 @@
      <None Include="Assets\ThirdParty\TK2DROOT\tk2dUI_demo\Assets\Dark\Fonts\Nunito32.fnt" />
      <None Include="Assets\ThirdParty\PlayMaker\Versions\readme.txt" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Shaders\AdditiveVertexColor.shader" />
+     <None Include="Assets\ThirdParty\JMO Assets\Cartoon FX\CartoonFX Readme.txt" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d_demo\democameradata\source\democamerafont.fnt" />
  <Reference Include="EpicMemory">
  <HintPath>Assets\bin\EpicMemory.dll</HintPath>
@@ -262,6 +270,9 @@
  </Reference>
  <Reference Include="UnityEditor.Android.Extensions">
  <HintPath>C:\Program Files (x86)\Unity\Editor\Data\PlaybackEngines\AndroidPlayer\EditorExtensions\UnityEditor.Android.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="JMOAssets">
+ <HintPath>Assets\ThirdParty\JMO Assets\Editor\JMOAssets.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
