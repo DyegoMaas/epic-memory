@@ -208,6 +208,9 @@
  <Reference Include="Autofac">
  <HintPath>Assets\Scripts\IoC\Autofac.dll</HintPath>
  </Reference>
+ <Reference Include="JMOAssets">
+ <HintPath>Assets\ThirdParty\JMO Assets\Editor\JMOAssets.dll</HintPath>
+ </Reference>
  <Reference Include="PlayMaker">
  <HintPath>Assets\ThirdParty\PlayMaker\PlayMaker.dll</HintPath>
  </Reference>
@@ -270,9 +273,6 @@
  </Reference>
  <Reference Include="UnityEditor.Android.Extensions">
  <HintPath>C:\Program Files (x86)\Unity\Editor\Data\PlaybackEngines\AndroidPlayer\EditorExtensions\UnityEditor.Android.Extensions.dll</HintPath>
- </Reference>
- <Reference Include="JMOAssets">
- <HintPath>Assets\ThirdParty\JMO Assets\Editor\JMOAssets.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -65,6 +65,11 @@ public class Personagem : MonoBehaviour, IPersonagemJogo
     {
         if (ataque.Value.Alvo == this)
             BroadcastMessage("AnimacaoHit");
+
+        if (SomAtaque)
+        {
+            AudioSource.PlayClipAtPoint(SomAtaque, transform.position);
+        }
     }
 
     // Update is called once per frame
@@ -97,10 +102,10 @@ public class Personagem : MonoBehaviour, IPersonagemJogo
 
     public void Atacar()
     {
-        if (SomAtaque)
-        {
-            AudioSource.PlayClipAtPoint(SomAtaque, transform.position);
-        }
+        //if (SomAtaque)
+        //{
+        //    AudioSource.PlayClipAtPoint(SomAtaque, transform.position);
+        //}
 
         var clip = seletorAnimacaoAtaque.BuscarClipe(Nivel);
         spriteAnimator.Play(clip);
