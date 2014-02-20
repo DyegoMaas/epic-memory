@@ -47,6 +47,21 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Editor\UpgradeVSProject.cs" />
+     <Compile Include="Assets\ThirdParty\DarkTonic\Editor\UndoHelper.cs" />
+     <Compile Include="Assets\ThirdParty\DarkTonic\MasterAudio\Editor\AudioCalcEventInspector.cs" />
+     <Compile Include="Assets\ThirdParty\DarkTonic\MasterAudio\Editor\AudioEventInspector.cs" />
+     <Compile Include="Assets\ThirdParty\DarkTonic\MasterAudio\Editor\ButtonClickerInspector.cs" />
+     <Compile Include="Assets\ThirdParty\DarkTonic\MasterAudio\Editor\DynamicGroupVariationInspector.cs" />
+     <Compile Include="Assets\ThirdParty\DarkTonic\MasterAudio\Editor\DynamicSoundGroupCreatorInspector.cs" />
+     <Compile Include="Assets\ThirdParty\DarkTonic\MasterAudio\Editor\DynamicSoundGroupInspector.cs" />
+     <Compile Include="Assets\ThirdParty\DarkTonic\MasterAudio\Editor\GUIHelper.cs" />
+     <Compile Include="Assets\ThirdParty\DarkTonic\MasterAudio\Editor\MasterAudioGroupInspector.cs" />
+     <Compile Include="Assets\ThirdParty\DarkTonic\MasterAudio\Editor\MasterAudioHierIcon.cs" />
+     <Compile Include="Assets\ThirdParty\DarkTonic\MasterAudio\Editor\MasterAudioInspector.cs" />
+     <Compile Include="Assets\ThirdParty\DarkTonic\MasterAudio\Editor\MasterAudioManager.cs" />
+     <Compile Include="Assets\ThirdParty\DarkTonic\MasterAudio\Editor\PlaylistControllerInspector.cs" />
+     <Compile Include="Assets\ThirdParty\DarkTonic\MasterAudio\Editor\SoundGroupPropertyDrawer.cs" />
+     <Compile Include="Assets\ThirdParty\DarkTonic\MasterAudio\Editor\SoundGroupVariationInspector.cs" />
      <Compile Include="Assets\ThirdParty\JMO Assets\Cartoon FX Easy Editor\Editor\CFXEasyEditor.cs" />
      <Compile Include="Assets\ThirdParty\JMO Assets\Cartoon FX\Editor\CFX_SpawnSystemEditor.cs" />
      <Compile Include="Assets\ThirdParty\PlayMaker\Actions\Editor\LookAtActionEditor.cs" />
@@ -187,6 +202,7 @@
      <None Include="Assets\ThirdParty\TK2DROOT\tk2dUI_demo\Assets\Dark\Fonts\Nunito24.fnt" />
      <None Include="Assets\Arte\GUI\footlight.fnt" />
      <None Include="Assets\ThirdParty\JMO Assets\Cartoon FX Easy Editor\CartoonFX Easy Editor Readme.txt" />
+     <None Include="Assets\ThirdParty\DarkTonic\MasterAudio\ReleaseNotes.txt" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Shaders\resources\BlendVertexColor.shader" />
      <None Include="Assets\ThirdParty\JMO Assets\!JMO Assets Readme.txt" />
      <None Include="Assets\ThirdParty\TK2DROOT\tk2d\Shaders\LitCutoutVertexColor.shader" />
