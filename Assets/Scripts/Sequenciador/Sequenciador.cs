@@ -51,8 +51,7 @@ public class Sequenciador : InjectionBehaviour
         sequenciaAtaquesDaMaquina = sequenciaAtaqueFactory.CriarSequenciaAtaque();
 
         yield return new WaitForSeconds(TempoEsperaComecarJogo);
-
-        StartCoroutine(AguardarNovoJogo());
+        yield return StartCoroutine(AguardarNovoJogo());
     }
 
     IEnumerator AguardarNovoJogo()
@@ -92,6 +91,7 @@ public class Sequenciador : InjectionBehaviour
             {
                 progressaoNivelPartida.AtualizarProgressao(ataque);
                 progressaoBatalha.AtualizarPercentual(sequenciaAtaquesDaMaquina, sequenciaAtaquesDoJogador.ToList().Count);
+                ataque.Atacante.Atacar();
                 Messenger.Send(MessageType.AtaqueDesferido, new Message<Ataque>(ataque));
 
                 if (sequenciaAtaquesDoJogador.EstaCompleta(sequenciaAtaquesDaMaquina))
