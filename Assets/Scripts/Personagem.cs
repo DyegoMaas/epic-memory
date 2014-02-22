@@ -1,3 +1,4 @@
+using System.Collections;
 using EpicMemory.Sequenciador;
 using UnityEngine;
 using Messaging;
@@ -33,7 +34,11 @@ public class Personagem : MonoBehaviour, IPersonagemJogo
         get { return vida; }
         set { vida = value; }
     }
-    
+
+    /// <summary>
+    /// Delay para que o ataque seja aplicado
+    /// </summary>
+    public float DelayAtaque;
 
     [SerializeField]
     private Equipe equipe = Equipe.A;
@@ -61,11 +66,18 @@ public class Personagem : MonoBehaviour, IPersonagemJogo
         Messenger.Subscribe(MessageType.AtaqueDesferido, gameObject, "AtaqueDesferido");
 	}
 
-    void AtaqueDesferido(Message<Ataque> ataque)
+    IEnumerator AtaqueDesferido(Message<Ataque> ataque)
     {
         if (ataque.Value.Alvo == this)
+        {
+            float delay = (ataque.Value.Atacante as Personagem).DelayAtaque;
+            if (delay > 0)
+            {
+                Debug.Log("aguardando algum tempinho");
+                yield return new WaitForSeconds(delay);
+            }
             BroadcastMessage("AnimacaoHit");
-
+        }
         if (SomAtaque)
         {
             AudioSource.PlayClipAtPoint(SomAtaque, transform.position);
@@ -106,7 +118,7 @@ public class Personagem : MonoBehaviour, IPersonagemJogo
         //{
         //    AudioSource.PlayClipAtPoint(SomAtaque, transform.position);
         //}
-
+        Debug.Log("ATAQUE");
         var clip = seletorAnimacaoAtaque.BuscarClipe(Nivel);
         spriteAnimator.Play(clip);
     }
