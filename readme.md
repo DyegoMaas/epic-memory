@@ -4,4 +4,5 @@ Simon Said like game, with colors replaced by attacks. As it is Middle Earth, th
 
 ## Prototype
 
-[![Epic Memory](docs/epic-memory.png)](https://www.youtube.com/watch?v=MqlAyxn9HCs)
+![Epic Memory](docs/epic-memory.png)
+[Gameplay on YouTube](https://www.youtube.com/watch?v=MqlAyxn9HCs)
